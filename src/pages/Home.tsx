@@ -32,6 +32,8 @@ import {
   Bookmark,
   BookmarkCheck,
   Check,
+  ChevronDown,
+  ChevronUp,
   Clock,
   ExternalLink,
   GraduationCap,
@@ -857,33 +859,7 @@ function Result({
       ) : null}
 
       {/* Meta grid */}
-      <div className="border-t border-border pt-6 mb-10">
-        <h3 className="text-sm font-semibold mb-4">직업 특성</h3>
-        <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 text-sm">
-          <Meta k="필요 학력" v={winner.education_required ?? "고졸이상"} />
-          <Meta k="근무 환경" v={winner.tags.work_environment} />
-          <Meta k="대인 접촉" v={winner.tags.people_interaction} />
-          <Meta k="창의성" v={winner.tags.creativity_level} />
-          <Meta k="분석력" v={winner.tags.analytical_level} />
-          <Meta k="기술 활용" v={winner.tags.tech_intensity} />
-          <Meta k="체력 부담" v={winner.tags.physical_intensity} />
-          <Meta k="소득 수준" v={winner.tags.income_level} />
-          <Meta k="위험도" v={winner.tags.risk_level} />
-          <Meta k="성별 제한" v={winner.gender_restriction ?? "무관"} />
-          <Meta k="근무 형태" v={winner.tags.work_schedule ?? "-"} />
-          <Meta k="원격 근무" v={winner.tags.remote_work ?? "-"} />
-          <Meta k="고용 형태" v={winner.tags.employment_type ?? "-"} />
-          <Meta k="성장 가능성" v={winner.tags.growth_potential ?? "-"} />
-          <Meta k="고용 안정성" v={winner.tags.job_stability ?? "-"} />
-          <Meta k="자동화 위험" v={winner.tags.automation_risk ?? "-"} />
-          <Meta k="업무 자율성" v={winner.tags.work_autonomy ?? "-"} />
-          <Meta k="팀워크" v={winner.tags.teamwork_level ?? "-"} />
-          <Meta k="소통 비중" v={winner.tags.communication_level ?? "-"} />
-          <Meta k="반복 업무" v={winner.tags.repetition_level ?? "-"} />
-          <Meta k="사회적 기여" v={winner.tags.social_impact ?? "-"} />
-          <Meta k="공공/민간" v={winner.tags.public_sector ?? "-"} />
-        </dl>
-      </div>
+      <WinnerMetaGrid winner={winner} />
 
       {/* Actions */}
       <div className="flex flex-wrap gap-3 mb-12">
@@ -1062,6 +1038,106 @@ function Meta({ k, v }: { k: string; v: string }) {
   );
 }
 
+/* ----------------------------- WinnerMetaGrid ----------------------------- */
+// 메인 결과 카드용: 기본 9개 + 더보기 토글
+function WinnerMetaGrid({ winner }: { winner: Job }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="border-t border-border pt-6 mb-10">
+      <h3 className="text-sm font-semibold mb-4">직업 특성</h3>
+      <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 text-sm">
+        <Meta k="필요 학력" v={winner.education_required ?? "고졸이상"} />
+        <Meta k="근무 환경" v={winner.tags.work_environment} />
+        <Meta k="소득 수준" v={winner.tags.income_level} />
+        <Meta k="기술 활용" v={winner.tags.tech_intensity} />
+        <Meta k="대인 접촉" v={winner.tags.people_interaction} />
+        <Meta k="체력 부담" v={winner.tags.physical_intensity} />
+        <Meta k="고용 안정성" v={winner.tags.job_stability ?? "-"} />
+        <Meta k="원격 근무" v={winner.tags.remote_work ?? "-"} />
+        <Meta k="성별 제한" v={winner.gender_restriction ?? "무관"} />
+        {expanded && (
+          <>
+            <Meta k="창의성" v={winner.tags.creativity_level} />
+            <Meta k="분석력" v={winner.tags.analytical_level} />
+            <Meta k="위험도" v={winner.tags.risk_level} />
+            <Meta k="근무 형태" v={winner.tags.work_schedule ?? "-"} />
+            <Meta k="고용 형태" v={winner.tags.employment_type ?? "-"} />
+            <Meta k="성장 가능성" v={winner.tags.growth_potential ?? "-"} />
+            <Meta k="자동화 위험" v={winner.tags.automation_risk ?? "-"} />
+            <Meta k="업무 자율성" v={winner.tags.work_autonomy ?? "-"} />
+            <Meta k="팀워크" v={winner.tags.teamwork_level ?? "-"} />
+            <Meta k="소통 비중" v={winner.tags.communication_level ?? "-"} />
+            <Meta k="반복 업무" v={winner.tags.repetition_level ?? "-"} />
+            <Meta k="사회적 기여" v={winner.tags.social_impact ?? "-"} />
+            <Meta k="공공/민간" v={winner.tags.public_sector ?? "-"} />
+          </>
+        )}
+      </dl>
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        className="mt-4 flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+      >
+        {expanded ? (
+          <><ChevronUp className="h-3.5 w-3.5" />접기</>
+        ) : (
+          <><ChevronDown className="h-3.5 w-3.5" />더보기 (+13개)</>
+        )}
+      </button>
+    </div>
+  );
+}
+
+/* ----------------------------- JobDetailMetaGrid ----------------------------- */
+// 러너 다이얼로그용: 기본 9개 + 더보기 토글
+function JobDetailMetaGrid({ job }: { job: Job }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="border-t border-border pt-4">
+      <h4 className="text-xs font-semibold mb-3">직업 특성</h4>
+      <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-xs">
+        <div><dt className="text-muted-foreground">필요 학력</dt><dd className="font-medium mt-0.5">{job.education_required ?? "고졸이상"}</dd></div>
+        <div><dt className="text-muted-foreground">근무 환경</dt><dd className="font-medium mt-0.5">{job.tags.work_environment}</dd></div>
+        <div><dt className="text-muted-foreground">소득 수준</dt><dd className="font-medium mt-0.5">{job.tags.income_level}</dd></div>
+        <div><dt className="text-muted-foreground">기술 활용</dt><dd className="font-medium mt-0.5">{job.tags.tech_intensity}</dd></div>
+        <div><dt className="text-muted-foreground">대인 접촉</dt><dd className="font-medium mt-0.5">{job.tags.people_interaction}</dd></div>
+        <div><dt className="text-muted-foreground">체력 부담</dt><dd className="font-medium mt-0.5">{job.tags.physical_intensity}</dd></div>
+        <div><dt className="text-muted-foreground">고용 안정성</dt><dd className="font-medium mt-0.5">{job.tags.job_stability ?? "-"}</dd></div>
+        <div><dt className="text-muted-foreground">원격 근무</dt><dd className="font-medium mt-0.5">{job.tags.remote_work ?? "-"}</dd></div>
+        {expanded && (
+          <>
+            <div><dt className="text-muted-foreground">성별 제한</dt><dd className="font-medium mt-0.5">{job.gender_restriction ?? "무관"}</dd></div>
+            <div><dt className="text-muted-foreground">창의성</dt><dd className="font-medium mt-0.5">{job.tags.creativity_level}</dd></div>
+            <div><dt className="text-muted-foreground">분석력</dt><dd className="font-medium mt-0.5">{job.tags.analytical_level}</dd></div>
+            <div><dt className="text-muted-foreground">위험도</dt><dd className="font-medium mt-0.5">{job.tags.risk_level}</dd></div>
+            <div><dt className="text-muted-foreground">근무 형태</dt><dd className="font-medium mt-0.5">{job.tags.work_schedule ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">고용 형태</dt><dd className="font-medium mt-0.5">{job.tags.employment_type ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">성장 가능성</dt><dd className="font-medium mt-0.5">{job.tags.growth_potential ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">자동화 위험</dt><dd className="font-medium mt-0.5">{job.tags.automation_risk ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">업무 자율성</dt><dd className="font-medium mt-0.5">{job.tags.work_autonomy ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">팀워크</dt><dd className="font-medium mt-0.5">{job.tags.teamwork_level ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">소통 비중</dt><dd className="font-medium mt-0.5">{job.tags.communication_level ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">반복 업무</dt><dd className="font-medium mt-0.5">{job.tags.repetition_level ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">사회적 기여</dt><dd className="font-medium mt-0.5">{job.tags.social_impact ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">공공/민간</dt><dd className="font-medium mt-0.5">{job.tags.public_sector ?? "-"}</dd></div>
+          </>
+        )}
+      </dl>
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        className="mt-3 flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+      >
+        {expanded ? (
+          <><ChevronUp className="h-3 w-3" />접기</>
+        ) : (
+          <><ChevronDown className="h-3 w-3" />더보기 (+14개)</>
+        )}
+      </button>
+    </div>
+  );
+}
+
 /* ----------------------------- JobDetailDialog ----------------------------- */
 
 function JobDetailDialog({
@@ -1171,33 +1247,7 @@ function JobDetailDialog({
             ) : null}
 
             {/* Meta grid */}
-            <div className="border-t border-border pt-4">
-              <h4 className="text-xs font-semibold mb-3">직업 특성</h4>
-              <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-xs">
-                <div><dt className="text-muted-foreground">필요 학력</dt><dd className="font-medium mt-0.5">{job.education_required ?? "고졸이상"}</dd></div>
-                <div><dt className="text-muted-foreground">근무 환경</dt><dd className="font-medium mt-0.5">{job.tags.work_environment}</dd></div>
-                <div><dt className="text-muted-foreground">대인 접촉</dt><dd className="font-medium mt-0.5">{job.tags.people_interaction}</dd></div>
-                <div><dt className="text-muted-foreground">창의성</dt><dd className="font-medium mt-0.5">{job.tags.creativity_level}</dd></div>
-                <div><dt className="text-muted-foreground">분석력</dt><dd className="font-medium mt-0.5">{job.tags.analytical_level}</dd></div>
-                <div><dt className="text-muted-foreground">기술 활용</dt><dd className="font-medium mt-0.5">{job.tags.tech_intensity}</dd></div>
-                <div><dt className="text-muted-foreground">체력 부담</dt><dd className="font-medium mt-0.5">{job.tags.physical_intensity}</dd></div>
-                <div><dt className="text-muted-foreground">소득 수준</dt><dd className="font-medium mt-0.5">{job.tags.income_level}</dd></div>
-                <div><dt className="text-muted-foreground">위험도</dt><dd className="font-medium mt-0.5">{job.tags.risk_level}</dd></div>
-                <div><dt className="text-muted-foreground">성별 제한</dt><dd className="font-medium mt-0.5">{job.gender_restriction ?? "무관"}</dd></div>
-                <div><dt className="text-muted-foreground">근무 형태</dt><dd className="font-medium mt-0.5">{job.tags.work_schedule ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">원격 근무</dt><dd className="font-medium mt-0.5">{job.tags.remote_work ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">고용 형태</dt><dd className="font-medium mt-0.5">{job.tags.employment_type ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">성장 가능성</dt><dd className="font-medium mt-0.5">{job.tags.growth_potential ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">고용 안정성</dt><dd className="font-medium mt-0.5">{job.tags.job_stability ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">자동화 위험</dt><dd className="font-medium mt-0.5">{job.tags.automation_risk ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">업무 자율성</dt><dd className="font-medium mt-0.5">{job.tags.work_autonomy ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">팀워크</dt><dd className="font-medium mt-0.5">{job.tags.teamwork_level ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">소통 비중</dt><dd className="font-medium mt-0.5">{job.tags.communication_level ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">반복 업무</dt><dd className="font-medium mt-0.5">{job.tags.repetition_level ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">사회적 기여</dt><dd className="font-medium mt-0.5">{job.tags.social_impact ?? "-"}</dd></div>
-                <div><dt className="text-muted-foreground">공공/민간</dt><dd className="font-medium mt-0.5">{job.tags.public_sector ?? "-"}</dd></div>
-              </dl>
-            </div>
+            <JobDetailMetaGrid job={job} />
           </div>
         </ScrollArea>
       </DialogContent>
