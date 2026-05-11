@@ -524,7 +524,7 @@ function Result({
           rel="noreferrer"
         >
           <Button variant="outline" className="rounded-md">
-            나무위키에서 더 보기
+            더 알아보기
             <ExternalLink className="h-4 w-4 ml-2" />
           </Button>
         </a>
