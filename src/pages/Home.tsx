@@ -2,7 +2,7 @@
  * Design philosophy: Minimal Light
  * 단계 흐름: intro → profile(성별·학력) → asking(질문) → result(메인/서브 추천)
  */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { useModalBackHandler } from "@/hooks/useModalBackHandler";
 import { useBookmarks } from "@/hooks/useBookmarks";
@@ -15,6 +15,7 @@ import {
   MIN_QUESTIONS,
   EDUCATION_OPTIONS,
   GENDER_OPTIONS,
+  QUESTIONS,
   currentCandidates,
   getRecommendations,
   meetsEducation,
@@ -53,6 +54,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { TagInput } from "@/components/TagInput";
+import { JobThumb } from "@/components/JobThumb";
 import { ALL_CERTIFICATIONS, ALL_LANGUAGES } from "@/data/profileData";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import {
@@ -92,6 +94,8 @@ export default function Home() {
   const [seed, setSeed] = useState<number>(() => generateSeed());
   // URL에서 복원된 세션인지 여부 (공유 링크로 진입시 true) - 향후 확장용
   const [, setRestoredFromUrl] = useState(false);
+  // 이전 질문 복원 직후 useEffect에서 pickNextQuestion이 트리거되어 랜덤으로 아닌 다른 질문을 고르는 것을 막는 가드
+  const skipNextPickRef = useRef(false);
 
   const candidates = useMemo(
     () => currentCandidates(profile, answers),
@@ -124,6 +128,15 @@ export default function Home() {
 
   useEffect(() => {
     if (phase !== "asking") return;
+    // 이전 질문으로 몉 돌아갈 직후에는 다음 질문을 새로 고르지 않는다 (popstate에서 이미 복원함)
+    if (skipNextPickRef.current) {
+      skipNextPickRef.current = false;
+      return;
+    }
+    // 현재 질문이 이미 설정되어 있고 아직 답변되지 않은 상태라면 그대로 유지
+    if (currentQuestion && !askedIds.has(currentQuestion.id)) {
+      return;
+    }
     // 최소 질문 수 이상 답한 상태에서 후보가 CANDIDATE_THRESHOLD 이하로 좌혀지면 조기 종료
     if (askedIds.size >= MIN_QUESTIONS && candidates.length <= CANDIDATE_THRESHOLD + 3) {
       navigate(PHASE_TO_PATH["result"]);
@@ -136,7 +149,7 @@ export default function Home() {
       return;
     }
     setCurrentQuestion(next);
-  }, [phase, askedIds, candidates]);
+  }, [phase, askedIds, candidates, currentQuestion]);
 
   // 브라우저 뒤로가기 대응: intro로 돌아오면 퀴즈 상태는 초기화하되, 프로필은 유지한다
   useEffect(() => {
@@ -192,9 +205,14 @@ export default function Home() {
 
     function handlePopState(e: PopStateEvent) {
       if (e.state?.quizStep) {
-        // 이전 질문으로 돌아가기
+        // 이전 질문으로 돌아가기: 방금 답한 질문 ID를 askedOrder에서 꺼내고,
+        // 해당 ID의 Question 객체를 QUESTIONS에서 찾아 현재 질문으로 되돌린다.
+        // 이렇게 되돌려야 pickNextQuestion의 랜덤 선택으로 이전 질문이 다른 걸로 바뀌지 않는다.
         const lastId = askedOrder[askedOrder.length - 1];
         if (lastId) {
+          const prevQuestion = QUESTIONS.find((q) => q.id === lastId);
+          // 다음 주기에 useEffect가 askedIds 변경에 반응해 새 질문을 고르는 것을 방지
+          skipNextPickRef.current = true;
           setAnswers((prev) => prev.slice(0, -1));
           setAskedOrder((prev) => prev.slice(0, -1));
           setAskedIds((prev) => {
@@ -202,9 +220,12 @@ export default function Home() {
             s.delete(lastId);
             return s;
           });
+          if (prevQuestion) {
+            setCurrentQuestion(prevQuestion);
+          }
         }
       }
-      // quizStep이 없으면 wouter가 /profile로 이동시킴다 → 그대로 두기
+      // quizStep이 없으면 wouter가 /profile로 이동시킨다 → 그대로 두기
     }
 
     window.addEventListener("popstate", handlePopState);
@@ -424,24 +445,29 @@ function BookmarkModal({
                     onClick={() => { setSelectedJob(job); setDetailOpen(true); }}
                     className="text-left w-full rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors group"
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-medium text-sm">{job.name}</span>
-                        <span className="text-xs text-muted-foreground">{job.domain}</span>
+                    <div className="flex gap-3">
+                      <JobThumb job={job} size={48} rounded="md" />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-baseline gap-2 min-w-0">
+                            <span className="font-medium text-sm truncate">{job.name}</span>
+                            <span className="text-xs text-muted-foreground shrink-0">{job.domain}</span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => { e.stopPropagation(); bookmarks.toggle(job.id); }}
+                            className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            <BookmarkCheck className="h-4 w-4 fill-foreground" />
+                          </button>
+                        </div>
+                        {(job.description || job.short_desc) && (
+                          <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
+                            {job.description || job.short_desc}
+                          </p>
+                        )}
                       </div>
-                      <button
-                        type="button"
-                        onClick={(e) => { e.stopPropagation(); bookmarks.toggle(job.id); }}
-                        className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        <BookmarkCheck className="h-4 w-4 fill-foreground" />
-                      </button>
                     </div>
-                    {(job.description || job.short_desc) && (
-                      <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
-                        {job.description || job.short_desc}
-                      </p>
-                    )}
                   </button>
                 ))}
               </div>
@@ -515,27 +541,32 @@ function RecentModal({
                     onClick={() => { setSelectedJob(job); setDetailOpen(true); }}
                     className="text-left w-full rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors"
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-medium text-sm">{job.name}</span>
-                        <span className="text-xs text-muted-foreground">{job.domain}</span>
+                    <div className="flex gap-3">
+                      <JobThumb job={job} size={48} rounded="md" />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-baseline gap-2 min-w-0">
+                            <span className="font-medium text-sm truncate">{job.name}</span>
+                            <span className="text-xs text-muted-foreground shrink-0">{job.domain}</span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => { e.stopPropagation(); bookmarks.toggle(job.id); }}
+                            className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
+                            title={bookmarks.isBookmarked(job.id) ? "저장 취소" : "저장"}
+                          >
+                            {bookmarks.isBookmarked(job.id)
+                              ? <BookmarkCheck className="h-4 w-4 fill-foreground" />
+                              : <Bookmark className="h-4 w-4" />}
+                          </button>
+                        </div>
+                        {(job.description || job.short_desc) && (
+                          <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
+                            {job.description || job.short_desc}
+                          </p>
+                        )}
                       </div>
-                      <button
-                        type="button"
-                        onClick={(e) => { e.stopPropagation(); bookmarks.toggle(job.id); }}
-                        className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
-                        title={bookmarks.isBookmarked(job.id) ? "저장 취소" : "저장"}
-                      >
-                        {bookmarks.isBookmarked(job.id)
-                          ? <BookmarkCheck className="h-4 w-4 fill-foreground" />
-                          : <Bookmark className="h-4 w-4" />}
-                      </button>
                     </div>
-                    {(job.description || job.short_desc) && (
-                      <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
-                        {job.description || job.short_desc}
-                      </p>
-                    )}
                   </button>
                 ))}
               </div>
@@ -918,6 +949,16 @@ function Result({
       <div className="text-xs text-muted-foreground mb-2">
         {winnerInMain ? "추천 직업" : "보완이 필요한 추천 직업"}
       </div>
+      {winner.image && (
+        <div className="mb-5 flex justify-center">
+          <JobThumb
+            job={winner}
+            rounded="2xl"
+            loading="eager"
+            className="w-full max-w-[320px] aspect-square shadow-md"
+          />
+        </div>
+      )}
       <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
         {winner.name}
       </h2>
@@ -1093,21 +1134,26 @@ function JobList({
               onClick={() => { setSelectedJob(r.job); setDialogOpen(true); }}
               className="text-left w-full rounded-md border border-border bg-card p-4 hover:border-foreground transition-colors cursor-pointer"
             >
-              <div className="flex items-baseline justify-between gap-3">
-                <div className="font-medium">{r.job.name}</div>
-                <div className="text-xs text-muted-foreground shrink-0">
-                  {r.job.domain}
+              <div className="flex gap-4">
+                <JobThumb job={r.job} size={72} rounded="lg" />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <div className="font-medium truncate">{r.job.name}</div>
+                    <div className="text-xs text-muted-foreground shrink-0">
+                      {r.job.domain}
+                    </div>
+                  </div>
+                  <div className="text-sm text-muted-foreground mt-1.5 line-clamp-2">
+                    {r.job.description || r.job.short_desc}
+                  </div>
+                  {highlightRequirement || !ok ? (
+                    <div className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-foreground/80 px-2 py-1 rounded bg-muted">
+                      <GraduationCap className="h-3.5 w-3.5" />
+                      필요 학력: {r.job.education_required ?? "고졸이상"}
+                    </div>
+                  ) : null}
                 </div>
               </div>
-              <div className="text-sm text-muted-foreground mt-1.5 line-clamp-2">
-                {r.job.description || r.job.short_desc}
-              </div>
-              {highlightRequirement || !ok ? (
-                <div className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-foreground/80 px-2 py-1 rounded bg-muted">
-                  <GraduationCap className="h-3.5 w-3.5" />
-                  필요 학력: {r.job.education_required ?? "고졸이상"}
-                </div>
-              ) : null}
             </button>
           );
         })}
@@ -1336,6 +1382,18 @@ function JobDetailDialog({
         </DialogHeader>
         <ScrollArea className="max-h-[60vh] pr-2">
           <div className="space-y-5 pb-2">
+            {/* Hero thumbnail */}
+            {job.image && (
+              <div className="-mt-1 mb-1 flex justify-center">
+                <JobThumb
+                  job={job}
+                  rounded="xl"
+                  loading="eager"
+                  className="w-full max-w-[260px] aspect-square shadow-sm"
+                />
+              </div>
+            )}
+
             {/* Description */}
             {(job.description || job.short_desc) && (
               <p className="text-sm leading-relaxed">
@@ -1510,17 +1568,22 @@ function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; 
               onClick={() => { setSelectedJob(job); setDialogOpen(true); }}
               className="text-left w-full rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors cursor-pointer"
             >
-              <div className="flex items-baseline justify-between gap-2">
-                <div className="font-medium text-sm">{job.name}</div>
-                <div className="text-xs text-muted-foreground shrink-0">
-                  {job.domain}
+              <div className="flex gap-3">
+                <JobThumb job={job} size={56} rounded="md" />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <div className="font-medium text-sm truncate">{job.name}</div>
+                    <div className="text-xs text-muted-foreground shrink-0">
+                      {job.domain}
+                    </div>
+                  </div>
+                  {(job.description || job.short_desc) && (
+                    <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                      {job.description || job.short_desc}
+                    </div>
+                  )}
                 </div>
               </div>
-              {(job.description || job.short_desc) && (
-                <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                  {job.description || job.short_desc}
-                </div>
-              )}
             </button>
           ))}
         </div>
