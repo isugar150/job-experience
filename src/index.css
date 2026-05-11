@@ -150,6 +150,31 @@
     .container { padding-left: 2rem; padding-right: 2rem; max-width: 1024px; }
   }
 
+  /* 포스트잇 다이얼로그 - 오른쪽 하단 모서리 접힘 + 상단 테이프 */
+  [data-slot="dialog-content"]::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 18px;
+    background: rgba(200, 180, 100, 0.55);
+    border-radius: 2px;
+    z-index: 1;
+  }
+  [data-slot="dialog-content"]::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(225deg, #e8d87a 45%, transparent 45%);
+    border-radius: 0 0 3px 0;
+    box-shadow: -2px -2px 4px rgba(80,60,10,0.15);
+  }
+
   /* 종이 카드 스타일 */
   .paper-card {
     background-image: url('/job-experience/paper_texture.png');

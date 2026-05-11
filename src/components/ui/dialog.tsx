@@ -128,10 +128,10 @@ function DialogContent({
           className
         )}
         style={{
-          background: 'linear-gradient(180deg, #fef9c3 0%, #fef08a 4%, #fef9c3 4%)',
-          borderRadius: '2px 2px 4px 4px',
-          boxShadow: '3px 4px 16px rgba(100,80,20,0.22), 0 1px 3px rgba(100,80,20,0.12)',
-          borderTop: '4px solid #fde047',
+          background: '#fef9c3',
+          borderRadius: '3px',
+          boxShadow: '4px 6px 20px rgba(80,60,10,0.20), 2px 2px 6px rgba(80,60,10,0.10)',
+          position: 'relative',
         }}
         onEscapeKeyDown={handleEscapeKeyDown}
         {...props}
