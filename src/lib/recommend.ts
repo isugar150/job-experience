@@ -529,7 +529,11 @@ export function getRecommendations(
 ): RecommendStep {
   const pool = filterByGender(ALL_JOBS, profile.gender);
   const scored = scoreJobs(pool, answers, profile);
-  scored.sort((a, b) => b.score - a.score);
+  // 점수 내림차순, 동점일 때는 랜덤으로 순서 섮기
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return Math.random() - 0.5;
+  });
 
   // 학력 unspecified: 학력 구분 없이 메인은 상위 topN
   // 서브는 topN+1 이하 상위 30개 중 랜덤 topN
