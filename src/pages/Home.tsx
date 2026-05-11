@@ -407,16 +407,9 @@ function Asking({
 
 /* ----------------------------- Result ----------------------------- */
 
-// Google I'm Feeling Lucky: 첫 번째 결과(나무위키)로 바로 이동
-const googleLuckyUrl = (name: string) =>
-  `https://www.google.com/search?q=${encodeURIComponent(name + " 나무위키")}&btnI=I`;
-
-// Naver 검색결과 보조 링크
-const naverSearchUrl = (name: string) =>
-  `https://search.naver.com/search.naver?query=${encodeURIComponent(name + " 나무위키")}`;
-
-// 하위 호환: 기존 source_url 필드가 있으면 우선 사용, 없으면 Google Lucky
-const namuwikiUrl = (name: string) => googleLuckyUrl(name);
+// 나무위키 다이렉트 링크
+const namuwikiUrl = (name: string) =>
+  `https://namu.wiki/w/${encodeURIComponent(name)}`;
 
 function Result({
   profile,
@@ -526,7 +519,7 @@ function Result({
           다시 찾아보기
         </Button>
         <a
-          href={googleLuckyUrl(winner.name)}
+          href={namuwikiUrl(winner.name)}
           target="_blank"
           rel="noreferrer"
         >
@@ -534,14 +527,6 @@ function Result({
             나무위키에서 더 보기
             <ExternalLink className="h-4 w-4 ml-2" />
           </Button>
-        </a>
-        <a
-          href={naverSearchUrl(winner.name)}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
-        >
-          Naver에서 검색
         </a>
       </div>
 
