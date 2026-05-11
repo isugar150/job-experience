@@ -828,7 +828,6 @@ function Result({
 }) {
   const winner = main[0]?.job ?? sub[0]?.job;
   const runners = main.slice(1, 5);
-  const isUnspecifiedEdu = profile.education === "unspecified";
 
   // 결과 페이지 진입 시 winner를 최근 본 직업에 자동 추가
   useEffect(() => {
@@ -909,7 +908,7 @@ function Result({
       {/* Certifications */}
       {winner.certifications?.length ? (
         <div className="mb-10">
-          <h3 className="text-sm font-semibold mb-3">유리한 자격증쀌면허</h3>
+          <h3 className="text-sm font-semibold mb-3">유리한 자격증·면허</h3>
           <div className="flex flex-wrap gap-2">
             {winner.certifications.map((c) => (
               <span
@@ -959,9 +958,10 @@ function Result({
       {/* Runners (메인 추천 나머지) */}
       {runners.length > 0 && (
         <div className="border-t border-border pt-8">
-          <h3 className="text-sm font-semibold mb-4">
-            {isUnspecifiedEdu ? "함께 추천된 직업" : "함께 추천된 직업 (학력 충족)"}
-          </h3>
+          <h3 className="text-sm font-semibold mb-2">함께 추천된 직업</h3>
+          <p className="text-xs text-muted-foreground mb-4 max-w-lg">
+            답변과 프로필에 잘 맞는 직업들입니다.
+          </p>
           <JobList items={runners} userEdu={profile.education} bookmarks={bookmarks} recentJobs={recentJobs} />
         </div>
       )}
