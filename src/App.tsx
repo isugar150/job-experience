@@ -15,6 +15,9 @@ function Router() {
     <WouterRouter base={ROUTER_BASE}>
       <Switch>
         <Route path={"/"} component={Home} />
+        <Route path={"/profile"} component={Home} />
+        <Route path={"/quiz"} component={Home} />
+        <Route path={"/result"} component={Home} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

@@ -3,6 +3,8 @@
  * 단계 흐름: intro → profile(성별·학력) → asking(질문) → result(메인/서브 추천)
  */
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "wouter";
+import { useModalBackHandler } from "@/hooks/useModalBackHandler";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useRecentJobs } from "@/hooks/useRecentJobs";
 import { Button } from "@/components/ui/button";
@@ -47,8 +49,24 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Phase = "intro" | "profile" | "asking" | "result";
 
+// URL 경로 <-> Phase 매핑
+const PATH_TO_PHASE: Record<string, Phase> = {
+  "/": "intro",
+  "/profile": "profile",
+  "/quiz": "asking",
+  "/result": "result",
+};
+const PHASE_TO_PATH: Record<Phase, string> = {
+  intro: "/",
+  profile: "/profile",
+  asking: "/quiz",
+  result: "/result",
+};
+
 export default function Home() {
-  const [phase, setPhase] = useState<Phase>("intro");
+  const [location, navigate] = useLocation();
+  const phase: Phase = PATH_TO_PHASE[location] ?? "intro";
+
   const [profile, setProfile] = useState<UserProfile>({
     gender: "unspecified",
     education: "unspecified",
@@ -70,35 +88,49 @@ export default function Home() {
   useEffect(() => {
     if (phase !== "asking") return;
     if (askedIds.size >= MAX_QUESTIONS) {
-      setPhase("result");
+      navigate(PHASE_TO_PATH["result"]);
       return;
     }
     if (askedIds.size >= 6 && candidates.length <= 5) {
-      setPhase("result");
+      navigate(PHASE_TO_PATH["result"]);
       return;
     }
     const next = pickNextQuestion(candidates, askedIds);
     if (!next) {
-      setPhase("result");
+      navigate(PHASE_TO_PATH["result"]);
       return;
     }
     setCurrentQuestion(next);
   }, [phase, askedIds, candidates]);
+
+  // 브라우저 뒤로가기 대응: profile/quiz 페이지에서 뒤로가기 시 상태 유지
+  useEffect(() => {
+    if (phase === "intro") {
+      // intro로 돌아오면 상태 초기화
+      setAnswers([]);
+      setAskedIds(new Set());
+      setAskedOrder([]);
+      setCurrentQuestion(null);
+      setProfile({ gender: "unspecified", education: "unspecified" });
+    }
+  }, [phase]);
 
   function startIntro() {
     setAnswers([]);
     setAskedIds(new Set());
     setAskedOrder([]);
     setCurrentQuestion(null);
-    setPhase("profile");
+    navigate(PHASE_TO_PATH["profile"]);
   }
 
   function startQuestions() {
-    setPhase("asking");
+    navigate(PHASE_TO_PATH["asking"]);
   }
 
   function answer(level: number) {
     if (!currentQuestion) return;
+    // 답변할 때마다 히스토리 항목을 쌓아서 브라우저 뒤로가기로 이전 질문으로 돌아갈 수 있게 함
+    history.pushState({ quizStep: true, questionId: currentQuestion.id }, "");
     setAnswers((prev) => [
       ...prev,
       { questionId: currentQuestion.id, level: level as -2 | -1 | 0 | 1 | 2 },
@@ -107,16 +139,38 @@ export default function Home() {
     setAskedOrder((prev) => [...prev, currentQuestion.id]);
   }
 
+  // quiz 단계에서 popstate 이벤트 처리
+  useEffect(() => {
+    if (phase !== "asking") return;
+
+    function handlePopState(e: PopStateEvent) {
+      if (e.state?.quizStep) {
+        // 이전 질문으로 돌아가기
+        const lastId = askedOrder[askedOrder.length - 1];
+        if (lastId) {
+          setAnswers((prev) => prev.slice(0, -1));
+          setAskedOrder((prev) => prev.slice(0, -1));
+          setAskedIds((prev) => {
+            const s = new Set(prev);
+            s.delete(lastId);
+            return s;
+          });
+        }
+      }
+      // quizStep이 없으면 wouter가 /profile로 이동시킴다 → 그대로 두기
+    }
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [phase, askedOrder]);
+
   function goBack() {
-    if (askedOrder.length === 0) return;
-    const lastId = askedOrder[askedOrder.length - 1];
-    setAnswers((prev) => prev.slice(0, -1));
-    setAskedOrder((prev) => prev.slice(0, -1));
-    setAskedIds((prev) => {
-      const s = new Set(prev);
-      s.delete(lastId);
-      return s;
-    });
+    if (askedOrder.length === 0) {
+      navigate(PHASE_TO_PATH["profile"]);
+      return;
+    }
+    // 히스토리에서 한 단계 뒤로 (하드코딩 버튼 사용 시)
+    history.back();
   }
 
   function reset() {
@@ -125,7 +179,7 @@ export default function Home() {
     setAskedOrder([]);
     setCurrentQuestion(null);
     setProfile({ gender: "unspecified", education: "unspecified" });
-    setPhase("intro");
+    navigate(PHASE_TO_PATH["intro"]);
   }
 
   const bookmarks = useBookmarks();
@@ -192,7 +246,7 @@ function Header({
 
   return (
     <>
-      <header className="border-b border-border sticky top-0 z-10" style={{backgroundColor: 'oklch(0.97 0.015 85)', backgroundImage: "url('/paper_texture.png')", backgroundRepeat: 'repeat', backgroundSize: '400px 400px', boxShadow: '0 2px 8px oklch(0.5 0.03 70 / 0.18)'}}>
+      <header className="border-b border-border sticky top-0 z-10" style={{backgroundColor: '#f7f3eb', backgroundImage: "url('/paper_texture.png')", backgroundRepeat: 'repeat', backgroundSize: '400px 400px', boxShadow: '0 2px 6px rgba(100,80,50,0.15)'}}>
         <div className="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {/* 연필 아이콘 */}
@@ -277,6 +331,7 @@ function BookmarkModal({
 }) {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
+  useModalBackHandler(open && !detailOpen, () => onOpenChange(false));
 
   const bookmarkedJobs = useMemo(
     () => ALL_JOBS.filter((j) => bookmarks.isBookmarked(j.id)),
@@ -365,6 +420,7 @@ function RecentModal({
 }) {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
+  useModalBackHandler(open && !detailOpen, () => onOpenChange(false));
 
   const jobs = useMemo(
     () =>
@@ -448,15 +504,35 @@ function RecentModal({
 function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookmarks?: BookmarksHook; recentJobs?: RecentJobsHook }) {
   return (
     <section className="pt-4">
-      {/* 헤로 영역 - 문구류 일러스트 배치 */}
-      <div className="relative mb-10">
-        {/* 오른쪽 상단 문구류 일러스트 */}
-        <div className="absolute -top-4 right-0 w-72 sm:w-96 opacity-80 pointer-events-none select-none hidden sm:block">
-          <img src="/stationery_objects.png" alt="" className="w-full" style={{filter: 'drop-shadow(1px 2px 4px oklch(0.4 0.02 60 / 0.2))'}} />
+      {/* 헤로 영역 */}
+      <div className="relative mb-10 min-h-[260px] sm:min-h-[320px]">
+
+        {/* 문구류 일러스트 - 오른쪽 상단 */}
+        <div
+          className="absolute top-0 right-0 w-[340px] sm:w-[480px] pointer-events-none select-none"
+          style={{ mixBlendMode: 'multiply', opacity: 0.92 }}
+        >
+          <img
+            src="/stationery_objects.png"
+            alt=""
+            className="w-full"
+          />
         </div>
 
-        <div className="relative z-10 max-w-lg">
-          {/* 스탬프 느낙 배지 */}
+        {/* 연필 - 왼쪽 하단 대각선 배치 */}
+        <div
+          className="absolute bottom-0 -left-6 w-[160px] sm:w-[200px] pointer-events-none select-none hidden sm:block"
+          style={{ mixBlendMode: 'multiply', opacity: 0.85, transform: 'rotate(30deg) translateY(20px)' }}
+        >
+          <img
+            src="/pencil.png"
+            alt=""
+            className="w-full"
+          />
+        </div>
+
+        <div className="relative z-10 max-w-[55%] sm:max-w-lg">
+          {/* 스탬프 느낌 배지 */}
           <div className="inline-block mb-4">
             <span className="stamp-badge text-xs text-primary/70 border-primary/40">
               {ALL_JOBS.length}개 직업 데이터베이스
@@ -990,6 +1066,7 @@ function JobDetailDialog({
   bookmarks?: BookmarksHook;
   onView?: (id: number) => void;
 }) {
+  useModalBackHandler(open, () => onOpenChange(false));
   useEffect(() => {
     if (open && job) {
       onView?.(job.id);
