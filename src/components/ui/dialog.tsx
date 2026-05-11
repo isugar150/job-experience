@@ -129,10 +129,11 @@ function DialogContent({
         )}
         style={{
           background: '#fef9c3',
-          borderRadius: '4px',
-          boxShadow: '4px 6px 20px rgba(80,60,10,0.22), 2px 2px 6px rgba(80,60,10,0.10)',
+          borderRadius: '3px',
+          boxShadow: '3px 5px 18px rgba(80,60,10,0.20), 1px 2px 5px rgba(80,60,10,0.10)',
           position: 'relative',
-          overflow: 'hidden',
+          overflow: 'visible',
+          marginTop: '14px',
         }}
         onEscapeKeyDown={handleEscapeKeyDown}
         {...props}

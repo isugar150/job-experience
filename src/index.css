@@ -150,38 +150,24 @@
     .container { padding-left: 2rem; padding-right: 2rem; max-width: 1024px; }
   }
 
-  /* 포스트잇 다이얼로그 - 스프링 뜯긴 구멍 + 가로 줄무늬 노트 스타일 */
+  /* 포스트잇 다이얼로그 - 심플 테이프 붙인 효과 */
   [data-slot="dialog-content"] {
-    /* 가로 줄무늬: 상단 36px은 구멍 영역(크림색), 이후 24px 간격 줄무늬 */
-    background-image:
-      /* 상단 구멍 영역 구분선 */
-      linear-gradient(to bottom, transparent 35px, #d4c97a 35px, #d4c97a 36px, transparent 36px),
-      /* 가로 줄무늬 */
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 23px,
-        #d4c97a 23px,
-        #d4c97a 24px
-      ) !important;
-    background-position: 0 36px, 0 36px !important;
-    background-size: 100% auto, 100% 24px !important;
-    background-repeat: no-repeat, repeat-y !important;
-    padding-top: 48px !important;
+    background-image: none !important;
+    padding-top: 2.5rem !important;
   }
-  /* 스프링 뜯긴 구멍들 */
+  /* 상단 테이프 */
   [data-slot="dialog-content"]::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 36px;
-    background-image: radial-gradient(circle, #b8a830 40%, transparent 40%);
-    background-size: 20px 20px;
-    background-position: 18px 8px;
-    background-repeat: repeat-x;
-    z-index: 2;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 26px;
+    background: rgba(210, 195, 120, 0.55);
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(100,80,20,0.15);
+    z-index: 10;
     pointer-events: none;
   }
   [data-slot="dialog-content"]::after {
