@@ -192,7 +192,7 @@ function Header({
 
   return (
     <>
-      <header className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-10" style={{boxShadow: '0 2px 8px oklch(0.5 0.03 70 / 0.12)'}}>
+      <header className="border-b border-border sticky top-0 z-10" style={{backgroundColor: 'oklch(0.97 0.015 85)', backgroundImage: "url('/paper_texture.png')", backgroundRepeat: 'repeat', backgroundSize: '400px 400px', boxShadow: '0 2px 8px oklch(0.5 0.03 70 / 0.18)'}}>
         <div className="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {/* 연필 아이콘 */}
