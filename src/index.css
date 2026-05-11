@@ -43,60 +43,60 @@
 }
 
 /**
- * Design philosophy: Minimal Light
- * - Background: pure white
- * - Foreground: near-black neutral
- * - Primary: subtle dark accent (charcoal), not vibrant
- * - 라운드 / 그림자 / 그라디언트 / 별자리 모두 제거. 깔끔한 1px border + 충분한 여백.
+ * Design philosophy: Paper & Stationery
+ * - 종이 질감 배경 (크림/아이보리)
+ * - 손글씨/연필 느낌의 폰트 및 컬러
+ * - 문구류 오브젝트 장식
  */
 :root {
-  --radius: 0.5rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0 0);
-  --primary: oklch(0.22 0 0);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.22 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.95 0 0);
-  --accent-foreground: oklch(0.18 0 0);
+  --radius: 0.375rem;
+
+  /* 종이 느낌 색상 팔레트 */
+  --background: oklch(0.97 0.015 85);        /* 크림 아이보리 */
+  --foreground: oklch(0.22 0.02 60);          /* 진한 갈색 잉크 */
+  --card: oklch(0.99 0.01 80);               /* 밝은 종이 */
+  --card-foreground: oklch(0.22 0.02 60);
+  --popover: oklch(0.99 0.01 80);
+  --popover-foreground: oklch(0.22 0.02 60);
+  --primary: oklch(0.28 0.04 55);            /* 진한 연필심 색 */
+  --primary-foreground: oklch(0.97 0.01 85);
+  --secondary: oklch(0.93 0.02 80);          /* 연한 종이 */
+  --secondary-foreground: oklch(0.28 0.04 55);
+  --muted: oklch(0.93 0.02 80);
+  --muted-foreground: oklch(0.5 0.02 60);
+  --accent: oklch(0.88 0.04 80);             /* 약간 더 진한 종이 */
+  --accent-foreground: oklch(0.22 0.02 60);
   --destructive: oklch(0.6 0.2 25);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.91 0 0);
-  --input: oklch(0.91 0 0);
-  --ring: oklch(0.5 0 0);
-  --chart-1: oklch(0.22 0 0);
-  --chart-2: oklch(0.45 0 0);
-  --chart-3: oklch(0.65 0 0);
-  --chart-4: oklch(0.8 0 0);
-  --chart-5: oklch(0.9 0 0);
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.18 0 0);
-  --sidebar-primary: oklch(0.22 0 0);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.95 0 0);
-  --sidebar-accent-foreground: oklch(0.18 0 0);
-  --sidebar-border: oklch(0.91 0 0);
-  --sidebar-ring: oklch(0.5 0 0);
+  --border: oklch(0.82 0.03 75);             /* 종이 접힌 선 느낌 */
+  --input: oklch(0.88 0.02 80);
+  --ring: oklch(0.5 0.03 70);
+  --chart-1: oklch(0.55 0.12 55);
+  --chart-2: oklch(0.6 0.1 200);
+  --chart-3: oklch(0.65 0.08 120);
+  --chart-4: oklch(0.7 0.1 30);
+  --chart-5: oklch(0.75 0.06 280);
+  --sidebar: oklch(0.95 0.015 85);
+  --sidebar-foreground: oklch(0.22 0.02 60);
+  --sidebar-primary: oklch(0.28 0.04 55);
+  --sidebar-primary-foreground: oklch(0.97 0.01 85);
+  --sidebar-accent: oklch(0.88 0.04 80);
+  --sidebar-accent-foreground: oklch(0.22 0.02 60);
+  --sidebar-border: oklch(0.82 0.03 75);
+  --sidebar-ring: oklch(0.5 0.03 70);
 }
 
 .dark {
-  /* 라이트 단일 테마이지만 dark 토큰도 유지 */
-  --background: oklch(0.16 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.2 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.95 0 0);
-  --primary-foreground: oklch(0.18 0 0);
+  --background: oklch(0.18 0.02 60);
+  --foreground: oklch(0.93 0.015 85);
+  --card: oklch(0.22 0.02 60);
+  --card-foreground: oklch(0.93 0.015 85);
+  --primary: oklch(0.88 0.03 80);
+  --primary-foreground: oklch(0.22 0.02 60);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.7 0 0);
+  --muted: oklch(0.28 0.02 60);
+  --muted-foreground: oklch(0.65 0.02 75);
 }
 
 @layer base {
@@ -104,8 +104,8 @@
     @apply border-border outline-ring/50;
   }
   html, body {
-    background-color: oklch(1 0 0);
-    color: oklch(0.18 0 0);
+    background-color: oklch(0.97 0.015 85);
+    color: oklch(0.22 0.02 60);
   }
   body {
     @apply bg-background text-foreground;
@@ -113,6 +113,10 @@
       system-ui, "Apple SD Gothic Neo", sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* 종이 질감 배경 */
+    background-image: url('/paper_texture.png');
+    background-repeat: repeat;
+    background-size: 400px 400px;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -144,5 +148,41 @@
   }
   @media (min-width: 1024px) {
     .container { padding-left: 2rem; padding-right: 2rem; max-width: 1024px; }
+  }
+
+  /* 종이 카드 스타일 */
+  .paper-card {
+    background-image: url('/paper_texture.png');
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    box-shadow: 2px 3px 8px oklch(0.5 0.03 70 / 0.15), 0 1px 2px oklch(0.5 0.03 70 / 0.1);
+  }
+
+  /* 연필 밑줄 효과 */
+  .pencil-underline {
+    position: relative;
+  }
+  .pencil-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: oklch(0.5 0.05 60 / 0.4);
+    border-radius: 1px;
+    transform: rotate(-0.3deg);
+  }
+
+  /* 스탬프/도장 느낌 배지 */
+  .stamp-badge {
+    border: 2px solid currentColor;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+    transform: rotate(-1.5deg);
+    display: inline-block;
   }
 }

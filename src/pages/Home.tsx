@@ -192,10 +192,14 @@ function Header({
 
   return (
     <>
-      <header className="border-b border-border">
+      <header className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-10" style={{boxShadow: '0 2px 8px oklch(0.5 0.03 70 / 0.12)'}}>
         <div className="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between">
-          <div className="text-sm font-semibold tracking-tight">
-            나에게 맞는 직업 찾기
+          <div className="flex items-center gap-2">
+            {/* 연필 아이콘 */}
+            <img src="/pencil.png" alt="" className="h-7 w-auto opacity-90" style={{transform: 'rotate(-10deg)'}} />
+            <span className="text-sm font-bold tracking-tight" style={{fontFamily: '"Pretendard Variable", sans-serif', letterSpacing: '-0.01em'}}>
+              나에게 맞는 직업 찾기
+            </span>
           </div>
           <div className="flex items-center gap-1">
             {/* 최근 본 직업 */}
@@ -444,31 +448,54 @@ function RecentModal({
 function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookmarks?: BookmarksHook; recentJobs?: RecentJobsHook }) {
   return (
     <section className="pt-4">
-      <h1 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-4">
-        나에게 맞는 직업, 찾아드립니다.
-      </h1>
-      <p className="text-base text-muted-foreground leading-relaxed mb-8 max-w-xl">
-        몇 가지 질문에 답해 주세요. 답변에 따라 {ALL_JOBS.length}개의 직업 중에서
-        당신과 잘 맞는 직업을 추려서 보여드립니다. 정답은 없으니 직감대로 답하면 됩니다.
-      </p>
+      {/* 헤로 영역 - 문구류 일러스트 배치 */}
+      <div className="relative mb-10">
+        {/* 오른쪽 상단 문구류 일러스트 */}
+        <div className="absolute -top-4 right-0 w-72 sm:w-96 opacity-80 pointer-events-none select-none hidden sm:block">
+          <img src="/stationery_objects.png" alt="" className="w-full" style={{filter: 'drop-shadow(1px 2px 4px oklch(0.4 0.02 60 / 0.2))'}} />
+        </div>
 
-      <Button size="lg" onClick={onStart} className="h-11 px-6 rounded-md">
-        시작하기
-        <ArrowRight className="h-4 w-4 ml-2" />
-      </Button>
+        <div className="relative z-10 max-w-lg">
+          {/* 스탬프 느낙 배지 */}
+          <div className="inline-block mb-4">
+            <span className="stamp-badge text-xs text-primary/70 border-primary/40">
+              {ALL_JOBS.length}개 직업 데이터베이스
+            </span>
+          </div>
 
-      <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
-        <Stat k={`${ALL_JOBS.length}`} v="직업 데이터" />
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-5" style={{wordBreak: 'keep-all'}}>
+            나에게 맞는 직업,
+            <br />
+            <span className="pencil-underline">찾아드립니다.</span>
+          </h1>
+          <p className="text-base text-muted-foreground leading-relaxed mb-8">
+            몇 가지 질문에 답해 주세요. 답변에 따라 {ALL_JOBS.length}개의 직업 중에서
+            당신과 잘 맞는 직업을 추려서 보여드립니다.
+            정답은 없으니 직감대로 답하면 됩니다.
+          </p>
+
+          <Button size="lg" onClick={onStart} className="h-11 px-7 rounded-sm font-semibold" style={{boxShadow: '2px 3px 0 oklch(0.3 0.03 60 / 0.3)'}}>
+            시작하기
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
+        </div>
+      </div>
+
+      {/* 통계 카드 - 종이 카드 느낙 */}
+      <div className="mt-10 grid grid-cols-3 gap-4 max-w-sm">
+        <Stat k={`${ALL_JOBS.length}`} v="직업" />
         <Stat k="34" v="중분류" />
-        <Stat k={`최대 ${MAX_QUESTIONS}`} v="질문 수" />
+        <Stat k={`${MAX_QUESTIONS}`} v="질문" />
       </div>
 
       {/* 전체 직업 리스트 */}
-      <div className="mt-16 pt-16 border-t border-border">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
-          전체 직업 목록
-        </h2>
-        <p className="text-sm text-muted-foreground mb-6 max-w-xl">
+      <div className="mt-16 pt-12 border-t border-border">
+        <div className="flex items-center gap-3 mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+            전체 직업 목록
+          </h2>
+        </div>
+        <p className="text-sm text-muted-foreground mb-6">
           {ALL_JOBS.length}개의 직업을 검색하고 필터링할 수 있습니다.
         </p>
         <JobListBrowser bookmarks={bookmarks} recentJobs={recentJobs} />
@@ -479,9 +506,9 @@ function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookma
 
 function Stat({ k, v }: { k: string; v: string }) {
   return (
-    <div>
-      <div className="text-2xl font-semibold tracking-tight">{k}</div>
-      <div className="text-xs text-muted-foreground mt-1">{v}</div>
+    <div className="paper-card rounded-sm border border-border px-4 py-3 text-center">
+      <div className="text-2xl font-bold tracking-tight">{k}</div>
+      <div className="text-xs text-muted-foreground mt-0.5">{v}</div>
     </div>
   );
 }
