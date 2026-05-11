@@ -89,7 +89,7 @@ export default function Home() {
   useEffect(() => {
     if (phase !== "asking") return;
     // 최소 질문 수 이상 답한 상태에서 후보가 CANDIDATE_THRESHOLD 이하로 좌혀지면 조기 종료
-    if (askedIds.size >= MIN_QUESTIONS && candidates.length <= CANDIDATE_THRESHOLD) {
+    if (askedIds.size >= MIN_QUESTIONS && candidates.length <= CANDIDATE_THRESHOLD + 3) {
       navigate(PHASE_TO_PATH["result"]);
       return;
     }

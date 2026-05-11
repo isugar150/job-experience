@@ -475,7 +475,10 @@ export function getRecommendations(
   };
 }
 
-/** 현재 후보군 (다음 질문 선택용) — 학력은 필터링하지 않음 */
+/**
+ * 현재 후보군 (다음 질문 선택용) — 학력은 필터링하지 않음
+ * 답변이 쌓일수록 상위 N개로 후보를 점진적으로 줄여 종료 조건이 발동하도록 한다.
+ */
 export function currentCandidates(
   profile: UserProfile,
   answers: Answer[]
@@ -483,13 +486,32 @@ export function currentCandidates(
   const pool = filterByGender(ALL_JOBS, profile.gender);
   const scored = scoreJobs(pool, answers);
   scored.sort((a, b) => b.score - a.score);
-  if (answers.length < 3) {
-    return scored.slice(0, Math.max(80, Math.floor(scored.length / 3))).map((s) => s.job);
+
+  const n = answers.length;
+
+  // 답변 수에 따라 상위 N개로 점진적 좀힌
+  // 0-2개: 전체 풀 유지
+  // 3개: 상위 150개
+  // 5개: 상위 60개
+  // 8개: 상위 20개
+  // 12개: 상위 8개
+  // 15개+: 상위 5개
+  let limit: number;
+  if (n < 3) {
+    limit = scored.length;
+  } else if (n < 5) {
+    limit = 150;
+  } else if (n < 8) {
+    limit = 60;
+  } else if (n < 12) {
+    limit = 20;
+  } else if (n < 15) {
+    limit = 8;
+  } else {
+    limit = CANDIDATE_THRESHOLD;
   }
-  if (answers.length < 6) {
-    return scored.slice(0, 40).map((s) => s.job);
-  }
-  return scored.slice(0, 20).map((s) => s.job);
+
+  return scored.slice(0, limit).map((s) => s.job);
 }
 
 export const ANSWER_OPTIONS: Array<{ label: string; level: AnswerLevel }> = [
