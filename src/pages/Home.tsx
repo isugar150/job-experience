@@ -550,12 +550,6 @@ function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookma
         </div>
       </div>
 
-      {/* 통계 카드 - 종이 카드 느낙 */}
-      <div className="mt-10 grid grid-cols-3 gap-4 max-w-sm">
-        <Stat k={`${ALL_JOBS.length}`} v="직업" />
-        <Stat k="34" v="중분류" />
-        <Stat k="33" v="질문" />
-      </div>
 
       {/* 전체 직업 리스트 */}
       <div className="mt-16 pt-12 border-t border-border">
