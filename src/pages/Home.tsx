@@ -1490,39 +1490,85 @@ const JobDetailDialog = memo(function JobDetailDialog({
 
 /* ----------------------------- JobListBrowser ----------------------------- */
 
+// 한 번에 렌더할 기본 아이템 수. 최초 진입 시 536개 카드를 한꺼번에 창으롌
+// JobListBrowser 자체가 무거워져 다이얼로그를 염 때의 React 커밋도 느려졌다.
+// 100개 단위로 점진적으로 표시하고 "더 보기" 버튼으로 확장한다.
+const JOB_LIST_PAGE_SIZE = 100;
+
+// 사전 계산 가능한 값들은 모듈 레벨에서 한 번만 계산한다.
+const JOB_CATEGORIES: string[] = Array.from(
+  new Set(ALL_JOBS.map((j) => j.category)),
+).sort();
+const JOB_CATEGORY_COUNTS: Record<string, number> = ALL_JOBS.reduce(
+  (acc, j) => {
+    acc[j.category] = (acc[j.category] ?? 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>,
+);
+// 검색을 위한 lowercase 메타도 미리 계산해둔다 (매 렌더마다 toLowerCase를
+// 3×536=1608회 호출하던 것을 제거).
+interface JobSearchEntry {
+  job: Job;
+  haystack: string;
+}
+const JOB_SEARCH_INDEX: JobSearchEntry[] = ALL_JOBS.map((j) => ({
+  job: j,
+  haystack: (
+    j.name +
+    "\u0000" +
+    j.domain +
+    "\u0000" +
+    (j.description || "")
+  ).toLowerCase(),
+}));
+
 function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; recentJobs?: RecentJobsHook }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-  // 마운트 시 한 번만 셔플된 직업 순서 (페이지 진입마다 순서 달라짐)
-  const shuffledJobs = useMemo(() => {
-    const arr = [...ALL_JOBS];
-    // Fisher-Yates shuffle
+  // 점진적 렌더링을 위한 표시 개수 (검색어/카테고리 변경 시 리셋)
+  const [visibleCount, setVisibleCount] = useState(JOB_LIST_PAGE_SIZE);
+
+  // 마운트 시 한 번만 셔플된 이덱스 순서 (페이지 진입마다 순서 달라짐).
+  // 대용량 배열을 다시 쉍으로 셔플하는 대신, 인덱스 배열만 셔플해 초기 작업을 줄인다.
+  const shuffledIndices = useMemo(() => {
+    const arr = new Int32Array(JOB_SEARCH_INDEX.length);
+    for (let i = 0; i < arr.length; i++) arr[i] = i;
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+      const tmp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = tmp;
     }
     return arr;
   }, []);
-  // 고유한 중분류 목록 (이건 랜덤이 아닄라 항상 정렬)
-  const categories = useMemo(
-    () => Array.from(new Set(ALL_JOBS.map((j) => j.category))).sort(),
-    []
-  );
-  // 필터링된 직업
+
+  // 필터링된 직업 (전체 결과 수만 알 수 있으면 되므로 전체를 순회하되, 설계상
+  // toLowerCase·includes 호출 횟수를 줄이고 렌더 자체는 아래의 visibleCount로 제한).
   const filtered = useMemo(() => {
-    return shuffledJobs.filter((job) => {
-      const matchesSearch =
-        searchTerm === "" ||
-        job.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (job.description || "").toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory =
-        selectedCategory === null || job.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    });
-  }, [shuffledJobs, searchTerm, selectedCategory]);
+    const q = searchTerm.trim().toLowerCase();
+    const out: Job[] = [];
+    for (let i = 0; i < shuffledIndices.length; i++) {
+      const entry = JOB_SEARCH_INDEX[shuffledIndices[i]];
+      const job = entry.job;
+      if (selectedCategory !== null && job.category !== selectedCategory) continue;
+      if (q !== "" && !entry.haystack.includes(q)) continue;
+      out.push(job);
+    }
+    return out;
+  }, [shuffledIndices, searchTerm, selectedCategory]);
+
+  // 검색어/카테고리가 바뀌면 표시 개수를 리셋한다.
+  useEffect(() => {
+    setVisibleCount(JOB_LIST_PAGE_SIZE);
+  }, [searchTerm, selectedCategory]);
+
+  const visibleJobs = useMemo(
+    () => filtered.slice(0, visibleCount),
+    [filtered, visibleCount],
+  );
 
   return (
     <div className="space-y-4">
@@ -1548,32 +1594,29 @@ function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; 
         >
           전체 ({ALL_JOBS.length})
         </button>
-        {categories.map((cat) => {
-          const count = ALL_JOBS.filter((j) => j.category === cat).length;
-          return (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={
-                "rounded-md border px-3 py-1.5 text-xs font-medium transition-colors " +
-                (selectedCategory === cat
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border bg-card hover:border-foreground")
-              }
-            >
-              {cat} ({count})
-            </button>
-          );
-        })}
+        {JOB_CATEGORIES.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={
+              "rounded-md border px-3 py-1.5 text-xs font-medium transition-colors " +
+              (selectedCategory === cat
+                ? "border-foreground bg-foreground text-background"
+                : "border-border bg-card hover:border-foreground")
+            }
+          >
+            {cat} ({JOB_CATEGORY_COUNTS[cat] ?? 0})
+          </button>
+        ))}
       </div>
 
       {/* 결과 */}
       <div className="mt-6">
         <p className="text-xs text-muted-foreground mb-3">
-          {filtered.length}개 직업 표시
+          {filtered.length}개 직업 중 {Math.min(visibleCount, filtered.length)}개 표시
         </p>
         <div className="grid gap-2 max-h-[600px] overflow-y-auto border border-border rounded-md p-3 bg-card/50">
-          {filtered.map((job) => (
+          {visibleJobs.map((job) => (
             <button
               key={job.id}
               type="button"
@@ -1598,6 +1641,15 @@ function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; 
               </div>
             </button>
           ))}
+          {visibleCount < filtered.length && (
+            <button
+              type="button"
+              onClick={() => setVisibleCount((c) => c + JOB_LIST_PAGE_SIZE)}
+              className="mt-1 w-full rounded-md border border-dashed border-border bg-card/30 px-3 py-3 text-sm text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+            >
+              {Math.min(JOB_LIST_PAGE_SIZE, filtered.length - visibleCount)}개 더 보기 ({filtered.length - visibleCount}개 남음)
+            </button>
+          )}
         </div>
       </div>
 
