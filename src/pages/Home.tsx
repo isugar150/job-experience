@@ -31,6 +31,14 @@ import {
   RotateCcw,
   X,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Phase = "intro" | "profile" | "asking" | "result";
 
@@ -580,54 +588,46 @@ function JobList({
   userEdu: UserEducation;
   highlightRequirement?: boolean;
 }) {
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   return (
-    <div className="grid gap-3">
-      {items.map((r) => {
-        const ok = meetsEducation(r.job, userEdu);
-        return (
-          <div
-            key={r.job.id}
-            className="block rounded-md border border-border bg-card p-4 hover:border-foreground transition-colors"
-          >
-            <div className="flex items-baseline justify-between gap-3">
-              <div className="font-medium">{r.job.name}</div>
-              <div className="text-xs text-muted-foreground shrink-0">
-                {r.job.domain}
+    <>
+      <div className="grid gap-3">
+        {items.map((r) => {
+          const ok = meetsEducation(r.job, userEdu);
+          return (
+            <button
+              key={r.job.id}
+              type="button"
+              onClick={() => { setSelectedJob(r.job); setDialogOpen(true); }}
+              className="text-left w-full rounded-md border border-border bg-card p-4 hover:border-foreground transition-colors cursor-pointer"
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <div className="font-medium">{r.job.name}</div>
+                <div className="text-xs text-muted-foreground shrink-0">
+                  {r.job.domain}
+                </div>
               </div>
-            </div>
-            <div className="text-sm text-muted-foreground mt-1.5 line-clamp-2">
-              {r.job.description || r.job.short_desc}
-            </div>
-            {highlightRequirement || !ok ? (
-              <div className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-foreground/80 px-2 py-1 rounded bg-muted">
-                <GraduationCap className="h-3.5 w-3.5" />
-                필요 학력: {r.job.education_required ?? "고졸이상"}
+              <div className="text-sm text-muted-foreground mt-1.5 line-clamp-2">
+                {r.job.description || r.job.short_desc}
               </div>
-            ) : null}
-            <div className="mt-2.5 flex gap-3">
-              <a
-                href={googleLuckyUrl(r.job.name)}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
-                onClick={(e) => e.stopPropagation()}
-              >
-                나무위키
-              </a>
-              <a
-                href={naverSearchUrl(r.job.name)}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
-                onClick={(e) => e.stopPropagation()}
-              >
-                Naver 검색
-              </a>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+              {highlightRequirement || !ok ? (
+                <div className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-foreground/80 px-2 py-1 rounded bg-muted">
+                  <GraduationCap className="h-3.5 w-3.5" />
+                  필요 학력: {r.job.education_required ?? "고졸이상"}
+                </div>
+              ) : null}
+            </button>
+          );
+        })}
+      </div>
+      <JobDetailDialog
+        job={selectedJob}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+      />
+    </>
   );
 }
 
@@ -684,11 +684,114 @@ function Meta({ k, v }: { k: string; v: string }) {
   );
 }
 
+/* ----------------------------- JobDetailDialog ----------------------------- */
+
+function JobDetailDialog({
+  job,
+  open,
+  onOpenChange,
+}: {
+  job: Job | null;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  if (!job) return null;
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-lg">
+        <DialogHeader>
+          <DialogTitle className="text-xl font-bold">{job.name}</DialogTitle>
+          <DialogDescription className="text-xs text-muted-foreground">
+            {job.domain} · {job.category}
+          </DialogDescription>
+        </DialogHeader>
+        <ScrollArea className="max-h-[60vh] pr-2">
+          <div className="space-y-5 pb-2">
+            {/* Description */}
+            {(job.description || job.short_desc) && (
+              <p className="text-sm leading-relaxed">
+                {job.description || job.short_desc}
+              </p>
+            )}
+
+            {/* Pros / Cons */}
+            {(job.pros?.length || job.cons?.length) ? (
+              <div className="grid sm:grid-cols-2 gap-3">
+                {job.pros?.length ? (
+                  <div className="rounded-md border border-border bg-card p-4">
+                    <h4 className="text-xs font-semibold mb-2">장점</h4>
+                    <ul className="space-y-1.5">
+                      {job.pros.map((item) => (
+                        <li key={item} className="flex gap-2 text-xs leading-relaxed">
+                          <Check className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+                {job.cons?.length ? (
+                  <div className="rounded-md border border-border bg-card p-4">
+                    <h4 className="text-xs font-semibold mb-2">단점</h4>
+                    <ul className="space-y-1.5">
+                      {job.cons.map((item) => (
+                        <li key={item} className="flex gap-2 text-xs leading-relaxed">
+                          <X className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+
+            {/* Certifications */}
+            {job.certifications?.length ? (
+              <div>
+                <h4 className="text-xs font-semibold mb-2">유리한 자격증·면허</h4>
+                <div className="flex flex-wrap gap-1.5">
+                  {job.certifications.map((c) => (
+                    <span
+                      key={c}
+                      className="px-2.5 py-1 rounded-md border border-border bg-card text-xs"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {/* Meta grid */}
+            <div className="border-t border-border pt-4">
+              <h4 className="text-xs font-semibold mb-3">직업 특성</h4>
+              <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-xs">
+                <div><dt className="text-muted-foreground">필요 학력</dt><dd className="font-medium mt-0.5">{job.education_required ?? "고졸이상"}</dd></div>
+                <div><dt className="text-muted-foreground">근무 환경</dt><dd className="font-medium mt-0.5">{job.tags.work_environment}</dd></div>
+                <div><dt className="text-muted-foreground">대인 접촉</dt><dd className="font-medium mt-0.5">{job.tags.people_interaction}</dd></div>
+                <div><dt className="text-muted-foreground">창의성</dt><dd className="font-medium mt-0.5">{job.tags.creativity_level}</dd></div>
+                <div><dt className="text-muted-foreground">분석력</dt><dd className="font-medium mt-0.5">{job.tags.analytical_level}</dd></div>
+                <div><dt className="text-muted-foreground">기술 활용</dt><dd className="font-medium mt-0.5">{job.tags.tech_intensity}</dd></div>
+                <div><dt className="text-muted-foreground">체력 부담</dt><dd className="font-medium mt-0.5">{job.tags.physical_intensity}</dd></div>
+                <div><dt className="text-muted-foreground">소득 수준</dt><dd className="font-medium mt-0.5">{job.tags.income_level}</dd></div>
+                <div><dt className="text-muted-foreground">성별 제한</dt><dd className="font-medium mt-0.5">{job.gender_restriction ?? "무관"}</dd></div>
+              </dl>
+            </div>
+          </div>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 /* ----------------------------- JobListBrowser ----------------------------- */
 
 function JobListBrowser() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   // 고유한 중분류 목록
   const categories = useMemo(
@@ -762,9 +865,11 @@ function JobListBrowser() {
         </p>
         <div className="grid gap-2 max-h-96 overflow-y-auto">
           {filtered.map((job) => (
-            <div
+            <button
               key={job.id}
-              className="rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors"
+              type="button"
+              onClick={() => { setSelectedJob(job); setDialogOpen(true); }}
+              className="text-left w-full rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors cursor-pointer"
             >
               <div className="flex items-baseline justify-between gap-2">
                 <div className="font-medium text-sm">{job.name}</div>
@@ -772,33 +877,21 @@ function JobListBrowser() {
                   {job.domain}
                 </div>
               </div>
-              {job.description && (
-                <div className="text-xs text-muted-foreground mt-1 line-clamp-1">
-                  {job.description}
+              {(job.description || job.short_desc) && (
+                <div className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                  {job.description || job.short_desc}
                 </div>
               )}
-              <div className="mt-1.5 flex gap-3">
-                <a
-                  href={googleLuckyUrl(job.name)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
-                >
-                  나무위키
-                </a>
-                <a
-                  href={naverSearchUrl(job.name)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
-                >
-                  Naver 검색
-                </a>
-              </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
+
+      <JobDetailDialog
+        job={selectedJob}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+      />
     </div>
   );
 }
