@@ -477,7 +477,10 @@ export function getRecommendations(
 
 /**
  * 현재 후보군 (다음 질문 선택용) — 학력은 필터링하지 않음
- * 답변이 쌓일수록 상위 N개로 후보를 점진적으로 줄여 종료 조건이 발동하도록 한다.
+ *
+ * 답변이 쌓일수록 상위 점수와의 차이가 일정 범위 안에 드는 직업만 후보로 유지한다.
+ * • 답변 수가 적을 때: 넓은 범위(상위 60%) → 답변이 쌓일수록 컷오프 상승
+ * • 최소 5개 / 최대 300개 보장
  */
 export function currentCandidates(
   profile: UserProfile,
@@ -487,31 +490,26 @@ export function currentCandidates(
   const scored = scoreJobs(pool, answers);
   scored.sort((a, b) => b.score - a.score);
 
+  if (scored.length === 0) return [];
+
+  const topScore = scored[0].score;
   const n = answers.length;
 
-  // 답변 수에 따라 상위 N개로 점진적 좀힌
-  // 0-2개: 전체 풀 유지
-  // 3개: 상위 150개
-  // 5개: 상위 60개
-  // 8개: 상위 20개
-  // 12개: 상위 8개
-  // 15개+: 상위 5개
-  let limit: number;
-  if (n < 3) {
-    limit = scored.length;
-  } else if (n < 5) {
-    limit = 150;
-  } else if (n < 8) {
-    limit = 60;
-  } else if (n < 12) {
-    limit = 20;
-  } else if (n < 15) {
-    limit = 8;
-  } else {
-    limit = CANDIDATE_THRESHOLD;
+  // 답변이 없으면 전체 풀 반환
+  if (n === 0 || topScore <= 0) {
+    return scored.map((s) => s.job);
   }
 
-  return scored.slice(0, limit).map((s) => s.job);
+  // 답변 수에 따라 컷오프 비율 상승: 답변 1개=40%, 5개=60%, 10개=75%, 15개+=85%
+  const ratio = Math.min(0.4 + n * 0.03, 0.85);
+  const cutoff = topScore * ratio;
+
+  const filtered = scored.filter((s) => s.score >= cutoff);
+
+  // 최소 5개, 최대 300개 보장
+  if (filtered.length < 5) return scored.slice(0, 5).map((s) => s.job);
+  if (filtered.length > 300) return scored.slice(0, 300).map((s) => s.job);
+  return filtered.map((s) => s.job);
 }
 
 export const ANSWER_OPTIONS: Array<{ label: string; level: AnswerLevel }> = [

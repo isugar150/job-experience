@@ -696,11 +696,14 @@ function Asking({
   onAnswer: (level: number) => void;
   onBack: () => void;
 }) {
-  // 후보 수가 줄어들수록 진행률이 올라가는 동적 방식
-  // 시작 후보를 537로 고정, 현재 후보가 CANDIDATE_THRESHOLD까지 줄어들면 100%
-  const TOTAL_JOBS = 537;
+  // 후보 수가 줄어들수록 진행률이 올라가는 동적 방식 (로그 스케일)
+  // 537 → 5개로 줄어드는 과정을 0~99%로 매핑
+  const totalJobs = ALL_JOBS.length;
+  const logTotal = Math.log(totalJobs);
+  const logCurrent = Math.log(Math.max(candidateCount, CANDIDATE_THRESHOLD));
+  const logMin = Math.log(CANDIDATE_THRESHOLD);
   const progress = Math.min(
-    ((TOTAL_JOBS - candidateCount) / (TOTAL_JOBS - CANDIDATE_THRESHOLD)) * 100,
+    ((logTotal - logCurrent) / (logTotal - logMin)) * 100,
     99
   );
   return (
