@@ -27,7 +27,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -83,7 +86,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -139,7 +145,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "소통능력",
@@ -196,7 +205,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -254,7 +266,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -312,7 +327,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -369,7 +387,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -429,7 +450,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "사교성",
@@ -485,7 +509,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -543,7 +570,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "신속함",
@@ -598,7 +628,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -655,7 +688,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -713,7 +749,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "신속함",
@@ -772,7 +811,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -831,7 +873,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -895,7 +940,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -951,7 +999,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -1012,7 +1063,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "이타심",
@@ -1069,7 +1123,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "따뜻함",
@@ -1126,7 +1183,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -1186,7 +1246,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -1244,7 +1307,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -1300,7 +1366,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -1356,7 +1425,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -1414,7 +1486,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -1469,7 +1544,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -1527,7 +1605,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -1584,7 +1665,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "사교성",
@@ -1642,7 +1726,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "설득력",
@@ -1702,7 +1789,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -1762,7 +1852,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -1819,7 +1912,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -1876,7 +1972,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "설득력",
@@ -1932,7 +2031,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -1989,7 +2091,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -2047,7 +2152,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -2104,7 +2212,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친화력",
@@ -2160,7 +2271,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "소통능력",
@@ -2219,7 +2333,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -2274,7 +2391,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향성",
@@ -2332,7 +2452,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -2390,7 +2513,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -2450,7 +2576,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -2507,7 +2636,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -2563,7 +2695,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향성",
@@ -2619,7 +2754,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -2677,7 +2815,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -2734,7 +2875,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -2790,7 +2934,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -2846,7 +2993,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -2905,7 +3055,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -2966,7 +3119,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -3023,7 +3179,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -3081,7 +3240,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "주의력",
@@ -3142,7 +3304,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "안전의식",
@@ -3201,7 +3366,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -3258,7 +3426,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -3315,7 +3486,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "주의력",
@@ -3376,7 +3550,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "주의력",
@@ -3437,7 +3614,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -3496,7 +3676,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -3556,7 +3739,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -3614,7 +3800,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -3673,7 +3862,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -3735,7 +3927,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -3793,7 +3988,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -3851,7 +4049,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "강인한 체력",
@@ -3910,7 +4111,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -3968,7 +4172,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4027,7 +4234,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4088,7 +4298,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4144,7 +4357,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4206,7 +4422,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4263,7 +4482,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4326,7 +4548,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4382,7 +4607,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4439,7 +4667,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4495,7 +4726,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4550,7 +4784,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4607,7 +4844,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4667,7 +4907,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -4728,7 +4971,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "주의력",
@@ -4792,7 +5038,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -4855,7 +5104,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -4914,7 +5166,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -4974,7 +5229,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "강인한 체력",
@@ -5031,7 +5289,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -5090,7 +5351,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5151,7 +5415,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5209,7 +5476,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5267,7 +5537,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5326,7 +5599,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5391,7 +5667,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5450,7 +5729,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5509,7 +5791,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5571,7 +5856,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5631,7 +5919,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5689,7 +5980,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5746,7 +6040,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5804,7 +6101,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5866,7 +6166,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5924,7 +6227,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -5987,7 +6293,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6049,7 +6358,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -6110,7 +6422,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6166,7 +6481,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6227,7 +6545,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6284,7 +6605,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6344,7 +6668,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6406,7 +6733,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6464,7 +6794,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6522,7 +6855,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6580,7 +6916,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6638,7 +6977,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -6697,7 +7039,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -6756,7 +7101,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6818,7 +7166,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6877,7 +7228,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6936,7 +7290,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -6991,7 +7348,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7046,7 +7406,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7104,7 +7467,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "주의력",
@@ -7164,7 +7530,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7224,7 +7593,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7284,7 +7656,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "주의력",
@@ -7346,7 +7721,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7402,7 +7780,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -7464,7 +7845,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -7521,7 +7905,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7582,7 +7969,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7642,7 +8032,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7704,7 +8097,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7766,7 +8162,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7824,7 +8223,10 @@
         "communication_level": "낮음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7882,7 +8284,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -7947,7 +8352,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8013,7 +8421,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8071,7 +8482,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8131,7 +8545,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8192,7 +8609,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8248,7 +8668,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8307,7 +8730,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8374,7 +8800,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8429,7 +8858,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -8491,7 +8923,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -8547,7 +8982,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8605,7 +9043,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8664,7 +9105,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8721,7 +9165,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8780,7 +9227,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8840,7 +9290,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8899,7 +9352,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -8955,7 +9411,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9012,7 +9471,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9071,7 +9533,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9128,7 +9593,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9185,7 +9653,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9243,7 +9714,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -9303,7 +9777,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9359,7 +9836,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -9415,7 +9895,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -9470,7 +9953,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9526,7 +10012,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9582,7 +10071,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9641,7 +10133,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9697,7 +10192,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9755,7 +10253,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9811,7 +10312,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9872,7 +10376,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9928,7 +10435,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -9984,7 +10494,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -10043,7 +10556,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -10098,7 +10614,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -10155,7 +10674,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -10212,7 +10734,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "손재주",
@@ -10275,7 +10800,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "섬세함",
@@ -10335,7 +10863,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -10392,7 +10923,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -10451,7 +10985,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -10507,7 +11044,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -10566,7 +11106,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -10626,7 +11169,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -10685,7 +11231,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -10743,7 +11292,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -10817,7 +11369,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -10874,7 +11429,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -10934,7 +11492,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -10998,7 +11559,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "성실함",
@@ -11061,7 +11625,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "강인함",
@@ -11117,7 +11684,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11174,7 +11744,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11230,7 +11803,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11291,7 +11867,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11351,7 +11930,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11410,7 +11992,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11467,7 +12052,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11523,7 +12111,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -11579,7 +12170,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -11637,7 +12231,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11697,7 +12294,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -11762,7 +12362,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "정확성",
@@ -11822,7 +12425,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "설득력",
@@ -11878,7 +12484,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "사교성",
@@ -11936,7 +12545,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -11994,7 +12606,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12050,7 +12665,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12110,7 +12728,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12166,7 +12787,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12222,7 +12846,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12282,7 +12909,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12339,7 +12969,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12399,7 +13032,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12459,7 +13095,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12515,7 +13154,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12572,7 +13214,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12629,7 +13274,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12685,7 +13333,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12742,7 +13393,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12800,7 +13454,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12855,7 +13512,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12915,7 +13575,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -12971,7 +13634,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13033,7 +13699,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13092,7 +13761,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13154,7 +13826,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13212,7 +13887,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13268,7 +13946,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13335,7 +14016,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13396,7 +14080,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13457,7 +14144,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13522,7 +14212,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13586,7 +14279,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13647,7 +14343,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "분석적",
@@ -13705,7 +14404,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13765,7 +14467,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -13827,7 +14532,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "창의적",
@@ -13886,7 +14594,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "논리적",
@@ -13943,7 +14654,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14002,7 +14716,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14060,7 +14777,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14118,7 +14838,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "꼼꼼함",
@@ -14177,7 +14900,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14239,7 +14965,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14301,7 +15030,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14359,7 +15091,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14424,7 +15159,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "분석적",
@@ -14483,7 +15221,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "문제해결력",
@@ -14547,7 +15288,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -14609,7 +15353,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "분석적",
@@ -14669,7 +15416,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14730,7 +15480,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -14791,7 +15544,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -14847,7 +15603,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14905,7 +15664,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -14967,7 +15729,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -15038,7 +15803,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -15101,7 +15869,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -15160,7 +15931,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -15223,7 +15997,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -15284,7 +16061,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -15344,7 +16124,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "전문성",
@@ -15400,7 +16183,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -15458,7 +16244,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -15514,7 +16303,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -15573,7 +16365,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "공정함",
@@ -15629,7 +16424,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "분석적",
@@ -15685,7 +16483,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "분석적",
@@ -15741,7 +16542,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -15801,7 +16605,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -15859,7 +16666,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -15922,7 +16732,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -15986,7 +16799,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "공감능력",
@@ -16045,7 +16861,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -16103,7 +16922,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -16163,7 +16985,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "사명감",
@@ -16221,7 +17046,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "따뜻함",
@@ -16279,7 +17107,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -16337,7 +17168,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -16394,7 +17228,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -16453,7 +17290,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "희생정신",
@@ -16509,7 +17349,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -16571,7 +17414,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -16631,7 +17477,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -16687,7 +17536,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "분석적",
@@ -16744,7 +17596,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "책임감",
@@ -16801,7 +17656,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "섬세함",
@@ -16858,7 +17716,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "책임감",
@@ -16915,7 +17776,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "꼼꼼함",
@@ -16972,7 +17836,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "꼼꼼함",
@@ -17029,7 +17896,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "공감능력",
@@ -17086,7 +17956,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "공감능력",
@@ -17145,7 +18018,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "분석적",
@@ -17202,7 +18078,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "분석적",
@@ -17259,7 +18138,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "분석적",
@@ -17318,7 +18200,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "꼼꼼함",
@@ -17377,7 +18262,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "책임감",
@@ -17434,7 +18322,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "책임감",
@@ -17490,7 +18381,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "분석적",
@@ -17546,7 +18440,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "꼼꼼함",
@@ -17603,7 +18500,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "동물사랑",
@@ -17661,7 +18561,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -17717,7 +18620,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -17775,7 +18681,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -17831,7 +18740,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -17892,7 +18804,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -17949,7 +18864,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -18009,7 +18927,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -18069,7 +18990,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -18126,7 +19050,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -18182,7 +19109,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -18238,7 +19168,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -18301,7 +19234,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -18359,7 +19295,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -18418,7 +19357,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -18479,7 +19421,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -18538,7 +19483,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -18598,7 +19546,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -18657,7 +19608,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -18716,7 +19670,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -18775,7 +19732,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -18833,7 +19793,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "봉사정신",
@@ -18891,7 +19854,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "체력",
@@ -18947,7 +19913,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -19003,7 +19972,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -19059,7 +20031,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -19115,7 +20090,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -19171,7 +20149,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "언어능력",
@@ -19231,7 +20212,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -19287,7 +20271,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "호기심",
@@ -19343,7 +20330,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -19400,7 +20390,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "호기심",
@@ -19458,7 +20451,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "탐구심",
@@ -19516,7 +20512,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -19573,7 +20572,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -19633,7 +20635,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -19691,7 +20696,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -19748,7 +20756,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -19804,7 +20815,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -19862,7 +20876,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -19922,7 +20939,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -19979,7 +20999,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "예술성",
@@ -20036,7 +21059,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "리더십",
@@ -20094,7 +21120,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -20150,7 +21179,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "예술적",
@@ -20208,7 +21240,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "표현력",
@@ -20266,7 +21301,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "예술성",
@@ -20324,7 +21362,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "표현력",
@@ -20382,7 +21423,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -20444,7 +21488,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "표현력",
@@ -20502,7 +21549,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -20561,7 +21611,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -20618,7 +21671,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -20679,7 +21735,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -20737,7 +21796,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -20795,7 +21857,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -20852,7 +21917,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -20911,7 +21979,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -20971,7 +22042,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -21032,7 +22106,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -21089,7 +22166,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "창의적",
@@ -21145,7 +22225,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -21203,7 +22286,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "창의성",
@@ -21259,7 +22345,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -21319,7 +22408,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "표현력",
@@ -21379,7 +22471,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "표현력",
@@ -21435,7 +22530,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "표현력",
@@ -21495,7 +22593,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "유머감각",
@@ -21552,7 +22653,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "표현력",
@@ -21612,7 +22716,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -21669,7 +22776,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향성",
@@ -21725,7 +22835,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -21787,7 +22900,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "예민함",
@@ -21847,7 +22963,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -21905,7 +23024,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "예술적 감각",
@@ -21961,7 +23083,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "창의성",
@@ -22019,7 +23144,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -22078,7 +23206,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -22138,7 +23269,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "승부욕",
@@ -22195,7 +23329,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "승부욕",
@@ -22255,7 +23392,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공정성",
@@ -22313,7 +23453,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "활발함",
@@ -22369,7 +23512,10 @@
         "communication_level": "보통",
         "repetition_level": "보통",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "활동적",
@@ -22428,7 +23574,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "외향적",
@@ -22487,7 +23636,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -22544,7 +23696,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -22606,7 +23761,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -22664,7 +23822,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "섬세함",
@@ -22720,7 +23881,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -22778,7 +23942,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -22834,7 +24001,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "섬세함",
@@ -22890,7 +24060,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "관찰력",
@@ -22947,7 +24120,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "소통능력",
@@ -23003,7 +24179,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -23061,7 +24240,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "공감능력",
@@ -23121,7 +24303,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -23178,7 +24363,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -23236,7 +24424,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -23294,7 +24485,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -23351,7 +24545,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -23409,7 +24606,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -23465,7 +24665,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -23521,7 +24724,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -23578,7 +24784,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -23634,7 +24843,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -23696,7 +24908,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -23759,7 +24974,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -23818,7 +25036,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -23880,7 +25101,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -23938,7 +25162,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -23995,7 +25222,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24055,7 +25285,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -24117,7 +25350,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "분석적",
@@ -24182,7 +25418,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -24247,7 +25486,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24307,7 +25549,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24370,7 +25615,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24428,7 +25676,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24488,7 +25739,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24546,7 +25800,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24605,7 +25862,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24664,7 +25924,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24722,7 +25985,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24783,7 +26049,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24842,7 +26111,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24905,7 +26177,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -24972,7 +26247,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25034,7 +26312,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -25096,7 +26377,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25156,7 +26440,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25222,7 +26509,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25281,7 +26571,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25342,7 +26635,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25397,7 +26693,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25456,7 +26755,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25517,7 +26819,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25579,7 +26884,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25637,7 +26945,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25701,7 +27012,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25761,7 +27075,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -25822,7 +27139,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25881,7 +27201,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25939,7 +27262,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -25998,7 +27324,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26056,7 +27385,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26115,7 +27447,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26175,7 +27510,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26233,7 +27571,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26294,7 +27635,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26352,7 +27696,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26410,7 +27757,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26467,7 +27817,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -26531,7 +27884,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26594,7 +27950,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -26651,7 +28010,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26712,7 +28074,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26772,7 +28137,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26837,7 +28205,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -26896,7 +28267,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -26956,7 +28330,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -27018,7 +28395,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -27074,7 +28454,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -27135,7 +28518,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "탐구적",
@@ -27194,7 +28580,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "지적호기심",
@@ -27249,7 +28638,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -27306,7 +28698,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -27365,7 +28760,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "인내심",
@@ -27421,7 +28819,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -27481,7 +28882,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -27541,7 +28945,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "논리적",
@@ -27599,7 +29006,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "외향적",
@@ -27660,7 +29070,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -27716,7 +29129,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "경력필수"
       },
       "traits": [
         "리더십",
@@ -27772,7 +29188,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -27828,7 +29247,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -27888,7 +29310,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "전략적",
@@ -27946,7 +29371,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "분석적",
@@ -28003,7 +29431,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28059,7 +29490,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28115,7 +29549,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -28175,7 +29612,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "책임감",
@@ -28233,7 +29673,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "리더십",
@@ -28293,7 +29736,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "매우높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28349,7 +29795,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -28416,7 +29865,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28475,7 +29927,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28534,7 +29989,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28594,7 +30052,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28655,7 +30116,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28714,7 +30178,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28774,7 +30241,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -28832,7 +30302,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -28890,7 +30363,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -28949,7 +30425,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -29012,7 +30491,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -29070,7 +30552,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "리더십",
@@ -29131,7 +30616,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "책임감",
@@ -29187,7 +30675,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "분석적",
@@ -29243,7 +30734,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -29301,7 +30795,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "높음",
+        "experience_required": "경력우대"
       },
       "traits": [
         "공감능력",
@@ -29359,7 +30856,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -29419,7 +30919,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -29479,7 +30982,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -29534,7 +31040,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -29590,7 +31099,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "창의적",
@@ -29649,7 +31161,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "경력우대"
       },
       "traits": [
         "분석적",
@@ -29706,7 +31221,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -29762,7 +31280,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -29820,7 +31341,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의성",
@@ -29876,7 +31400,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -29934,7 +31461,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -29989,7 +31519,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30048,7 +31581,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30107,7 +31643,10 @@
         "communication_level": "높음",
         "repetition_level": "낮음",
         "social_impact": "높음",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "높음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30163,7 +31702,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -30224,7 +31766,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "창의적",
@@ -30285,7 +31830,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -30346,7 +31894,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "소통능력",
@@ -30404,7 +31955,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30465,7 +32019,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30521,7 +32078,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "높음",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30583,7 +32143,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30645,7 +32208,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30708,7 +32274,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30765,7 +32334,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30826,7 +32398,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30882,7 +32457,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30938,7 +32516,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -30998,7 +32579,10 @@
         "communication_level": "낮음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -31053,7 +32637,10 @@
         "communication_level": "낮음",
         "repetition_level": "낮음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -31114,7 +32701,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -31173,7 +32763,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -31234,7 +32827,10 @@
         "communication_level": "높음",
         "repetition_level": "높음",
         "social_impact": "낮음",
-        "public_sector": "민간"
+        "public_sector": "민간",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -31290,7 +32886,10 @@
         "communication_level": "높음",
         "repetition_level": "보통",
         "social_impact": "높음",
-        "public_sector": "혼합"
+        "public_sector": "혼합",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "친절함",
@@ -31352,7 +32951,10 @@
         "communication_level": "보통",
         "repetition_level": "낮음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "분석적",
@@ -31407,7 +33009,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -31469,7 +33074,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "낮음",
+        "competition_level": "낮음",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",
@@ -31527,7 +33135,10 @@
         "communication_level": "보통",
         "repetition_level": "높음",
         "social_impact": "보통",
-        "public_sector": "공공"
+        "public_sector": "공공",
+        "entry_difficulty": "보통",
+        "competition_level": "보통",
+        "experience_required": "신입가능"
       },
       "traits": [
         "꼼꼼함",

@@ -64,6 +64,9 @@ export interface Job {
     repetition_level?: string;
     social_impact?: string;
     public_sector?: string;
+    entry_difficulty?: string;
+    competition_level?: string;
+    experience_required?: string;
   };
   traits: string[];
   short_desc: string;
@@ -365,6 +368,24 @@ export const QUESTIONS: Question[] = [
     id: "domain_lead",
     text: "조직을 이끌고 의사결정을 내리는 리더 역할을 원하시나요?",
     predicate: (j) => yes(j.domain === "관리/리더십"),
+    weight: 1.2,
+  },
+  {
+    id: "entry_easy",
+    text: "진입 장벽이 낮고 빨리 일을 시작할 수 있는 직업이 좋으신가요?",
+    predicate: (j) => yes(j.tags.entry_difficulty === "낮음"),
+    weight: 1.3,
+  },
+  {
+    id: "competition_low",
+    text: "지원자가 많이 몰리는 경쟁 치열한 직업은 피하고 싶으세요?",
+    predicate: (j) => yes(j.tags.competition_level === "낮음" || j.tags.competition_level === "보통"),
+    weight: 1.2,
+  },
+  {
+    id: "experience_newbie",
+    text: "경력 없이 신입으로도 도전할 수 있는 직업이 좋으세요?",
+    predicate: (j) => yes(j.tags.experience_required === "신입가능"),
     weight: 1.2,
   },
 ];

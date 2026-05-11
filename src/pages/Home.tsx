@@ -835,10 +835,27 @@ function Result({
         </div>
       )}
 
+      {/* Traits */}
+      {winner.traits?.length ? (
+        <div className="mb-10">
+          <h3 className="text-sm font-semibold mb-3">이런 성향의 사람에게 잘 맞아요</h3>
+          <div className="flex flex-wrap gap-2">
+            {winner.traits.map((t) => (
+              <span
+                key={t}
+                className="px-3 py-1.5 rounded-full border border-border bg-muted text-sm"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
       {/* Certifications */}
       {winner.certifications?.length ? (
         <div className="mb-10">
-          <h3 className="text-sm font-semibold mb-3">유리한 자격증·면허</h3>
+          <h3 className="text-sm font-semibold mb-3">유리한 자격증쀌면허</h3>
           <div className="flex flex-wrap gap-2">
             {winner.certifications.map((c) => (
               <span
@@ -1064,6 +1081,10 @@ function WinnerMetaGrid({ winner }: { winner: Job }) {
             <Meta k="반복 업무" v={winner.tags.repetition_level ?? "-"} />
             <Meta k="사회적 기여" v={winner.tags.social_impact ?? "-"} />
             <Meta k="공공/민간" v={winner.tags.public_sector ?? "-"} />
+            <Meta k="자격증 필수" v={winner.tags.license_required ? "필수" : "불필요"} />
+            <Meta k="진입 난이도" v={winner.tags.entry_difficulty ?? "-"} />
+            <Meta k="취업 경쟁률" v={winner.tags.competition_level ?? "-"} />
+            <Meta k="경력 요구" v={winner.tags.experience_required ?? "-"} />
           </>
         )}
       </dl>
@@ -1075,7 +1096,7 @@ function WinnerMetaGrid({ winner }: { winner: Job }) {
         {expanded ? (
           <><ChevronUp className="h-3.5 w-3.5" />접기</>
         ) : (
-          <><ChevronDown className="h-3.5 w-3.5" />더보기 (+13개)</>
+          <><ChevronDown className="h-3.5 w-3.5" />더보기 (+17개)</>
         )}
       </button>
     </div>
@@ -1114,6 +1135,10 @@ function JobDetailMetaGrid({ job }: { job: Job }) {
             <div><dt className="text-muted-foreground">반복 업무</dt><dd className="font-medium mt-0.5">{job.tags.repetition_level ?? "-"}</dd></div>
             <div><dt className="text-muted-foreground">사회적 기여</dt><dd className="font-medium mt-0.5">{job.tags.social_impact ?? "-"}</dd></div>
             <div><dt className="text-muted-foreground">공공/민간</dt><dd className="font-medium mt-0.5">{job.tags.public_sector ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">자격증 필수</dt><dd className="font-medium mt-0.5">{job.tags.license_required ? "필수" : "불필요"}</dd></div>
+            <div><dt className="text-muted-foreground">진입 난이도</dt><dd className="font-medium mt-0.5">{job.tags.entry_difficulty ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">취업 경쟁률</dt><dd className="font-medium mt-0.5">{job.tags.competition_level ?? "-"}</dd></div>
+            <div><dt className="text-muted-foreground">경력 요구</dt><dd className="font-medium mt-0.5">{job.tags.experience_required ?? "-"}</dd></div>
           </>
         )}
       </dl>
@@ -1125,7 +1150,7 @@ function JobDetailMetaGrid({ job }: { job: Job }) {
         {expanded ? (
           <><ChevronUp className="h-3 w-3" />접기</>
         ) : (
-          <><ChevronDown className="h-3 w-3" />더보기 (+14개)</>
+          <><ChevronDown className="h-3 w-3" />더보기 (+18개)</>
         )}
       </button>
     </div>
@@ -1220,6 +1245,23 @@ function JobDetailDialog({
                     </ul>
                   </div>
                 ) : null}
+              </div>
+            ) : null}
+
+            {/* Traits */}
+            {job.traits?.length ? (
+              <div>
+                <h4 className="text-xs font-semibold mb-2">이런 성향의 사람에게 잘 맞아요</h4>
+                <div className="flex flex-wrap gap-1.5">
+                  {job.traits.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 rounded-full border border-border bg-muted text-xs"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             ) : null}
 
