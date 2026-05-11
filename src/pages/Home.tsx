@@ -2,7 +2,7 @@
  * Design philosophy: Minimal Light
  * 단계 흐름: intro → profile(성별·학력) → asking(질문) → result(메인/서브 추천)
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { useModalBackHandler } from "@/hooks/useModalBackHandler";
 import { useBookmarks } from "@/hooks/useBookmarks";
@@ -409,10 +409,11 @@ function BookmarkModal({
   const [detailOpen, setDetailOpen] = useState(false);
   useModalBackHandler(open && !detailOpen, () => onOpenChange(false));
 
+  // 다이얼로그가 닫혀 있는 동안에는 ALL_JOBS(536개) 필터링을 수행하지 않는다.
+  // open이 true일 때만 계산해 다이얼로그 열림 직전의 부모 렌더를 가볍게 유지한다.
   const bookmarkedJobs = useMemo(
-    () => ALL_JOBS.filter((j) => bookmarks.isBookmarked(j.id)),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [bookmarks.bookmarkedIds]
+    () => (open ? ALL_JOBS.filter((j) => bookmarks.bookmarkedIds.has(j.id)) : []),
+    [open, bookmarks.bookmarkedIds]
   );
 
   return (
@@ -503,12 +504,15 @@ function RecentModal({
   const [detailOpen, setDetailOpen] = useState(false);
   useModalBackHandler(open && !detailOpen, () => onOpenChange(false));
 
+  // open=false일 때는 recentIds 순회를 수행하지 않아 닫힌 상태의 부모 렌더를 가볍게 유지한다.
   const jobs = useMemo(
     () =>
-      recentJobs.recentIds
-        .map((id) => ALL_JOBS.find((j) => j.id === id))
-        .filter((j): j is Job => j !== undefined),
-    [recentJobs.recentIds]
+      open
+        ? recentJobs.recentIds
+            .map((id) => ALL_JOBS.find((j) => j.id === id))
+            .filter((j): j is Job => j !== undefined)
+        : [],
+    [open, recentJobs.recentIds]
   );
 
   return (
@@ -1332,7 +1336,11 @@ function JobDetailMetaGrid({ job }: { job: Job }) {
 
 /* ----------------------------- JobDetailDialog ----------------------------- */
 
-function JobDetailDialog({
+// 다양한 부모(JobList / BookmarkModal / RecentModal / JobListBrowser)에서
+// 항상 마운트되는 다이얼로그이다. 부모의 state가 바뀔 때마다 닫힌 다이얼로그의
+// 자식 트리가 매번 재렌더되어 비용이 컸으므로, React.memo로 감싸고
+// 닫혀 있으면 자식 트리 자체를 빌드하지 않도록 한다.
+const JobDetailDialog = memo(function JobDetailDialog({
   job,
   open,
   onOpenChange,
@@ -1352,7 +1360,11 @@ function JobDetailDialog({
     }
   }, [open, job?.id]);
 
-  if (!job) return null;
+  // 다이얼로그가 닫혀 있거나 job이 없으면 자식 트리를 빌드하지 않는다.
+  // (Radix Dialog는 open=false에서 Portal 내부를 마운트하지 않지만, JSX 자식의
+  // React element 자체는 매 렌더마다 만들어진다. 닫힌 상태에서는 그 비용도
+  // 아끼고, 다이얼로그가 처음 열리는 프레임의 작업량을 최소화한다.)
+  if (!open || !job) return null;
   const isBookmarked = bookmarks?.isBookmarked(job.id) ?? false;
 
   return (
@@ -1474,7 +1486,7 @@ function JobDetailDialog({
       </DialogContent>
     </Dialog>
   );
-}
+});
 
 /* ----------------------------- JobListBrowser ----------------------------- */
 
