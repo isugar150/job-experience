@@ -51,6 +51,19 @@ export interface Job {
     license_required: boolean;
     income_level: string;
     risk_level: string;
+    // 새로 추가된 태그
+    work_schedule?: string;
+    remote_work?: string;
+    employment_type?: string;
+    growth_potential?: string;
+    job_stability?: string;
+    automation_risk?: string;
+    work_autonomy?: string;
+    teamwork_level?: string;
+    communication_level?: string;
+    repetition_level?: string;
+    social_impact?: string;
+    public_sector?: string;
   };
   traits: string[];
   short_desc: string;
@@ -129,26 +142,26 @@ export const QUESTIONS: Question[] = [
   // ── 양방향 축 질문 (긍정 → 실내/높음, 부정 → 실외/낮음) ──
   {
     id: "work_env",
-    text: "주로 실내에서 일하는 환경을 선호하시나요? (아니면 야외·현장 활동이 더 좋으신가요?)",
+    text: "주로 실내에서 일하는 환경을 선호하시나요?",
     predicate: (j) => yes(j.tags.work_environment === "실내중심"),
     // 부정 답변은 실외중심 직업에 가산점이 되도록 predicate 반전 활용
     weight: 1.2,
   },
   {
     id: "people_interaction",
-    text: "사람들과 자주 소통하고 어울리는 일이 좋으신가요? (아니면 혼자 집중하는 일을 선호하시나요?)",
+    text: "사람들과 자주 소통하고 어울리는 일이 좋으신가요?",
     predicate: (j) => yes(j.tags.people_interaction === "높음"),
     weight: 1.3,
   },
   {
     id: "tech_usage",
-    text: "컴퓨터·IT·디지털 도구를 적극 활용하는 일이 좋으신가요? (아니면 손·몸·도구를 직접 다루는 일이 좋으신가요?)",
+    text: "컴퓨터·IT·디지털 도구를 적극 활용하는 일이 좋으신가요?",
     predicate: (j) => yes(j.tags.tech_intensity === "높음"),
     weight: 1.4,
   },
   {
     id: "physical_demand",
-    text: "체력을 많이 쓰는 활동적인 일을 원하시나요? (아니면 앉아서 편안하게 일하는 환경을 원하시나요?)",
+    text: "체력을 많이 쓰는 활동적인 일을 원하시나요?",
     predicate: (j) => yes(j.tags.physical_intensity === "높음"),
     weight: 1.0,
   },
@@ -183,6 +196,83 @@ export const QUESTIONS: Question[] = [
     text: "위험이 적고 안전한 환경에서 일하고 싶으신가요?",
     predicate: (j) => yes(j.tags.risk_level === "낮음"),
     weight: 0.9,
+  },
+  // ── 새로 추가된 근무 조건 질문 ──
+  {
+    id: "remote_work",
+    text: "재택·원격 근무가 가능한 직업을 선호하시나요?",
+    predicate: (j) =>
+      yes(j.tags.remote_work === "가능" || j.tags.remote_work === "부분가능"),
+    weight: 1.2,
+  },
+  {
+    id: "work_schedule_regular",
+    text: "정해진 시간에 규칙적으로 일하는 환경을 원하시나요?",
+    predicate: (j) => yes(j.tags.work_schedule === "정규직"),
+    weight: 1.1,
+  },
+  {
+    id: "employment_stable",
+    text: "정규직처럼 고용이 안정적인 형태를 원하시나요?",
+    predicate: (j) => yes(j.tags.employment_type === "정규직"),
+    weight: 1.1,
+  },
+  // ── 새로 추가된 성장/커리어 질문 ──
+  {
+    id: "growth_potential",
+    text: "앞으로 성장 가능성이 높은 직업을 원하시나요?",
+    predicate: (j) => yes(j.tags.growth_potential === "높음"),
+    weight: 1.2,
+  },
+  {
+    id: "job_stability",
+    text: "직업 안정성을 가장 중요하게 생각하시나요?",
+    predicate: (j) => yes(j.tags.job_stability === "높음"),
+    weight: 1.2,
+  },
+  {
+    id: "automation_risk_low",
+    text: "AI·자동화로 대체되기 어려운 직업을 원하시나요?",
+    predicate: (j) => yes(j.tags.automation_risk === "낮음"),
+    weight: 1.1,
+  },
+  // ── 새로 추가된 업무 성격 질문 ──
+  {
+    id: "work_autonomy",
+    text: "스스로 계획하고 자율적으로 일하는 것을 좋아하시나요?",
+    predicate: (j) => yes(j.tags.work_autonomy === "높음"),
+    weight: 1.2,
+  },
+  {
+    id: "solo_work",
+    text: "혼자 집중해서 일하는 것을 더 좋아하시나요?",
+    predicate: (j) => yes(j.tags.teamwork_level === "개인중심"),
+    weight: 1.2,
+  },
+  {
+    id: "communication_high",
+    text: "말하거나 글 쓰는 커뮤니케이션이 많은 일을 원하시나요?",
+    predicate: (j) => yes(j.tags.communication_level === "높음"),
+    weight: 1.0,
+  },
+  {
+    id: "repetition_low",
+    text: "매일 다양하고 새로운 업무를 하는 것을 선호하시나요?",
+    predicate: (j) => yes(j.tags.repetition_level === "낮음"),
+    weight: 1.0,
+  },
+  // ── 새로 추가된 사회적 가치 질문 ──
+  {
+    id: "social_impact",
+    text: "사회에 긍정적인 영향을 미치는 의미 있는 일을 원하시나요?",
+    predicate: (j) => yes(j.tags.social_impact === "높음"),
+    weight: 1.1,
+  },
+  {
+    id: "public_sector",
+    text: "공공기관·공무원처럼 공공 분야에서 일하고 싶으신가요?",
+    predicate: (j) => yes(j.tags.public_sector === "공공"),
+    weight: 1.2,
   },
   // 도메인 그룹
   {

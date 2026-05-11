@@ -150,29 +150,42 @@
     .container { padding-left: 2rem; padding-right: 2rem; max-width: 1024px; }
   }
 
-  /* 포스트잇 다이얼로그 - 오른쪽 하단 모서리 접힘 + 상단 테이프 */
+  /* 포스트잇 다이얼로그 - 스프링 뜯긴 구멍 + 가로 줄무늬 노트 스타일 */
+  [data-slot="dialog-content"] {
+    /* 가로 줄무늬: 상단 36px은 구멍 영역(크림색), 이후 24px 간격 줄무늬 */
+    background-image:
+      /* 상단 구멍 영역 구분선 */
+      linear-gradient(to bottom, transparent 35px, #d4c97a 35px, #d4c97a 36px, transparent 36px),
+      /* 가로 줄무늬 */
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 23px,
+        #d4c97a 23px,
+        #d4c97a 24px
+      ) !important;
+    background-position: 0 36px, 0 36px !important;
+    background-size: 100% auto, 100% 24px !important;
+    background-repeat: no-repeat, repeat-y !important;
+    padding-top: 48px !important;
+  }
+  /* 스프링 뜯긴 구멍들 */
   [data-slot="dialog-content"]::before {
     content: '';
     position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 18px;
-    background: rgba(200, 180, 100, 0.55);
-    border-radius: 2px;
-    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
+    background-image: radial-gradient(circle, #b8a830 40%, transparent 40%);
+    background-size: 20px 20px;
+    background-position: 18px 8px;
+    background-repeat: repeat-x;
+    z-index: 2;
+    pointer-events: none;
   }
   [data-slot="dialog-content"]::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 28px;
-    height: 28px;
-    background: linear-gradient(225deg, #e8d87a 45%, transparent 45%);
-    border-radius: 0 0 3px 0;
-    box-shadow: -2px -2px 4px rgba(80,60,10,0.15);
+    content: none;
   }
 
   /* 종이 카드 스타일 */
