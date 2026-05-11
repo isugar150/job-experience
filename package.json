@@ -4,9 +4,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "VITE_BASE=/ vite --host",
-    "build": "VITE_BASE=/ vite build",
-    "build:pages": "vite build && node -e \"const fs=require('fs');const d='dist';fs.copyFileSync(d+'/index.html',d+'/404.html');fs.writeFileSync(d+'/.nojekyll','');console.log('GitHub Pages post-build done')\"",
+    "dev": "vite --host",
+    "build": "vite build",
+    "build:pages": "vite build --mode production && node -e \"const fs=require('fs');const d='dist';fs.copyFileSync(d+'/index.html',d+'/404.html');fs.writeFileSync(d+'/.nojekyll','');console.log('GitHub Pages post-build done')\"",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "format": "prettier --write ."
