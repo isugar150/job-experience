@@ -3,6 +3,8 @@
  * 단계 흐름: intro → profile(성별·학력) → asking(질문) → result(메인/서브 추천)
  */
 import { useEffect, useMemo, useState } from "react";
+import { useBookmarks } from "@/hooks/useBookmarks";
+import { useRecentJobs } from "@/hooks/useRecentJobs";
 import { Button } from "@/components/ui/button";
 import {
   ANSWER_OPTIONS,
@@ -24,7 +26,10 @@ import {
 import {
   ArrowLeft,
   ArrowRight,
+  Bookmark,
+  BookmarkCheck,
   Check,
+  Clock,
   ExternalLink,
   GraduationCap,
   Info,
@@ -123,12 +128,15 @@ export default function Home() {
     setPhase("intro");
   }
 
+  const bookmarks = useBookmarks();
+  const recentJobs = useRecentJobs();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header showReset={phase !== "intro"} onReset={reset} />
+      <Header showReset={phase !== "intro"} onReset={reset} bookmarks={bookmarks} recentJobs={recentJobs} />
 
       <main className="max-w-3xl mx-auto px-5 sm:px-6 pt-10 sm:pt-16 pb-24">
-        {phase === "intro" && <Intro onStart={startIntro} />}
+        {phase === "intro" && <Intro onStart={startIntro} bookmarks={bookmarks} recentJobs={recentJobs} />}
         {phase === "profile" && (
           <Profile
             profile={profile}
@@ -152,6 +160,8 @@ export default function Home() {
             main={recommendation.mainCandidates}
             sub={recommendation.subCandidates}
             onReset={reset}
+            bookmarks={bookmarks}
+            recentJobs={recentJobs}
           />
         )}
       </main>
@@ -161,38 +171,277 @@ export default function Home() {
 
 /* ----------------------------- Header ----------------------------- */
 
+type BookmarksHook = ReturnType<typeof useBookmarks>;
+type RecentJobsHook = ReturnType<typeof useRecentJobs>;
+
 function Header({
   showReset,
   onReset,
+  bookmarks,
+  recentJobs,
 }: {
   showReset: boolean;
   onReset: () => void;
+  bookmarks: BookmarksHook;
+  recentJobs: RecentJobsHook;
 }) {
+  const [bookmarkOpen, setBookmarkOpen] = useState(false);
+  const [recentOpen, setRecentOpen] = useState(false);
+  const bookmarkCount = bookmarks.bookmarkedIds.size;
+  const recentCount = recentJobs.recentIds.length;
+
   return (
-    <header className="border-b border-border">
-      <div className="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between">
-        <div className="text-sm font-semibold tracking-tight">
-          나에게 맞는 직업 찾기
+    <>
+      <header className="border-b border-border">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between">
+          <div className="text-sm font-semibold tracking-tight">
+            나에게 맞는 직업 찾기
+          </div>
+          <div className="flex items-center gap-1">
+            {/* 최근 본 직업 */}
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setRecentOpen(true)}
+              className="relative text-muted-foreground hover:text-foreground"
+              title="최근 본 직업"
+            >
+              <Clock className="h-4 w-4" />
+              {recentCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-muted-foreground text-background text-[10px] font-bold">
+                  {recentCount}
+                </span>
+              )}
+            </Button>
+            {/* 체갈피 */}
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setBookmarkOpen(true)}
+              className="relative text-muted-foreground hover:text-foreground"
+              title="저장한 직업"
+            >
+              <Bookmark className="h-4 w-4" />
+              {bookmarkCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-background text-[10px] font-bold">
+                  {bookmarkCount}
+                </span>
+              )}
+            </Button>
+            {showReset && (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={onReset}
+                className="text-muted-foreground hover:text-foreground text-xs"
+              >
+                <RotateCcw className="h-3.5 w-3.5 mr-1.5" />
+                처음부터
+              </Button>
+            )}
+          </div>
         </div>
-        {showReset && (
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={onReset}
-            className="text-muted-foreground hover:text-foreground text-xs"
-          >
-            <RotateCcw className="h-3.5 w-3.5 mr-1.5" />
-            처음부터
-          </Button>
-        )}
-      </div>
-    </header>
+      </header>
+      <BookmarkModal
+        open={bookmarkOpen}
+        onOpenChange={setBookmarkOpen}
+        bookmarks={bookmarks}
+        recentJobs={recentJobs}
+      />
+      <RecentModal
+        open={recentOpen}
+        onOpenChange={setRecentOpen}
+        recentJobs={recentJobs}
+        bookmarks={bookmarks}
+      />
+    </>
+  );
+}
+
+/* ----------------------------- BookmarkModal ----------------------------- */
+
+function BookmarkModal({
+  open,
+  onOpenChange,
+  bookmarks,
+  recentJobs,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  bookmarks: BookmarksHook;
+  recentJobs?: RecentJobsHook;
+}) {
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [detailOpen, setDetailOpen] = useState(false);
+
+  const bookmarkedJobs = useMemo(
+    () => ALL_JOBS.filter((j) => bookmarks.isBookmarked(j.id)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [bookmarks.bookmarkedIds]
+  );
+
+  return (
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Bookmark className="h-4 w-4" />
+              저장한 직업
+            </DialogTitle>
+            <DialogDescription className="text-xs text-muted-foreground">
+              {bookmarkedJobs.length > 0
+                ? `${bookmarkedJobs.length}개의 직업을 저장했습니다. (최대 ${bookmarks.max}개)`
+                : "아직 저장한 직업이 없습니다. 직업 카드의 책갈피 아이콘을 눈러 저장하세요."}
+            </DialogDescription>
+          </DialogHeader>
+          <ScrollArea className="max-h-[60vh] pr-2">
+            {bookmarkedJobs.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
+                <Bookmark className="h-10 w-10 mb-3 opacity-30" />
+                <p className="text-sm">저장된 직업이 없습니다</p>
+              </div>
+            ) : (
+              <div className="grid gap-2 pb-2">
+                {bookmarkedJobs.map((job) => (
+                  <button
+                    key={job.id}
+                    type="button"
+                    onClick={() => { setSelectedJob(job); setDetailOpen(true); }}
+                    className="text-left w-full rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors group"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-medium text-sm">{job.name}</span>
+                        <span className="text-xs text-muted-foreground">{job.domain}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); bookmarks.toggle(job.id); }}
+                        className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <BookmarkCheck className="h-4 w-4 fill-foreground" />
+                      </button>
+                    </div>
+                    {(job.description || job.short_desc) && (
+                      <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
+                        {job.description || job.short_desc}
+                      </p>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
+      <JobDetailDialog
+        job={selectedJob}
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        bookmarks={bookmarks}
+        onView={recentJobs?.addRecent}
+      />
+    </>
+  );
+}
+
+/* ----------------------------- RecentModal ----------------------------- */
+
+function RecentModal({
+  open,
+  onOpenChange,
+  recentJobs,
+  bookmarks,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  recentJobs: RecentJobsHook;
+  bookmarks: BookmarksHook;
+}) {
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [detailOpen, setDetailOpen] = useState(false);
+
+  const jobs = useMemo(
+    () =>
+      recentJobs.recentIds
+        .map((id) => ALL_JOBS.find((j) => j.id === id))
+        .filter((j): j is Job => j !== undefined),
+    [recentJobs.recentIds]
+  );
+
+  return (
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Clock className="h-4 w-4" />
+              최근 본 직업
+            </DialogTitle>
+            <DialogDescription className="text-xs text-muted-foreground">
+              {jobs.length > 0
+                ? `최근에 본 ${jobs.length}개의 직업입니다. (최대 ${recentJobs.max}개)`
+                : "아직 본 직업이 없습니다. 직업 카드를 눌러보세요."}
+            </DialogDescription>
+          </DialogHeader>
+          <ScrollArea className="max-h-[60vh] pr-2">
+            {jobs.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
+                <Clock className="h-10 w-10 mb-3 opacity-30" />
+                <p className="text-sm">최근 본 직업이 없습니다</p>
+              </div>
+            ) : (
+              <div className="grid gap-2 pb-2">
+                {jobs.map((job) => (
+                  <button
+                    key={job.id}
+                    type="button"
+                    onClick={() => { setSelectedJob(job); setDetailOpen(true); }}
+                    className="text-left w-full rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-medium text-sm">{job.name}</span>
+                        <span className="text-xs text-muted-foreground">{job.domain}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); bookmarks.toggle(job.id); }}
+                        className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
+                        title={bookmarks.isBookmarked(job.id) ? "저장 취소" : "저장"}
+                      >
+                        {bookmarks.isBookmarked(job.id)
+                          ? <BookmarkCheck className="h-4 w-4 fill-foreground" />
+                          : <Bookmark className="h-4 w-4" />}
+                      </button>
+                    </div>
+                    {(job.description || job.short_desc) && (
+                      <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
+                        {job.description || job.short_desc}
+                      </p>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
+      <JobDetailDialog
+        job={selectedJob}
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        bookmarks={bookmarks}
+        onView={recentJobs.addRecent}
+      />
+    </>
   );
 }
 
 /* ----------------------------- Intro ----------------------------- */
 
-function Intro({ onStart }: { onStart: () => void }) {
+function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookmarks?: BookmarksHook; recentJobs?: RecentJobsHook }) {
   return (
     <section className="pt-4">
       <h1 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-4">
@@ -222,7 +471,7 @@ function Intro({ onStart }: { onStart: () => void }) {
         <p className="text-sm text-muted-foreground mb-6 max-w-xl">
           {ALL_JOBS.length}개의 직업을 검색하고 필터링할 수 있습니다.
         </p>
-        <JobListBrowser />
+        <JobListBrowser bookmarks={bookmarks} recentJobs={recentJobs} />
       </div>
     </section>
   );
@@ -416,11 +665,15 @@ function Result({
   main,
   sub,
   onReset,
+  bookmarks,
+  recentJobs,
 }: {
   profile: UserProfile;
   main: Array<{ job: Job; score: number }>;
   sub: Array<{ job: Job; score: number }>;
   onReset: () => void;
+  bookmarks?: BookmarksHook;
+  recentJobs?: RecentJobsHook;
 }) {
   const winner = main[0]?.job ?? sub[0]?.job;
   const runners = main.slice(1, 5);
@@ -536,7 +789,7 @@ function Result({
           <h3 className="text-sm font-semibold mb-4">
             {isUnspecifiedEdu ? "함께 추천된 직업" : "함께 추천된 직업 (학력 충족)"}
           </h3>
-          <JobList items={runners} userEdu={profile.education} />
+          <JobList items={runners} userEdu={profile.education} bookmarks={bookmarks} recentJobs={recentJobs} />
         </div>
       )}
 
@@ -557,6 +810,8 @@ function Result({
             items={sub.slice(0, 5)}
             userEdu={profile.education}
             highlightRequirement
+            bookmarks={bookmarks}
+            recentJobs={recentJobs}
           />
         </div>
       )}
@@ -568,10 +823,14 @@ function JobList({
   items,
   userEdu,
   highlightRequirement,
+  bookmarks,
+  recentJobs,
 }: {
   items: Array<{ job: Job; score: number }>;
   userEdu: UserEducation;
   highlightRequirement?: boolean;
+  bookmarks?: BookmarksHook;
+  recentJobs?: RecentJobsHook;
 }) {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -611,6 +870,8 @@ function JobList({
         job={selectedJob}
         open={dialogOpen}
         onOpenChange={setDialogOpen}
+        bookmarks={bookmarks}
+        onView={recentJobs?.addRecent}
       />
     </>
   );
@@ -675,20 +936,48 @@ function JobDetailDialog({
   job,
   open,
   onOpenChange,
+  bookmarks,
+  onView,
 }: {
   job: Job | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  bookmarks?: BookmarksHook;
+  onView?: (id: number) => void;
 }) {
+  useEffect(() => {
+    if (open && job) {
+      onView?.(job.id);
+    }
+  }, [open, job?.id]);
+
   if (!job) return null;
+  const isBookmarked = bookmarks?.isBookmarked(job.id) ?? false;
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">{job.name}</DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground">
-            {job.domain} · {job.category}
-          </DialogDescription>
+          <div className="flex items-start justify-between gap-3 pr-6">
+            <div>
+              <DialogTitle className="text-xl font-bold">{job.name}</DialogTitle>
+              <DialogDescription className="text-xs text-muted-foreground mt-1">
+                {job.domain} · {job.category}
+              </DialogDescription>
+            </div>
+            {bookmarks && (
+              <button
+                type="button"
+                onClick={() => bookmarks.toggle(job.id)}
+                className="shrink-0 mt-0.5 text-muted-foreground hover:text-foreground transition-colors"
+                title={isBookmarked ? "저장 취소" : "저장"}
+              >
+                {isBookmarked
+                  ? <BookmarkCheck className="h-5 w-5 fill-foreground" />
+                  : <Bookmark className="h-5 w-5" />}
+              </button>
+            )}
+          </div>
         </DialogHeader>
         <ScrollArea className="max-h-[60vh] pr-2">
           <div className="space-y-5 pb-2">
@@ -772,7 +1061,7 @@ function JobDetailDialog({
 
 /* ----------------------------- JobListBrowser ----------------------------- */
 
-function JobListBrowser() {
+function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; recentJobs?: RecentJobsHook }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
@@ -876,6 +1165,8 @@ function JobListBrowser() {
         job={selectedJob}
         open={dialogOpen}
         onOpenChange={setDialogOpen}
+        bookmarks={bookmarks}
+        onView={recentJobs?.addRecent}
       />
     </div>
   );
