@@ -1349,28 +1349,34 @@ function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-
-  // 고유한 중분류 목록
+  // 마운트 시 한 번만 셔플된 직업 순서 (페이지 진입마다 순서 달라짐)
+  const shuffledJobs = useMemo(() => {
+    const arr = [...ALL_JOBS];
+    // Fisher-Yates shuffle
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, []);
+  // 고유한 중분류 목록 (이건 랜덤이 아닄라 항상 정렬)
   const categories = useMemo(
     () => Array.from(new Set(ALL_JOBS.map((j) => j.category))).sort(),
     []
   );
-
   // 필터링된 직업
   const filtered = useMemo(() => {
-    return ALL_JOBS.filter((job) => {
+    return shuffledJobs.filter((job) => {
       const matchesSearch =
         searchTerm === "" ||
         job.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (job.description || "").toLowerCase().includes(searchTerm.toLowerCase());
-
       const matchesCategory =
         selectedCategory === null || job.category === selectedCategory;
-
       return matchesSearch && matchesCategory;
     });
-  }, [searchTerm, selectedCategory]);
+  }, [shuffledJobs, searchTerm, selectedCategory]);
 
   return (
     <div className="space-y-4">

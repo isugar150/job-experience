@@ -458,30 +458,43 @@ export function scoreJobs(
   });
 }
 
-/** 다음 질문 선택 — 후보군을 50:50으로 가르는 질문을 우선 */
+/** 다음 질문 선택 — 후보군을 50:50으로 가르는 질문 중 랜덤으로 선택 */
 export function pickNextQuestion(
   candidates: Job[],
   asked: Set<string>
 ): Question | null {
   const remaining = QUESTIONS.filter((q) => !asked.has(q.id));
   if (remaining.length === 0) return null;
-  if (candidates.length === 0) return remaining[0];
+  if (candidates.length === 0) {
+    // 아직 후보가 없으면 난수 질문만쿠다
+    return remaining[Math.floor(Math.random() * remaining.length)];
+  }
 
-  let best: { q: Question; gain: number } | null = null;
+  // 각 질문의 변별력 점수(gain) 계산
+  const scored: Array<{ q: Question; gain: number }> = [];
   for (const q of remaining) {
     let yesCount = 0;
     for (const j of candidates) {
       if (q.predicate(j)) yesCount++;
     }
     const noCount = candidates.length - yesCount;
-    if (yesCount === 0 || noCount === 0) continue;
+    if (yesCount === 0 || noCount === 0) continue; // 변별력 없는 질문은 제외
     const balance = -Math.abs(yesCount - noCount);
     const gain = balance + (q.weight ?? 1) * 0.5;
-    if (best === null || gain > best.gain) {
-      best = { q, gain };
-    }
+    scored.push({ q, gain });
   }
-  return best?.q ?? remaining[0];
+
+  if (scored.length === 0) return null; // 변별력 있는 질문이 없으면 종료
+
+  // 최고 점수 근처(상위 30% 또는 점수 차 이내)의 질문들 중 랜덤 선택
+  scored.sort((a, b) => b.gain - a.gain);
+  const bestGain = scored[0].gain;
+  // 최고 점수 - 30%의 candidates 수 범위 이내 질문들을 후보로
+  const tolerance = Math.max(2, Math.ceil(candidates.length * 0.15));
+  const topPool = scored.filter((s) => s.gain >= bestGain - tolerance);
+  // 동적 파일에서 랜덤 선택
+  const picked = topPool[Math.floor(Math.random() * topPool.length)];
+  return picked.q;
 }
 
 export interface RecommendStep {
