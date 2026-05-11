@@ -205,6 +205,17 @@ function Intro({ onStart }: { onStart: () => void }) {
         <Stat k="34" v="중분류" />
         <Stat k={`최대 ${MAX_QUESTIONS}`} v="질문 수" />
       </div>
+
+      {/* 전체 직업 리스트 */}
+      <div className="mt-16 pt-16 border-t border-border">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
+          전체 직업 목록
+        </h2>
+        <p className="text-sm text-muted-foreground mb-6 max-w-xl">
+          {ALL_JOBS.length}개의 직업을 검색하고 필터링할 수 있습니다.
+        </p>
+        <JobListBrowser />
+      </div>
     </section>
   );
 }
@@ -636,6 +647,110 @@ function Meta({ k, v }: { k: string; v: string }) {
     <div>
       <dt className="text-xs text-muted-foreground">{k}</dt>
       <dd className="text-sm font-medium mt-0.5">{v}</dd>
+    </div>
+  );
+}
+
+/* ----------------------------- JobListBrowser ----------------------------- */
+
+function JobListBrowser() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // 고유한 중분류 목록
+  const categories = useMemo(
+    () => Array.from(new Set(ALL_JOBS.map((j) => j.category))).sort(),
+    []
+  );
+
+  // 필터링된 직업
+  const filtered = useMemo(() => {
+    return ALL_JOBS.filter((job) => {
+      const matchesSearch =
+        searchTerm === "" ||
+        job.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (job.description || "").toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesCategory =
+        selectedCategory === null || job.category === selectedCategory;
+
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchTerm, selectedCategory]);
+
+  return (
+    <div className="space-y-4">
+      {/* 검색 입력 */}
+      <input
+        type="text"
+        placeholder="직업명, 도메인, 설명으로 검색..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full px-4 py-2.5 rounded-md border border-border bg-card text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+      />
+
+      {/* 중분류 필터 */}
+      <div className="flex flex-wrap gap-2">
+        <button
+          onClick={() => setSelectedCategory(null)}
+          className={
+            "rounded-md border px-3 py-1.5 text-xs font-medium transition-colors " +
+            (selectedCategory === null
+              ? "border-foreground bg-foreground text-background"
+              : "border-border bg-card hover:border-foreground")
+          }
+        >
+          전체 ({ALL_JOBS.length})
+        </button>
+        {categories.map((cat) => {
+          const count = ALL_JOBS.filter((j) => j.category === cat).length;
+          return (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={
+                "rounded-md border px-3 py-1.5 text-xs font-medium transition-colors " +
+                (selectedCategory === cat
+                  ? "border-foreground bg-foreground text-background"
+                  : "border-border bg-card hover:border-foreground")
+              }
+            >
+              {cat} ({count})
+            </button>
+          );
+        })}
+      </div>
+
+      {/* 결과 */}
+      <div className="mt-6">
+        <p className="text-xs text-muted-foreground mb-3">
+          {filtered.length}개 직업 표시
+        </p>
+        <div className="grid gap-2 max-h-96 overflow-y-auto">
+          {filtered.map((job) => (
+            <a
+              key={job.id}
+              href={job.source_url || namuwikiUrl(job.name)}
+              target="_blank"
+              rel="noreferrer"
+              className="block rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors"
+            >
+              <div className="flex items-baseline justify-between gap-2">
+                <div className="font-medium text-sm">{job.name}</div>
+                <div className="text-xs text-muted-foreground shrink-0">
+                  {job.domain}
+                </div>
+              </div>
+              {job.description && (
+                <div className="text-xs text-muted-foreground mt-1 line-clamp-1">
+                  {job.description}
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -3,10 +3,13 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { defineConfig } from "vite";
 
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  // GitHub Pages 배포 시: VITE_BASE=/job-experience/ pnpm build
-  base: process.env.VITE_BASE ?? "/",
+  // 기본값: /job-experience (GitHub Pages 환경)
+  // 로컬 개발: VITE_BASE=/ pnpm dev
+  // 다른 경로: VITE_BASE=/custom/ pnpm build
+  base: process.env.VITE_BASE ?? "/job-experience/",
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
@@ -30,5 +33,7 @@ export default defineConfig({
       "localhost",
       "127.0.0.1",
     ],
+    // 로컬 개발 시 /job-experience 경로 프록시
+    middlewareMode: false,
   },
 });

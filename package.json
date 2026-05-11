@@ -4,9 +4,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "build:pages": "VITE_BASE=/job-experience/ vite build && node -e \"const fs=require('fs');const d='dist';fs.copyFileSync(d+'/index.html',d+'/404.html');fs.writeFileSync(d+'/.nojekyll','');console.log('GitHub Pages post-build done')\"",
+    "dev": "VITE_BASE=/ vite --host",
+    "build": "VITE_BASE=/ vite build",
+    "build:pages": "vite build && node -e \"const fs=require('fs');const d='dist';fs.copyFileSync(d+'/index.html',d+'/404.html');fs.writeFileSync(d+'/.nojekyll','');console.log('GitHub Pages post-build done')\"",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "format": "prettier --write ."
@@ -73,6 +73,7 @@
     "typescript": "5.6.3",
     "vite": "^7.1.7"
   },
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
   "pnpm": {
     "overrides": {
       "tailwindcss>nanoid": "3.3.7"
