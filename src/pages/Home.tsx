@@ -399,8 +399,16 @@ function Asking({
 
 /* ----------------------------- Result ----------------------------- */
 
-const namuwikiUrl = (name: string) =>
-  `https://namu.wiki/w/${encodeURIComponent(name)}`;
+// Google I'm Feeling Lucky: 첫 번째 결과(나무위키)로 바로 이동
+const googleLuckyUrl = (name: string) =>
+  `https://www.google.com/search?q=${encodeURIComponent(name + " 나무위키")}&btnI=I`;
+
+// Naver 검색결과 보조 링크
+const naverSearchUrl = (name: string) =>
+  `https://search.naver.com/search.naver?query=${encodeURIComponent(name + " 나무위키")}`;
+
+// 하위 호환: 기존 source_url 필드가 있으면 우선 사용, 없으면 Google Lucky
+const namuwikiUrl = (name: string) => googleLuckyUrl(name);
 
 function Result({
   profile,
@@ -510,7 +518,7 @@ function Result({
           다시 찾아보기
         </Button>
         <a
-          href={winner.source_url || namuwikiUrl(winner.name)}
+          href={googleLuckyUrl(winner.name)}
           target="_blank"
           rel="noreferrer"
         >
@@ -518,6 +526,14 @@ function Result({
             나무위키에서 더 보기
             <ExternalLink className="h-4 w-4 ml-2" />
           </Button>
+        </a>
+        <a
+          href={naverSearchUrl(winner.name)}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
+        >
+          Naver에서 검색
         </a>
       </div>
 
@@ -569,11 +585,8 @@ function JobList({
       {items.map((r) => {
         const ok = meetsEducation(r.job, userEdu);
         return (
-          <a
+          <div
             key={r.job.id}
-            href={r.job.source_url || namuwikiUrl(r.job.name)}
-            target="_blank"
-            rel="noreferrer"
             className="block rounded-md border border-border bg-card p-4 hover:border-foreground transition-colors"
           >
             <div className="flex items-baseline justify-between gap-3">
@@ -591,7 +604,27 @@ function JobList({
                 필요 학력: {r.job.education_required ?? "고졸이상"}
               </div>
             ) : null}
-          </a>
+            <div className="mt-2.5 flex gap-3">
+              <a
+                href={googleLuckyUrl(r.job.name)}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
+                onClick={(e) => e.stopPropagation()}
+              >
+                나무위키
+              </a>
+              <a
+                href={naverSearchUrl(r.job.name)}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Naver 검색
+              </a>
+            </div>
+          </div>
         );
       })}
     </div>
@@ -729,12 +762,9 @@ function JobListBrowser() {
         </p>
         <div className="grid gap-2 max-h-96 overflow-y-auto">
           {filtered.map((job) => (
-            <a
+            <div
               key={job.id}
-              href={job.source_url || namuwikiUrl(job.name)}
-              target="_blank"
-              rel="noreferrer"
-              className="block rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors"
+              className="rounded-md border border-border bg-card p-3 hover:border-foreground transition-colors"
             >
               <div className="flex items-baseline justify-between gap-2">
                 <div className="font-medium text-sm">{job.name}</div>
@@ -747,7 +777,25 @@ function JobListBrowser() {
                   {job.description}
                 </div>
               )}
-            </a>
+              <div className="mt-1.5 flex gap-3">
+                <a
+                  href={googleLuckyUrl(job.name)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
+                >
+                  나무위키
+                </a>
+                <a
+                  href={naverSearchUrl(job.name)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
+                >
+                  Naver 검색
+                </a>
+              </div>
+            </div>
           ))}
         </div>
       </div>
