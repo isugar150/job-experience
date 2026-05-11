@@ -38,7 +38,9 @@ import {
   ExternalLink,
   GraduationCap,
   Info,
+  Link2,
   RotateCcw,
+  Share2,
   X,
 } from "lucide-react";
 import {
@@ -53,6 +55,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { TagInput } from "@/components/TagInput";
 import { ALL_CERTIFICATIONS, ALL_LANGUAGES } from "@/data/profileData";
 import { useUserProfile } from "@/hooks/useUserProfile";
+import {
+  buildShareUrl,
+  decodeShareParams,
+  generateSeed,
+  shareUrl,
+} from "@/lib/share";
 
 type Phase = "intro" | "profile" | "asking" | "result";
 
@@ -80,15 +88,39 @@ export default function Home() {
   const [askedIds, setAskedIds] = useState<Set<string>>(new Set());
   const [askedOrder, setAskedOrder] = useState<string[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
+  // 결과 추천 재현 가능성을 위한 시드 (공유 링크 지원)
+  const [seed, setSeed] = useState<number>(() => generateSeed());
+  // URL에서 복원된 세션인지 여부 (공유 링크로 진입시 true) - 향후 확장용
+  const [, setRestoredFromUrl] = useState(false);
 
   const candidates = useMemo(
     () => currentCandidates(profile, answers),
     [profile, answers]
   );
   const recommendation = useMemo(
-    () => getRecommendations(profile, answers, 5),
-    [profile, answers]
+    () => getRecommendations(profile, answers, 5, seed),
+    [profile, answers, seed]
   );
+
+  // 최초 마운트 시 URL 쿼리 파라미터를 검사해 추천 상태를 복원·결과 화면으로 이동
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sp = new URLSearchParams(window.location.search);
+    if (!sp.has("s")) return;
+    const restored = decodeShareParams(sp);
+    if (!restored) return;
+    setProfile(restored.profile);
+    setAnswers(restored.answers);
+    setAskedIds(new Set(restored.answers.map((a) => a.questionId)));
+    setAskedOrder(restored.answers.map((a) => a.questionId));
+    setSeed(restored.seed);
+    setRestoredFromUrl(true);
+    // 결과 화면으로 강제 이동
+    if (PATH_TO_PHASE[location] !== "result") {
+      navigate(PHASE_TO_PATH["result"]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (phase !== "asking") return;
@@ -117,11 +149,24 @@ export default function Home() {
     }
   }, [phase]);
 
+  // 결과 화면 진입 시 URL을 공유 가능한 상태로 동기화
+  useEffect(() => {
+    if (phase !== "result") return;
+    if (typeof window === "undefined") return;
+    const url = buildShareUrl({ profile, answers, seed });
+    const newSearch = url.split("?")[1] ?? "";
+    if (window.location.search !== `?${newSearch}`) {
+      window.history.replaceState({}, "", `${window.location.pathname}?${newSearch}`);
+    }
+  }, [phase, profile, answers, seed]);
+
   function startIntro() {
     setAnswers([]);
     setAskedIds(new Set());
     setAskedOrder([]);
     setCurrentQuestion(null);
+    setSeed(generateSeed());
+    setRestoredFromUrl(false);
     navigate(PHASE_TO_PATH["profile"]);
   }
 
@@ -180,7 +225,13 @@ export default function Home() {
     setAskedIds(new Set());
     setAskedOrder([]);
     setCurrentQuestion(null);
+    setSeed(generateSeed());
+    setRestoredFromUrl(false);
     // 다시 시작 때 profile은 유지 (사용자가 동일인과다)
+    // URL에 남아있는 공유 파라미터가 있으면 제거
+    if (typeof window !== "undefined" && window.location.search) {
+      window.history.replaceState({}, "", window.location.pathname);
+    }
     navigate(PHASE_TO_PATH["intro"]);
   }
 
@@ -216,6 +267,8 @@ export default function Home() {
             profile={profile}
             main={recommendation.mainCandidates}
             sub={recommendation.subCandidates}
+            answers={answers}
+            seed={seed}
             onReset={reset}
             bookmarks={bookmarks}
             recentJobs={recentJobs}
@@ -815,6 +868,8 @@ function Result({
   profile,
   main,
   sub,
+  answers,
+  seed,
   onReset,
   bookmarks,
   recentJobs,
@@ -822,17 +877,27 @@ function Result({
   profile: UserProfile;
   main: Array<{ job: Job; score: number }>;
   sub: Array<{ job: Job; score: number }>;
+  answers: Answer[];
+  seed: number;
   onReset: () => void;
   bookmarks?: BookmarksHook;
   recentJobs?: RecentJobsHook;
 }) {
   const winner = main[0]?.job ?? sub[0]?.job;
   const runners = main.slice(1, 5);
+  const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "shared">("idle");
 
   // 결과 페이지 진입 시 winner를 최근 본 직업에 자동 추가
   useEffect(() => {
     if (winner) recentJobs?.addRecent(winner.id);
   }, [winner?.id]);
+
+  async function handleShare() {
+    const url = buildShareUrl({ profile, answers, seed });
+    const result = await shareUrl(url, winner ? `나에게 맞는 직업: ${winner.name}` : "나에게 맞는 직업 추천");
+    setShareStatus(result);
+    window.setTimeout(() => setShareStatus("idle"), 2200);
+  }
 
   if (!winner) {
     return (
@@ -908,7 +973,7 @@ function Result({
       {/* Certifications */}
       {winner.certifications?.length ? (
         <div className="mb-10">
-          <h3 className="text-sm font-semibold mb-3">유리한 자격증·면허</h3>
+          <h3 className="text-sm font-semibold mb-3">유리한 자격증쀌면허</h3>
           <div className="flex flex-wrap gap-2">
             {winner.certifications.map((c) => (
               <span
@@ -944,6 +1009,19 @@ function Result({
             )}
           </Button>
         )}
+        <Button
+          variant="outline"
+          className="rounded-md"
+          onClick={handleShare}
+        >
+          {shareStatus === "copied" ? (
+            <><Link2 className="h-4 w-4 mr-2" />링크 복사됨</>
+          ) : shareStatus === "shared" ? (
+            <><Check className="h-4 w-4 mr-2" />공유됨</>
+          ) : (
+            <><Share2 className="h-4 w-4 mr-2" />공유하기</>
+          )}
+        </Button>
         <a
           href={namuwikiUrl(winner.name)}
           target="_blank"

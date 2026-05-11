@@ -506,11 +506,23 @@ export interface RecommendStep {
   subCandidates: Array<{ job: Job; score: number }>;
 }
 
-// Fisher-Yates 셔플
-function shuffle<T>(arr: T[]): T[] {
+// 시드 기반 의사난수 (mulberry32) - 공유 링크 재현에 사용
+function makeRng(seed: number): () => number {
+  let a = seed >>> 0;
+  return function () {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Fisher-Yates 셔플 (시드 선택 가능)
+function shuffle<T>(arr: T[], rng: () => number = Math.random): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
@@ -525,14 +537,17 @@ function shuffle<T>(arr: T[]): T[] {
 export function getRecommendations(
   profile: UserProfile,
   answers: Answer[],
-  topN = 5
+  topN = 5,
+  seed?: number
 ): RecommendStep {
+  // seed 가 주어지면 재현 가능한 PRNG, 아니면 Math.random
+  const rng = seed != null ? makeRng(seed) : Math.random;
   const pool = filterByGender(ALL_JOBS, profile.gender);
   const scored = scoreJobs(pool, answers, profile);
-  // 점수 내림차순, 동점일 때는 랜덤으로 순서 섮기
+  // 점수 내림차순, 동점일 때는 rng 기반으로 순서 섮기
   scored.sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score;
-    return Math.random() - 0.5;
+    return rng() - 0.5;
   });
 
   // 학력 unspecified: 학력 구분 없이 메인은 상위 topN
@@ -540,7 +555,7 @@ export function getRecommendations(
   if (profile.education === "unspecified") {
     const main = scored.slice(0, topN);
     const subPool = scored.slice(topN, topN + 30);
-    const sub = shuffle(subPool).slice(0, topN);
+    const sub = shuffle(subPool, rng).slice(0, topN);
     return {
       remainingCount: scored.length,
       topCandidates: main,
@@ -556,7 +571,7 @@ export function getRecommendations(
   // 서브 풌: 메인에 알린 id 제외하고, 나머지 (학력 충족 + 미달 포함) 중 상위 30개
   const mainIds = new Set(main.map((m) => m.job.id));
   const subPool = scored.filter((s) => !mainIds.has(s.job.id)).slice(0, 30);
-  const sub = shuffle(subPool).slice(0, topN);
+  const sub = shuffle(subPool, rng).slice(0, topN);
 
   return {
     remainingCount: scored.length,
