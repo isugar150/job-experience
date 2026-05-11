@@ -246,11 +246,11 @@ function Header({
 
   return (
     <>
-      <header className="border-b border-border sticky top-0 z-10" style={{backgroundColor: '#f7f3eb', backgroundImage: "url('/paper_texture.png')", backgroundRepeat: 'repeat', backgroundSize: '400px 400px', boxShadow: '0 2px 6px rgba(100,80,50,0.15)'}}>
+      <header className="border-b border-border sticky top-0 z-10" style={{backgroundColor: '#f7f3eb', backgroundImage: "url('/job-experience/paper_texture.png')", backgroundRepeat: 'repeat', backgroundSize: '400px 400px', boxShadow: '0 2px 6px rgba(100,80,50,0.15)'}}>
         <div className="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {/* 연필 아이콘 */}
-            <img src="/pencil.png" alt="" className="h-7 w-auto opacity-90" style={{transform: 'rotate(-10deg)'}} />
+            <img src="/job-experience/pencil.png" alt="" className="h-7 w-auto opacity-90" style={{transform: 'rotate(-10deg)'}} />
             <span className="text-sm font-bold tracking-tight" style={{fontFamily: '"Pretendard Variable", sans-serif', letterSpacing: '-0.01em'}}>
               나에게 맞는 직업 찾기
             </span>
@@ -509,25 +509,25 @@ function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookma
 
         {/* 문구류 일러스트 - 오른쪽 상단 */}
         <div
-          className="absolute top-0 right-0 w-[340px] sm:w-[480px] pointer-events-none select-none"
-          style={{ mixBlendMode: 'multiply', opacity: 0.92 }}
+          className="absolute top-0 right-0 w-[300px] sm:w-[440px] pointer-events-none select-none"
+          style={{ opacity: 0.9 }}
         >
           <img
-            src="/stationery_objects.png"
+            src="/job-experience/stationery_objects.png"
             alt=""
-            className="w-full"
+            className="w-full drop-shadow-sm"
           />
         </div>
 
         {/* 연필 - 왼쪽 하단 대각선 배치 */}
         <div
-          className="absolute bottom-0 -left-6 w-[160px] sm:w-[200px] pointer-events-none select-none hidden sm:block"
-          style={{ mixBlendMode: 'multiply', opacity: 0.85, transform: 'rotate(30deg) translateY(20px)' }}
+          className="absolute bottom-0 -left-4 w-[140px] sm:w-[180px] pointer-events-none select-none hidden sm:block"
+          style={{ opacity: 0.88, transform: 'rotate(28deg) translateY(24px)' }}
         >
           <img
-            src="/pencil.png"
+            src="/job-experience/pencil.png"
             alt=""
-            className="w-full"
+            className="w-full drop-shadow-sm"
           />
         </div>
 
