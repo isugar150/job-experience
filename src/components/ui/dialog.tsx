@@ -131,9 +131,7 @@ function DialogContent({
           background: '#fef9c3',
           borderRadius: '3px',
           boxShadow: '3px 5px 18px rgba(80,60,10,0.20), 1px 2px 5px rgba(80,60,10,0.10)',
-          position: 'relative',
           overflow: 'visible',
-          marginTop: '14px',
         }}
         onEscapeKeyDown={handleEscapeKeyDown}
         {...props}
