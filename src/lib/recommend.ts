@@ -126,30 +126,33 @@ export interface Question {
 const yes = (b: boolean) => b;
 
 export const QUESTIONS: Question[] = [
+  // ── 양방향 축 질문 (긍정 → 실내/높음, 부정 → 실외/낮음) ──
   {
-    id: "indoor",
-    text: "당신은 주로 실내에서 일하는 직업을 원하시나요?",
+    id: "work_env",
+    text: "주로 실내에서 일하는 환경을 선호하시나요? (아니면 야외·현장 활동이 더 좋으신가요?)",
     predicate: (j) => yes(j.tags.work_environment === "실내중심"),
+    // 부정 답변은 실외중심 직업에 가산점이 되도록 predicate 반전 활용
     weight: 1.2,
   },
   {
-    id: "outdoor",
-    text: "야외/현장에서 활동하는 일이 더 끌리시나요?",
-    predicate: (j) => yes(j.tags.work_environment === "실외중심"),
-    weight: 1.0,
-  },
-  {
-    id: "people_high",
-    text: "사람들과 자주 소통하고 어울리는 일이 좋은가요?",
+    id: "people_interaction",
+    text: "사람들과 자주 소통하고 어울리는 일이 좋으신가요? (아니면 혼자 집중하는 일을 선호하시나요?)",
     predicate: (j) => yes(j.tags.people_interaction === "높음"),
     weight: 1.3,
   },
   {
-    id: "people_low",
-    text: "혼자 집중해서 처리하는 일을 더 선호하시나요?",
-    predicate: (j) => yes(j.tags.people_interaction === "낮음"),
-    weight: 1.1,
+    id: "tech_usage",
+    text: "컴퓨터·IT·디지털 도구를 적극 활용하는 일이 좋으신가요? (아니면 손·몸·도구를 직접 다루는 일이 좋으신가요?)",
+    predicate: (j) => yes(j.tags.tech_intensity === "높음"),
+    weight: 1.4,
   },
+  {
+    id: "physical_demand",
+    text: "체력을 많이 쓰는 활동적인 일을 원하시나요? (아니면 앉아서 편안하게 일하는 환경을 원하시나요?)",
+    predicate: (j) => yes(j.tags.physical_intensity === "높음"),
+    weight: 1.0,
+  },
+  // ── 단독 특성 질문 ──
   {
     id: "creative",
     text: "창의적인 아이디어로 무언가를 만들어내는 일을 좋아하시나요?",
@@ -161,30 +164,6 @@ export const QUESTIONS: Question[] = [
     text: "데이터·논리를 분석해서 문제를 푸는 일이 즐거우신가요?",
     predicate: (j) => yes(j.tags.analytical_level === "높음"),
     weight: 1.3,
-  },
-  {
-    id: "tech_high",
-    text: "컴퓨터·IT·디지털 도구를 적극적으로 활용하는 직업이 좋은가요?",
-    predicate: (j) => yes(j.tags.tech_intensity === "높음"),
-    weight: 1.4,
-  },
-  {
-    id: "tech_low",
-    text: "디지털 기기보다는 손·몸·도구를 직접 다루는 일이 좋은가요?",
-    predicate: (j) => yes(j.tags.tech_intensity === "낮음"),
-    weight: 1.0,
-  },
-  {
-    id: "physical_high",
-    text: "체력을 많이 쓰는 활동적인 일을 감당할 수 있나요?",
-    predicate: (j) => yes(j.tags.physical_intensity === "높음"),
-    weight: 1.0,
-  },
-  {
-    id: "physical_low",
-    text: "신체적으로 편안하게 앉아서 일하는 환경을 원하시나요?",
-    predicate: (j) => yes(j.tags.physical_intensity === "낮음"),
-    weight: 0.9,
   },
   {
     id: "license",
