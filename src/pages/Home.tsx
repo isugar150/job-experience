@@ -1182,7 +1182,7 @@ function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; 
         <p className="text-xs text-muted-foreground mb-3">
           {filtered.length}개 직업 표시
         </p>
-        <div className="grid gap-2 max-h-96 overflow-y-auto">
+        <div className="grid gap-2 max-h-[600px] overflow-y-auto border border-border rounded-md p-3 bg-card/50">
           {filtered.map((job) => (
             <button
               key={job.id}
