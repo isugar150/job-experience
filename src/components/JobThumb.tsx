@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Briefcase } from "lucide-react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 import { cn } from "@/lib/utils";
 import type { Job } from "@/lib/recommend";
 
@@ -23,8 +25,17 @@ export interface JobThumbProps {
   className?: string;
   /** 이미지가 없을 때 fallback을 표시할지 여부 (기본 true). false면 null 반환. */
   showFallback?: boolean;
-  /** lazy loading. 결과 페이지 winner 카드처럼 처음부터 보이는 곳에서는 'eager'로. */
+  /**
+   * 로딩 모드.
+   * - `lazy` (기본): 뷰포트에 진입하기 직전(threshold만큼 앞)에 이미지를 로드한다.
+   * - `eager`: 첫 화면에 바로 보이는 경우(예: 결과 페이지의 winner 카드)에 사용한다.
+   */
   loading?: "lazy" | "eager";
+  /**
+   * 뷰포트 진입 전에 미리 이미지를 로드하기 시작할 거리(px). 기본 100px.
+   * 너무 작으면 스크롤 시 빈 칸이 보일 수 있고, 너무 크면 lazy 효과가 줄어든다.
+   */
+  threshold?: number;
 }
 
 const ROUND_CLASS: Record<NonNullable<JobThumbProps["rounded"]>, string> = {
@@ -39,7 +50,8 @@ const ROUND_CLASS: Record<NonNullable<JobThumbProps["rounded"]>, string> = {
 
 /**
  * 직업 썸네일 일러스트를 렌더링하는 공통 컴포넌트.
- * - `Job.image`가 있으면 `<img>`를 사용한다.
+ * - `Job.image`가 있으면 `react-lazy-load-image-component`의 `LazyLoadImage`로
+ *   IntersectionObserver 기반 lazy loading + opacity fade-in 효과를 적용한다.
  * - 없거나 로드에 실패하면 도메인 이니셜 + 아이콘 플레이스홀더를 보여준다.
  */
 export function JobThumb({
@@ -49,11 +61,13 @@ export function JobThumb({
   className,
   showFallback = true,
   loading = "lazy",
+  threshold = 100,
 }: JobThumbProps) {
   const [errored, setErrored] = useState(false);
   const hasImage = !!job.image && !errored;
 
   const sizeStyle = size ? { width: size, height: size } : undefined;
+  const roundClass = ROUND_CLASS[rounded];
 
   if (!hasImage) {
     if (!showFallback) return null;
@@ -63,7 +77,7 @@ export function JobThumb({
         style={sizeStyle}
         className={cn(
           "shrink-0 inline-flex items-center justify-center bg-muted text-muted-foreground border border-border overflow-hidden select-none",
-          ROUND_CLASS[rounded],
+          roundClass,
           className,
         )}
         aria-hidden
@@ -79,19 +93,25 @@ export function JobThumb({
     );
   }
 
+  // eager 모드는 lazy 처리를 우회하기 위해 visibleByDefault로 동작시킨다.
+  // (현재 뷰포트에 즉시 보여야 하는 경우: winner 카드 등)
+  const eager = loading === "eager";
+
   return (
-    <img
+    <LazyLoadImage
       src={withBase(job.image!)}
       alt={`${job.name} 일러스트`}
       width={size}
       height={size}
       style={sizeStyle}
-      loading={loading}
-      decoding="async"
+      threshold={threshold}
+      effect="opacity"
+      visibleByDefault={eager}
       onError={() => setErrored(true)}
+      wrapperClassName={cn("shrink-0 inline-block align-top", roundClass)}
       className={cn(
         "shrink-0 object-cover bg-muted border border-border overflow-hidden",
-        ROUND_CLASS[rounded],
+        roundClass,
         className,
       )}
     />
