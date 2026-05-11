@@ -33,6 +33,10 @@ export type UserEducation =
 export interface UserProfile {
   gender: UserGender;
   education: UserEducation;
+  /** 사용자가 보유한 자격증 목록 (선택) */
+  certifications?: string[];
+  /** 사용자가 구사하는 언어 목록 (선택) */
+  languages?: string[];
 }
 
 export interface Job {
@@ -400,10 +404,44 @@ export function filterByGender(jobs: Job[], userGender: UserGender): Job[] {
   return jobs.filter((j) => meetsGender(j, userGender));
 }
 
+/** 사용자가 보유한 자격증/언어에 따른 가산점 */
+function profileBonus(job: Job, profile?: UserProfile): number {
+  if (!profile) return 0;
+  let bonus = 0;
+  
+  // 1. 자격증 일치: 질문 점수(최대 20~30점)를 압도할 수 있도록 대폭 가산
+  if (profile.certifications?.length && job.certifications?.length) {
+    const userCerts = new Set(profile.certifications);
+    for (const c of job.certifications) {
+      if (userCerts.has(c)) {
+        // 자격증 1개 매치당 +50점 (무조건 최상위권으로 올림)
+        bonus += 50.0;
+      }
+    }
+  }
+  
+  // 2. 언어 가산점: 외국어 관련 직업이면 언어당 +30점
+  if (profile.languages?.length) {
+    const isLanguageJob =
+      /통역|번역|외국어|관광|가이드|외교|무역|항공|승무원|호텔|해외영업|국제/.test(job.name) ||
+      /외교관|비행기객실승무원|여행안내원|관광통역안내원|무역사무원|해외영업원/.test(job.name);
+      
+    if (isLanguageJob) {
+      bonus += profile.languages.length * 30.0;
+    } else if (profile.languages.length >= 2) {
+      // 다국어 구사자는 일반 직업에도 약간의 보너스
+      bonus += 2.0;
+    }
+  }
+  
+  return bonus;
+}
+
 /** 후보 직업의 점수를 계산한다. */
 export function scoreJobs(
   jobs: Job[],
-  answers: Answer[]
+  answers: Answer[],
+  profile?: UserProfile
 ): Array<{ job: Job; score: number }> {
   const qMap = new Map(QUESTIONS.map((q) => [q.id, q]));
   return jobs.map((job) => {
@@ -415,6 +453,7 @@ export function scoreJobs(
       const w = q.weight ?? 1;
       score += (matches ? 1 : -1) * ans.level * w;
     }
+    score += profileBonus(job, profile);
     return { job, score };
   });
 }
@@ -466,7 +505,7 @@ export function getRecommendations(
   topN = 5
 ): RecommendStep {
   const pool = filterByGender(ALL_JOBS, profile.gender);
-  const scored = scoreJobs(pool, answers);
+  const scored = scoreJobs(pool, answers, profile);
   scored.sort((a, b) => b.score - a.score);
 
   if (profile.education === "unspecified") {
@@ -508,6 +547,7 @@ export function currentCandidates(
   answers: Answer[]
 ): Job[] {
   const pool = filterByGender(ALL_JOBS, profile.gender);
+  // 후보 좁히기 단계에서는 profile 가산점 제외 - 질문 답변 만으로 순수하게 평가
   const scored = scoreJobs(pool, answers);
   scored.sort((a, b) => b.score - a.score);
 

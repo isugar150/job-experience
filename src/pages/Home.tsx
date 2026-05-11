@@ -50,6 +50,10 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+import { TagInput } from "@/components/TagInput";
+import { ALL_CERTIFICATIONS, ALL_LANGUAGES } from "@/data/profileData";
+import { useUserProfile } from "@/hooks/useUserProfile";
+
 type Phase = "intro" | "profile" | "asking" | "result";
 
 // URL 경로 <-> Phase 매핑
@@ -70,10 +74,8 @@ export default function Home() {
   const [location, navigate] = useLocation();
   const phase: Phase = PATH_TO_PHASE[location] ?? "intro";
 
-  const [profile, setProfile] = useState<UserProfile>({
-    gender: "unspecified",
-    education: "unspecified",
-  });
+  // 프로필은 localStorage에 자동 저장·복원되어 새로고침·재방문 시 이전 입력값이 유지된다
+  const { profile, setProfile, resetProfile } = useUserProfile();
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [askedIds, setAskedIds] = useState<Set<string>>(new Set());
   const [askedOrder, setAskedOrder] = useState<string[]>([]);
@@ -104,15 +106,14 @@ export default function Home() {
     setCurrentQuestion(next);
   }, [phase, askedIds, candidates]);
 
-  // 브라우저 뒤로가기 대응: profile/quiz 페이지에서 뒤로가기 시 상태 유지
+  // 브라우저 뒤로가기 대응: intro로 돌아오면 퀴즈 상태는 초기화하되, 프로필은 유지한다
   useEffect(() => {
     if (phase === "intro") {
-      // intro로 돌아오면 상태 초기화
       setAnswers([]);
       setAskedIds(new Set());
       setAskedOrder([]);
       setCurrentQuestion(null);
-      setProfile({ gender: "unspecified", education: "unspecified" });
+      // profile은 의도적으로 유지 (localStorage 에서 복원됨)
     }
   }, [phase]);
 
@@ -179,7 +180,7 @@ export default function Home() {
     setAskedIds(new Set());
     setAskedOrder([]);
     setCurrentQuestion(null);
-    setProfile({ gender: "unspecified", education: "unspecified" });
+    // 다시 시작 때 profile은 유지 (사용자가 동일인과다)
     navigate(PHASE_TO_PATH["intro"]);
   }
 
@@ -196,6 +197,7 @@ export default function Home() {
           <Profile
             profile={profile}
             onChange={setProfile}
+            onReset={resetProfile}
             onContinue={startQuestions}
           />
         )}
@@ -581,20 +583,27 @@ function Stat({ k, v }: { k: string; v: string }) {
 function Profile({
   profile,
   onChange,
+  onReset,
   onContinue,
 }: {
   profile: UserProfile;
   onChange: (p: UserProfile) => void;
+  onReset: () => void;
   onContinue: () => void;
 }) {
+  const hasSavedData =
+    profile.gender !== "unspecified" ||
+    profile.education !== "unspecified" ||
+    (profile.certifications?.length ?? 0) > 0 ||
+    (profile.languages?.length ?? 0) > 0;
   return (
     <section>
       <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
-        먼저 두 가지만 알려주세요.
+        먼저 간단한 프로필을 알려주세요.
       </h2>
       <p className="text-sm text-muted-foreground mb-10 max-w-xl">
-        성별과 학력은 추천 결과를 더 정확하게 좁히는 데 사용됩니다.
-        응답하기 어려운 항목은 <span className="font-medium">응답 안함</span>으로 두셔도 됩니다.
+        입력한 정보는 추천 결과를 더 정확하게 맞추는 데 사용됩니다.
+        모든 항목은 선택 사항이며, 응답하기 어려운 항목은 <span className="font-medium">응답 안함</span>으로 두셔도 됩니다.
       </p>
 
       <div className="space-y-10">
@@ -623,7 +632,7 @@ function Profile({
           <div className="flex items-center gap-2 mb-3">
             <h3 className="text-sm font-semibold">학력</h3>
             <span className="text-xs text-muted-foreground">
-              요건 충족 여부에 따라 메인/보완 추천으로 나뉩니다.
+              요건 충족 여부에 따라 메인/보완 추천으로 나뉘니다.
             </span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -639,6 +648,38 @@ function Profile({
             ))}
           </div>
         </div>
+
+        {/* 자격증 (선택) */}
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-semibold">보유 자격증</h3>
+            <span className="text-xs text-muted-foreground">
+              입력한 자격증을 요구하는 직업에 가산점이 부여됩니다.
+            </span>
+          </div>
+          <TagInput
+            value={profile.certifications ?? []}
+            onChange={(certs) => onChange({ ...profile, certifications: certs })}
+            suggestions={ALL_CERTIFICATIONS}
+            placeholder="예: 정보처리기사, 운전면허 ..."
+          />
+        </div>
+
+        {/* 언어 능력 (선택) */}
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-semibold">구사 언어</h3>
+            <span className="text-xs text-muted-foreground">
+              통번역·외국어 관련 직업에 가산점이 부여됩니다.
+            </span>
+          </div>
+          <TagInput
+            value={profile.languages ?? []}
+            onChange={(langs) => onChange({ ...profile, languages: langs })}
+            suggestions={ALL_LANGUAGES}
+            placeholder="예: 영어, 일본어 ..."
+          />
+        </div>
       </div>
 
       <div className="mt-12 flex flex-wrap gap-3">
@@ -646,6 +687,16 @@ function Profile({
           질문 시작
           <ArrowRight className="h-4 w-4 ml-2" />
         </Button>
+        {hasSavedData && (
+          <Button
+            variant="ghost"
+            size="lg"
+            onClick={onReset}
+            className="h-11 px-4 rounded-md text-muted-foreground hover:text-foreground"
+          >
+            프로필 초기화
+          </Button>
+        )}
       </div>
     </section>
   );
