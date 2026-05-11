@@ -249,8 +249,7 @@ function Header({
       <header className="border-b border-border sticky top-0 z-10" style={{backgroundColor: '#f7f3eb', backgroundImage: "url('/job-experience/paper_texture.png')", backgroundRepeat: 'repeat', backgroundSize: '400px 400px', boxShadow: '0 2px 6px rgba(100,80,50,0.15)'}}>
         <div className="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {/* 연필 아이콘 */}
-            <img src="/job-experience/pencil.png" alt="" className="h-7 w-auto opacity-90" style={{transform: 'rotate(-10deg)'}} />
+            <img src="/job-experience/logo_icon.png" alt="로고" className="h-8 w-8 object-contain" />
             <span className="text-sm font-bold tracking-tight" style={{fontFamily: '"Pretendard Variable", sans-serif', letterSpacing: '-0.01em'}}>
               나에게 맞는 직업 찾기
             </span>
@@ -504,34 +503,11 @@ function RecentModal({
 function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookmarks?: BookmarksHook; recentJobs?: RecentJobsHook }) {
   return (
     <section className="pt-4">
-      {/* 헤로 영역 */}
-      <div className="relative mb-10 min-h-[260px] sm:min-h-[320px]">
+      {/* 헤로 영역 - 좌우 2단 레이아웃 */}
+      <div className="flex flex-col sm:flex-row items-start gap-6 mb-10">
 
-        {/* 문구류 일러스트 - 오른쪽 상단 */}
-        <div
-          className="absolute top-0 right-0 w-[300px] sm:w-[440px] pointer-events-none select-none"
-          style={{ opacity: 0.9 }}
-        >
-          <img
-            src="/job-experience/stationery_objects.png"
-            alt=""
-            className="w-full drop-shadow-sm"
-          />
-        </div>
-
-        {/* 연필 - 왼쪽 하단 대각선 배치 */}
-        <div
-          className="absolute bottom-0 -left-4 w-[140px] sm:w-[180px] pointer-events-none select-none hidden sm:block"
-          style={{ opacity: 0.88, transform: 'rotate(28deg) translateY(24px)' }}
-        >
-          <img
-            src="/job-experience/pencil.png"
-            alt=""
-            className="w-full drop-shadow-sm"
-          />
-        </div>
-
-        <div className="relative z-10 max-w-[55%] sm:max-w-lg">
+        {/* 왼쪽: 텍스트 영역 */}
+        <div className="flex-1 min-w-0">
           {/* 스탬프 느낌 배지 */}
           <div className="inline-block mb-4">
             <span className="stamp-badge text-xs text-primary/70 border-primary/40">
@@ -544,16 +520,32 @@ function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookma
             <br />
             <span className="pencil-underline">찾아드립니다.</span>
           </h1>
-          <p className="text-base text-muted-foreground leading-relaxed mb-8">
+          <p className="text-base text-muted-foreground leading-relaxed mb-8" style={{wordBreak: 'keep-all'}}>
             몇 가지 질문에 답해 주세요. 답변에 따라 {ALL_JOBS.length}개의 직업 중에서
             당신과 잘 맞는 직업을 추려서 보여드립니다.
             정답은 없으니 직감대로 답하면 됩니다.
           </p>
 
-          <Button size="lg" onClick={onStart} className="h-11 px-7 rounded-sm font-semibold" style={{boxShadow: '2px 3px 0 oklch(0.3 0.03 60 / 0.3)'}}>
+          <Button size="lg" onClick={onStart} className="h-11 px-7 rounded-sm font-semibold" style={{boxShadow: '2px 3px 0 rgba(60,40,10,0.25)'}}>
             시작하기
             <ArrowRight className="h-4 w-4 ml-2" />
           </Button>
+        </div>
+
+        {/* 오른쪽: 문구류 일러스트 */}
+        <div className="hidden sm:flex flex-col items-center gap-4 shrink-0 w-[260px]">
+          <img
+            src="/job-experience/stationery_objects.png"
+            alt=""
+            className="w-full drop-shadow-md"
+            style={{ opacity: 0.95 }}
+          />
+          <img
+            src="/job-experience/pencil.png"
+            alt=""
+            className="w-[140px] drop-shadow-md"
+            style={{ opacity: 0.9, transform: 'rotate(-15deg) translateX(20px)' }}
+          />
         </div>
       </div>
 

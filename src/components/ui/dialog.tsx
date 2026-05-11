@@ -124,9 +124,15 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
+          "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 p-6 duration-200 sm:max-w-lg",
           className
         )}
+        style={{
+          background: 'linear-gradient(180deg, #fef9c3 0%, #fef08a 4%, #fef9c3 4%)',
+          borderRadius: '2px 2px 4px 4px',
+          boxShadow: '3px 4px 16px rgba(100,80,20,0.22), 0 1px 3px rgba(100,80,20,0.12)',
+          borderTop: '4px solid #fde047',
+        }}
         onEscapeKeyDown={handleEscapeKeyDown}
         {...props}
       >
