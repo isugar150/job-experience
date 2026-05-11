@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "job_recent";
-const MAX_RECENT = 20;
+const MAX_RECENT = 50;
 
 export function useRecentJobs() {
   // 최신 순서로 저장 (앞이 최신)

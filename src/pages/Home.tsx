@@ -679,6 +679,11 @@ function Result({
   const runners = main.slice(1, 5);
   const isUnspecifiedEdu = profile.education === "unspecified";
 
+  // 결과 페이지 진입 시 winner를 최근 본 직업에 자동 추가
+  useEffect(() => {
+    if (winner) recentJobs?.addRecent(winner.id);
+  }, [winner?.id]);
+
   if (!winner) {
     return (
       <section>
@@ -691,6 +696,7 @@ function Result({
   }
 
   const winnerInMain = main[0]?.job?.id === winner.id;
+  const isBookmarked = bookmarks?.isBookmarked(winner.id) ?? false;
 
   return (
     <section>
@@ -771,6 +777,19 @@ function Result({
           <RotateCcw className="h-4 w-4 mr-2" />
           다시 찾아보기
         </Button>
+        {bookmarks && (
+          <Button
+            variant="outline"
+            className="rounded-md"
+            onClick={() => bookmarks.toggle(winner.id)}
+          >
+            {isBookmarked ? (
+              <><BookmarkCheck className="h-4 w-4 mr-2 fill-foreground" />저장됨</>
+            ) : (
+              <><Bookmark className="h-4 w-4 mr-2" />저장하기</>
+            )}
+          </Button>
+        )}
         <a
           href={namuwikiUrl(winner.name)}
           target="_blank"
@@ -782,7 +801,6 @@ function Result({
           </Button>
         </a>
       </div>
-
       {/* Runners (메인 추천 나머지) */}
       {runners.length > 0 && (
         <div className="border-t border-border pt-8">
