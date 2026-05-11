@@ -500,7 +500,10 @@ export const ANSWER_OPTIONS: Array<{ label: string; level: AnswerLevel }> = [
   { label: "전혀 아니다", level: -2 },
 ];
 
-export const MAX_QUESTIONS = 12;
+/** 후보가 이 수 이하로 좁혀지면 질문을 조기 종료한다 */
+export const CANDIDATE_THRESHOLD = 5;
+/** 최소 질문 수 — 이 수 이상 답해야 조기 종료 조건이 발동한다 */
+export const MIN_QUESTIONS = 5;
 
 export const GENDER_OPTIONS: Array<{ value: UserGender; label: string }> = [
   { value: "male", label: "남성" },

@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/button";
 import {
   ANSWER_OPTIONS,
   ALL_JOBS,
-  MAX_QUESTIONS,
+  CANDIDATE_THRESHOLD,
+  MIN_QUESTIONS,
   EDUCATION_OPTIONS,
   GENDER_OPTIONS,
   currentCandidates,
@@ -87,14 +88,12 @@ export default function Home() {
 
   useEffect(() => {
     if (phase !== "asking") return;
-    if (askedIds.size >= MAX_QUESTIONS) {
+    // 최소 질문 수 이상 답한 상태에서 후보가 CANDIDATE_THRESHOLD 이하로 좌혀지면 조기 종료
+    if (askedIds.size >= MIN_QUESTIONS && candidates.length <= CANDIDATE_THRESHOLD) {
       navigate(PHASE_TO_PATH["result"]);
       return;
     }
-    if (askedIds.size >= 6 && candidates.length <= 5) {
-      navigate(PHASE_TO_PATH["result"]);
-      return;
-    }
+    // 더 이상 유효한 질문이 없으면 종료
     const next = pickNextQuestion(candidates, askedIds);
     if (!next) {
       navigate(PHASE_TO_PATH["result"]);
@@ -553,7 +552,7 @@ function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookma
       <div className="mt-10 grid grid-cols-3 gap-4 max-w-sm">
         <Stat k={`${ALL_JOBS.length}`} v="직업" />
         <Stat k="34" v="중분류" />
-        <Stat k={`${MAX_QUESTIONS}`} v="질문" />
+        <Stat k="33" v="질문" />
       </div>
 
       {/* 전체 직업 리스트 */}
@@ -697,14 +696,18 @@ function Asking({
   onAnswer: (level: number) => void;
   onBack: () => void;
 }) {
-  const progress = (answeredCount / MAX_QUESTIONS) * 100;
+  // 후보 수가 줄어들수록 진행률이 올라가는 동적 방식
+  // 시작 후보를 537로 고정, 현재 후보가 CANDIDATE_THRESHOLD까지 줄어들면 100%
+  const TOTAL_JOBS = 537;
+  const progress = Math.min(
+    ((TOTAL_JOBS - candidateCount) / (TOTAL_JOBS - CANDIDATE_THRESHOLD)) * 100,
+    99
+  );
   return (
     <section>
       <div className="mb-10">
         <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
-          <span>
-            질문 {answeredCount + 1} / {MAX_QUESTIONS}
-          </span>
+          <span>질문 {answeredCount + 1}번째</span>
           <span>후보 직업 {candidateCount}개</span>
         </div>
         <div className="h-1 bg-muted rounded-full overflow-hidden">
@@ -862,7 +865,20 @@ function Result({
           <Meta k="기술 활용" v={winner.tags.tech_intensity} />
           <Meta k="체력 부담" v={winner.tags.physical_intensity} />
           <Meta k="소득 수준" v={winner.tags.income_level} />
+          <Meta k="위험도" v={winner.tags.risk_level} />
           <Meta k="성별 제한" v={winner.gender_restriction ?? "무관"} />
+          <Meta k="근무 형태" v={winner.tags.work_schedule ?? "-"} />
+          <Meta k="원격 근무" v={winner.tags.remote_work ?? "-"} />
+          <Meta k="고용 형태" v={winner.tags.employment_type ?? "-"} />
+          <Meta k="성장 가능성" v={winner.tags.growth_potential ?? "-"} />
+          <Meta k="고용 안정성" v={winner.tags.job_stability ?? "-"} />
+          <Meta k="자동화 위험" v={winner.tags.automation_risk ?? "-"} />
+          <Meta k="업무 자율성" v={winner.tags.work_autonomy ?? "-"} />
+          <Meta k="팀워크" v={winner.tags.teamwork_level ?? "-"} />
+          <Meta k="소통 비중" v={winner.tags.communication_level ?? "-"} />
+          <Meta k="반복 업무" v={winner.tags.repetition_level ?? "-"} />
+          <Meta k="사회적 기여" v={winner.tags.social_impact ?? "-"} />
+          <Meta k="공공/민간" v={winner.tags.public_sector ?? "-"} />
         </dl>
       </div>
 
@@ -1163,7 +1179,20 @@ function JobDetailDialog({
                 <div><dt className="text-muted-foreground">기술 활용</dt><dd className="font-medium mt-0.5">{job.tags.tech_intensity}</dd></div>
                 <div><dt className="text-muted-foreground">체력 부담</dt><dd className="font-medium mt-0.5">{job.tags.physical_intensity}</dd></div>
                 <div><dt className="text-muted-foreground">소득 수준</dt><dd className="font-medium mt-0.5">{job.tags.income_level}</dd></div>
+                <div><dt className="text-muted-foreground">위험도</dt><dd className="font-medium mt-0.5">{job.tags.risk_level}</dd></div>
                 <div><dt className="text-muted-foreground">성별 제한</dt><dd className="font-medium mt-0.5">{job.gender_restriction ?? "무관"}</dd></div>
+                <div><dt className="text-muted-foreground">근무 형태</dt><dd className="font-medium mt-0.5">{job.tags.work_schedule ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">원격 근무</dt><dd className="font-medium mt-0.5">{job.tags.remote_work ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">고용 형태</dt><dd className="font-medium mt-0.5">{job.tags.employment_type ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">성장 가능성</dt><dd className="font-medium mt-0.5">{job.tags.growth_potential ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">고용 안정성</dt><dd className="font-medium mt-0.5">{job.tags.job_stability ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">자동화 위험</dt><dd className="font-medium mt-0.5">{job.tags.automation_risk ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">업무 자율성</dt><dd className="font-medium mt-0.5">{job.tags.work_autonomy ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">팀워크</dt><dd className="font-medium mt-0.5">{job.tags.teamwork_level ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">소통 비중</dt><dd className="font-medium mt-0.5">{job.tags.communication_level ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">반복 업무</dt><dd className="font-medium mt-0.5">{job.tags.repetition_level ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">사회적 기여</dt><dd className="font-medium mt-0.5">{job.tags.social_impact ?? "-"}</dd></div>
+                <div><dt className="text-muted-foreground">공공/민간</dt><dd className="font-medium mt-0.5">{job.tags.public_sector ?? "-"}</dd></div>
               </dl>
             </div>
           </div>
