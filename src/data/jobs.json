@@ -29103,65 +29103,6 @@
       "verified": true
     },
     {
-      "id": 472,
-      "name": "기업고위임원",
-      "category": "관리직(임원·부서장)",
-      "domain": "관리/리더십",
-      "tags": {
-        "work_environment": "실내중심",
-        "physical_intensity": "낮음",
-        "people_interaction": "높음",
-        "creativity_level": "높음",
-        "analytical_level": "높음",
-        "tech_intensity": "보통",
-        "education_required": "대졸",
-        "license_required": false,
-        "income_level": "매우높음",
-        "risk_level": "낮음",
-        "work_schedule": "정규직",
-        "remote_work": "부분가능",
-        "employment_type": "정규직",
-        "growth_potential": "높음",
-        "job_stability": "높음",
-        "automation_risk": "낮음",
-        "work_autonomy": "높음",
-        "teamwork_level": "팀중심",
-        "communication_level": "높음",
-        "repetition_level": "낮음",
-        "social_impact": "보통",
-        "public_sector": "혼합",
-        "entry_difficulty": "높음",
-        "competition_level": "높음",
-        "experience_required": "경력필수"
-      },
-      "traits": [
-        "리더십",
-        "결단력",
-        "책임감",
-        "전략적"
-      ],
-      "short_desc": "기업의 경영 목표를 설정하고 조직을 총괄한다",
-      "description": "기업고위임원은 기업을 대표하며, 사업체 경영의 능률과 경제성 제고, 이익의 극대화를 위한 조사연구나 홍보, 판매 등을 계획하고 관리하는 직업입니다. 이사회나 이와 유사한 운영기관 또는 법령에 의해 위임된 권한 하에 사업체의 전반적인 정책을 수립하고 운영현황, 과거의 실적, 미래의 계획을 평가하여 사업계획을 결정합니다. 대외적으로 사업체를 대표하며, 고위 간부와 임원의 임명을 결정하고 예산 배정과 조직의 업무분장을 조정하고 승인합니다.",
-      "pros": [
-        "높은 연봉과 보상",
-        "기업의 최고 의사결정권자로서의 권한",
-        "사회적 지위와 명예"
-      ],
-      "cons": [
-        "단기 고용으로 인한 고용 불안정성",
-        "무거운 책임감과 높은 업무 강도",
-        "실적 압박으로 인한 스트레스"
-      ],
-      "certifications": [
-        "없음"
-      ],
-      "education_required": "전문대졸",
-      "gender_restriction": "무관",
-      "source_url": "https://www.career.go.kr/cnet/app/base/job/jobView.m;jsessionid=86B7EA25BD36EA6B50807FD8E5A218F4?SEQ=238",
-      "source_type": "worknet",
-      "verified": true
-    },
-    {
       "id": 473,
       "name": "정부행정관리자",
       "category": "관리직(임원·부서장)",
@@ -33235,5 +33176,5 @@
     "행정/사무",
     "화학/환경"
   ],
-  "total": 537
+  "total": 536
 }

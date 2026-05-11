@@ -500,17 +500,27 @@ export function pickNextQuestion(
 export interface RecommendStep {
   remainingCount: number;
   topCandidates: Array<{ job: Job; score: number }>;
-  /** 학력 충족 직업 (메인 추천) */
+  /** 메인 추천 (학력 충족 + 상위 점수) */
   mainCandidates: Array<{ job: Job; score: number }>;
-  /** 학력 미달 직업 (서브 추천) */
+  /** "도전해볼 만한 직업" - 메인에 들지 않은 속의 점수 상위 직업 중 랜덤 5개 */
   subCandidates: Array<{ job: Job; score: number }>;
+}
+
+// Fisher-Yates 셔플
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 /**
  * 사용자 프로필을 반영해 추천 결과를 생성한다.
  * - 성별 제한에 맞지 않는 직업은 사전 제거
- * - 학력 조건 충족 여부에 따라 메인/서브로 나눈다
- * - 학력 unspecified 인 경우 둘을 합쳐서 반환
+ * - 메인: 학력 충족 + 상위 점수 topN개
+ * - 서브 (“도전해볼 만한 직업”): 메인에 들지 않은 속의 상위 30개 풌 중 랜덤 5개
  */
 export function getRecommendations(
   profile: UserProfile,
@@ -521,25 +531,29 @@ export function getRecommendations(
   const scored = scoreJobs(pool, answers, profile);
   scored.sort((a, b) => b.score - a.score);
 
+  // 학력 unspecified: 학력 구분 없이 메인은 상위 topN
+  // 서브는 topN+1 이하 상위 30개 중 랜덤 topN
   if (profile.education === "unspecified") {
+    const main = scored.slice(0, topN);
+    const subPool = scored.slice(topN, topN + 30);
+    const sub = shuffle(subPool).slice(0, topN);
     return {
       remainingCount: scored.length,
-      topCandidates: scored.slice(0, topN),
-      mainCandidates: scored.slice(0, topN),
-      subCandidates: [],
+      topCandidates: main,
+      mainCandidates: main,
+      subCandidates: sub,
     };
   }
 
-  const main: Array<{ job: Job; score: number }> = [];
-  const sub: Array<{ job: Job; score: number }> = [];
-  for (const s of scored) {
-    if (meetsEducation(s.job, profile.education)) {
-      if (main.length < topN) main.push(s);
-    } else {
-      if (sub.length < topN) sub.push(s);
-    }
-    if (main.length >= topN && sub.length >= topN) break;
-  }
+  // 학력 지정: 학력 충족 직업만으로 메인 구성
+  const eligible = scored.filter((s) => meetsEducation(s.job, profile.education));
+  const main = eligible.slice(0, topN);
+
+  // 서브 풌: 메인에 알린 id 제외하고, 나머지 (학력 충족 + 미달 포함) 중 상위 30개
+  const mainIds = new Set(main.map((m) => m.job.id));
+  const subPool = scored.filter((s) => !mainIds.has(s.job.id)).slice(0, 30);
+  const sub = shuffle(subPool).slice(0, topN);
+
   return {
     remainingCount: scored.length,
     topCandidates: main.length ? main : sub,

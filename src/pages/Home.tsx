@@ -524,9 +524,8 @@ function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookma
             <span className="pencil-underline">찾아드립니다.</span>
           </h1>
           <p className="text-base text-muted-foreground leading-relaxed mb-8" style={{wordBreak: 'keep-all'}}>
-            몇 가지 질문에 답해 주세요. 답변에 따라 {ALL_JOBS.length}개의 직업 중에서
-            당신과 잘 맞는 직업을 추려서 보여드립니다.
-            정답은 없으니 직감대로 답하면 됩니다.
+            간단한 질문들에 직감대로 답해보세요.
+            당신의 성향과 선호도를 분석해, 가장 잘 어울리는 직업들을 찾아 제안해 드립니다.
           </p>
 
           <Button size="lg" onClick={onStart} className="h-11 px-7 rounded-sm font-semibold" style={{boxShadow: '2px 3px 0 rgba(60,40,10,0.25)'}}>
@@ -775,12 +774,16 @@ function Asking({
       <div className="grid gap-2.5">
         {ANSWER_OPTIONS.map((opt) => (
           <button
-            key={opt.label}
-            onClick={() => onAnswer(opt.level)}
-            className="group flex items-center justify-between text-left rounded-md border border-border bg-card px-4 py-3.5 hover:border-foreground hover:bg-accent/50 transition-colors"
+            key={`${question.id}-${opt.label}`}
+            onClick={(e) => {
+              // 모바일 sticky hover 방지용 포커스 해제
+              (e.currentTarget as HTMLButtonElement).blur();
+              onAnswer(opt.level);
+            }}
+            className="group flex items-center justify-between text-left rounded-md border border-border bg-card px-4 py-3.5 [@media(hover:hover)]:hover:border-foreground [@media(hover:hover)]:hover:bg-accent/50 transition-colors"
           >
             <span className="text-base font-medium">{opt.label}</span>
-            <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+            <ArrowRight className="h-4 w-4 text-muted-foreground [@media(hover:hover)]:group-hover:text-foreground transition-colors" />
           </button>
         ))}
       </div>
@@ -963,23 +966,18 @@ function Result({
         </div>
       )}
 
-      {/* 서브 추천: 학력 보완 필요 */}
-      {!isUnspecifiedEdu && sub.length > 0 && (
+      {/* 서브 추천: 도전해볼 만한 직업 (랜덤 5개) */}
+      {sub.length > 0 && (
         <div className="border-t border-border pt-8 mt-10">
-          <div className="flex items-center gap-2 mb-2">
-            <GraduationCap className="h-4 w-4 text-muted-foreground" />
-            <h3 className="text-sm font-semibold">
-              학력 보완이 필요한 추천
-            </h3>
-          </div>
+          <h3 className="text-sm font-semibold mb-2">
+            이런 직업도 어떨까요?
+          </h3>
           <p className="text-xs text-muted-foreground mb-4 max-w-lg">
-            점수상으로는 잘 맞지만 현재 학력으로는 요건을 충족하지 못하는 직업입니다.
-            추가 학위·과정을 거치면 도전할 수 있습니다.
+            답변과 일부 다른 면이 있지만, 그만큼 새로운 선택으로 고려해볼 만한 직업입니다.
           </p>
           <JobList
             items={sub.slice(0, 5)}
             userEdu={profile.education}
-            highlightRequirement
             bookmarks={bookmarks}
             recentJobs={recentJobs}
           />
