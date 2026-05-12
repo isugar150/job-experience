@@ -12,6 +12,7 @@ import {
   ANSWER_OPTIONS,
   ALL_JOBS,
   CANDIDATE_THRESHOLD,
+  MAX_QUESTIONS,
   MIN_QUESTIONS,
   EDUCATION_OPTIONS,
   GENDER_OPTIONS,
@@ -135,6 +136,10 @@ export default function Home() {
     }
     // 현재 질문이 이미 설정되어 있고 아직 답변되지 않은 상태라면 그대로 유지
     if (currentQuestion && !askedIds.has(currentQuestion.id)) {
+      return;
+    }
+    if (askedIds.size >= MAX_QUESTIONS) {
+      navigate(PHASE_TO_PATH["result"]);
       return;
     }
     // 최소 질문 수 이상 답한 상태에서 후보가 CANDIDATE_THRESHOLD 이하로 좌혀지면 조기 종료
@@ -1075,7 +1080,7 @@ function Result({
       {/* Certifications */}
       {winner.certifications?.length ? (
         <div className="mb-10">
-          <h3 className="text-sm font-semibold mb-3">유리한 자격증쀌면허</h3>
+          <h3 className="text-sm font-semibold mb-3">유리한 자격증·면허</h3>
           <div className="flex flex-wrap gap-2">
             {winner.certifications.map((c) => (
               <span

@@ -1,6 +1,6 @@
 /**
  * 추천 엔진
- * - 사용자가 답한 답변을 사용해 537개 직업 후보를 점진적으로 좁혀나간다.
+ * - 사용자가 답한 답변을 사용해 직업 후보를 점진적으로 좁혀나간다.
  * - 시작 전에 성별/학력을 사전 입력으로 받아, 학력 충족 여부에 따라
  *   추천 결과를 "메인(요건 충족)"과 "서브(보완 필요)"로 분리한다.
  */
@@ -136,16 +136,56 @@ export function meetsGender(job: Job, userGender: UserGender): boolean {
 }
 
 /**
- * 각 질문은 "직업이 이 조건을 만족하면 +1, 아니면 -1" 식의 predicate를 가진다.
+ * 각 질문은 predicate로 긍정 방향을 정의하고, 필요하면 score로 보통/혼합/부분일치 값을 보정한다.
  */
 export interface Question {
   id: string;
   text: string;
   predicate: (job: Job) => boolean;
   weight?: number;
+  score?: (job: Job) => number;
+  mismatchPenalty?: number;
 }
 
 const yes = (b: boolean) => b;
+
+const jobText = (j: Job) =>
+  [
+    j.name,
+    j.category,
+    j.domain,
+    j.short_desc,
+    j.description,
+    ...(j.traits ?? []),
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+const jobMatches = (j: Job, pattern: RegExp) => pattern.test(jobText(j));
+const jobTitleText = (j: Job) => [j.name, j.category, j.domain].join(" ");
+const jobTitleMatches = (j: Job, pattern: RegExp) =>
+  pattern.test(jobTitleText(j));
+
+const levelScore = (
+  value: string | undefined,
+  positive: string,
+  negative: string
+) => {
+  if (value === positive) return 1;
+  if (value === negative) return -1;
+  return 0;
+};
+
+const oneOfScore = (
+  value: string | undefined,
+  positive: string[],
+  negative: string[],
+  neutralScore = 0
+) => {
+  if (value && positive.includes(value)) return 1;
+  if (value && negative.includes(value)) return -1;
+  return neutralScore;
+};
 
 export const QUESTIONS: Question[] = [
   // ── 양방향 축 질문 (긍정 → 실내/높음, 부정 → 실외/낮음) ──
@@ -153,43 +193,48 @@ export const QUESTIONS: Question[] = [
     id: "work_env",
     text: "주로 실내에서 일하는 환경을 선호하시나요?",
     predicate: (j) => yes(j.tags.work_environment === "실내중심"),
-    // 부정 답변은 실외중심 직업에 가산점이 되도록 predicate 반전 활용
+    score: (j) => levelScore(j.tags.work_environment, "실내중심", "실외중심"),
     weight: 1.2,
   },
   {
     id: "people_interaction",
-    text: "사람들과 자주 소통하고 어울리는 일이 좋으신가요?",
+    text: "사람들과 자주 소통하고 어울리는 업무를 선호하시나요?",
     predicate: (j) => yes(j.tags.people_interaction === "높음"),
+    score: (j) => levelScore(j.tags.people_interaction, "높음", "낮음"),
     weight: 1.3,
   },
   {
     id: "tech_usage",
-    text: "컴퓨터·IT·디지털 도구를 적극 활용하는 일이 좋으신가요?",
+    text: "컴퓨터·IT·디지털 도구를 적극 활용하는 업무를 선호하시나요?",
     predicate: (j) => yes(j.tags.tech_intensity === "높음"),
+    score: (j) => levelScore(j.tags.tech_intensity, "높음", "낮음"),
     weight: 1.4,
   },
   {
     id: "physical_demand",
-    text: "체력을 많이 쓰는 활동적인 일을 원하시나요?",
+    text: "체력을 많이 쓰는 활동적인 업무를 선호하시나요?",
     predicate: (j) => yes(j.tags.physical_intensity === "높음"),
+    score: (j) => levelScore(j.tags.physical_intensity, "높음", "낮음"),
     weight: 1.0,
   },
   // ── 단독 특성 질문 ──
   {
     id: "creative",
-    text: "창의적인 아이디어로 무언가를 만들어내는 일을 좋아하시나요?",
+    text: "창의적인 아이디어로 무언가를 만들어내는 과정에 흥미가 있으신가요?",
     predicate: (j) => yes(j.tags.creativity_level === "높음"),
+    score: (j) => levelScore(j.tags.creativity_level, "높음", "낮음"),
     weight: 1.3,
   },
   {
     id: "analytical",
-    text: "데이터·논리를 분석해서 문제를 푸는 일이 즐거우신가요?",
+    text: "데이터·논리를 분석해서 문제를 푸는 과정에 흥미가 있으신가요?",
     predicate: (j) => yes(j.tags.analytical_level === "높음"),
+    score: (j) => levelScore(j.tags.analytical_level, "높음", "낮음"),
     weight: 1.3,
   },
   {
     id: "license",
-    text: "자격증·면허가 반드시 필요한 전문 직업이 좋은가요?",
+    text: "자격증·면허가 필요한 전문 직업을 선호하시나요?",
     predicate: (j) => yes(j.tags.license_required === true),
     weight: 1.0,
   },
@@ -198,12 +243,15 @@ export const QUESTIONS: Question[] = [
     text: "소득이 높은 편의 직업을 우선적으로 고려하시나요?",
     predicate: (j) =>
       yes(j.tags.income_level === "높음" || j.tags.income_level === "매우높음"),
+    score: (j) =>
+      oneOfScore(j.tags.income_level, ["높음", "매우높음"], ["낮음"]),
     weight: 1.1,
   },
   {
     id: "risk_low",
-    text: "위험이 적고 안전한 환경에서 일하고 싶으신가요?",
+    text: "위험이 적고 안전한 근무 환경을 선호하시나요?",
     predicate: (j) => yes(j.tags.risk_level === "낮음"),
+    score: (j) => levelScore(j.tags.risk_level, "낮음", "높음"),
     weight: 0.9,
   },
   // ── 새로 추가된 근무 조건 질문 ──
@@ -212,87 +260,110 @@ export const QUESTIONS: Question[] = [
     text: "재택·원격 근무가 가능한 직업을 선호하시나요?",
     predicate: (j) =>
       yes(j.tags.remote_work === "가능" || j.tags.remote_work === "부분가능"),
+    score: (j) =>
+      j.tags.remote_work === "가능"
+        ? 1
+        : j.tags.remote_work === "부분가능"
+          ? 0.5
+          : -1,
     weight: 1.2,
   },
   {
     id: "work_schedule_regular",
-    text: "정해진 시간에 규칙적으로 일하는 환경을 원하시나요?",
+    text: "교대나 불규칙 근무보다 일정한 근무 패턴을 선호하시나요?",
     predicate: (j) => yes(j.tags.work_schedule === "정규직"),
+    score: (j) =>
+      oneOfScore(j.tags.work_schedule, ["정규직"], ["교대근무", "불규칙"]),
     weight: 1.1,
   },
   {
     id: "employment_stable",
-    text: "정규직처럼 고용이 안정적인 형태를 원하시나요?",
+    text: "정규직처럼 고용이 안정적인 형태를 선호하시나요?",
     predicate: (j) => yes(j.tags.employment_type === "정규직"),
+    score: (j) =>
+      oneOfScore(
+        j.tags.employment_type,
+        ["정규직"],
+        ["계약직", "프리랜서", "자영업"]
+      ),
     weight: 1.1,
   },
   // ── 새로 추가된 성장/커리어 질문 ──
   {
     id: "growth_potential",
-    text: "앞으로 성장 가능성이 높은 직업을 원하시나요?",
+    text: "앞으로 성장 가능성이 높은 직업을 선호하시나요?",
     predicate: (j) => yes(j.tags.growth_potential === "높음"),
+    score: (j) => levelScore(j.tags.growth_potential, "높음", "낮음"),
     weight: 1.2,
   },
   {
     id: "job_stability",
     text: "직업 안정성을 가장 중요하게 생각하시나요?",
     predicate: (j) => yes(j.tags.job_stability === "높음"),
+    score: (j) => levelScore(j.tags.job_stability, "높음", "낮음"),
     weight: 1.2,
   },
   {
     id: "automation_risk_low",
-    text: "AI·자동화로 대체되기 어려운 직업을 원하시나요?",
+    text: "AI·자동화로 대체되기 어려운 직업을 선호하시나요?",
     predicate: (j) => yes(j.tags.automation_risk === "낮음"),
+    score: (j) => levelScore(j.tags.automation_risk, "낮음", "높음"),
     weight: 1.1,
   },
   // ── 새로 추가된 업무 성격 질문 ──
   {
     id: "work_autonomy",
-    text: "스스로 계획하고 자율적으로 일하는 것을 좋아하시나요?",
+    text: "스스로 계획하고 자율적으로 일하는 방식을 선호하시나요?",
     predicate: (j) => yes(j.tags.work_autonomy === "높음"),
+    score: (j) => levelScore(j.tags.work_autonomy, "높음", "낮음"),
     weight: 1.2,
   },
   {
     id: "solo_work",
-    text: "혼자 집중해서 일하는 것을 더 좋아하시나요?",
+    text: "혼자 집중해서 일하는 방식을 더 선호하시나요?",
     predicate: (j) => yes(j.tags.teamwork_level === "개인중심"),
+    score: (j) => levelScore(j.tags.teamwork_level, "개인중심", "팀중심"),
     weight: 1.2,
   },
   {
     id: "communication_high",
-    text: "말하거나 글 쓰는 커뮤니케이션이 많은 일을 원하시나요?",
+    text: "말하거나 글 쓰는 커뮤니케이션이 많은 업무를 선호하시나요?",
     predicate: (j) => yes(j.tags.communication_level === "높음"),
+    score: (j) => levelScore(j.tags.communication_level, "높음", "낮음"),
     weight: 1.0,
   },
   {
     id: "repetition_low",
     text: "매일 다양하고 새로운 업무를 하는 것을 선호하시나요?",
     predicate: (j) => yes(j.tags.repetition_level === "낮음"),
+    score: (j) => levelScore(j.tags.repetition_level, "낮음", "높음"),
     weight: 1.0,
   },
   // ── 새로 추가된 사회적 가치 질문 ──
   {
     id: "social_impact",
-    text: "사회에 긍정적인 영향을 미치는 의미 있는 일을 원하시나요?",
+    text: "사회에 긍정적인 영향을 미치는 직업을 중요하게 생각하시나요?",
     predicate: (j) => yes(j.tags.social_impact === "높음"),
+    score: (j) => levelScore(j.tags.social_impact, "높음", "낮음"),
     weight: 1.1,
   },
   {
     id: "public_sector",
     text: "공공기관·공무원처럼 공공 분야에서 일하고 싶으신가요?",
     predicate: (j) => yes(j.tags.public_sector === "공공"),
+    score: (j) => levelScore(j.tags.public_sector, "공공", "민간"),
     weight: 1.2,
   },
   // 도메인 그룹
   {
     id: "domain_it",
-    text: "IT·소프트웨어·데이터 분야의 일에 흥미가 있으신가요?",
+    text: "IT·소프트웨어·데이터 분야에 흥미가 있으신가요?",
     predicate: (j) => yes(j.domain === "IT/소프트웨어"),
     weight: 1.5,
   },
   {
     id: "domain_health",
-    text: "사람의 건강을 돌보거나 치료하는 일에 끌리시나요?",
+    text: "사람의 건강을 돌보거나 치료하는 분야에 관심이 있으신가요?",
     predicate: (j) => yes(j.domain === "의료/보건"),
     weight: 1.4,
   },
@@ -309,13 +380,13 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "domain_edu",
-    text: "가르치고 연구하는 교육·학문 분야가 좋으신가요?",
+    text: "가르치고 연구하는 교육·학문 분야에 관심이 있으신가요?",
     predicate: (j) => yes(j.domain === "교육/연구"),
     weight: 1.3,
   },
   {
     id: "domain_make",
-    text: "제품을 직접 만들거나 기계·설비를 다루는 일에 관심 있으신가요?",
+    text: "제품을 직접 만들거나 기계·설비를 다루는 분야에 관심이 있으신가요?",
     predicate: (j) =>
       yes(
         j.domain === "제조/생산" ||
@@ -326,7 +397,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "domain_service",
-    text: "고객을 직접 응대하는 서비스·접객 분야에 매력을 느끼시나요?",
+    text: "고객을 직접 응대하는 서비스·접객 분야에 관심이 있으신가요?",
     predicate: (j) =>
       yes(
         j.domain === "서비스/접객" ||
@@ -336,8 +407,14 @@ export const QUESTIONS: Question[] = [
     weight: 1.2,
   },
   {
+    id: "domain_sales",
+    text: "상품이나 서비스를 제안하고 설득하는 영업·판매 분야에 관심이 있으신가요?",
+    predicate: (j) => yes(j.domain === "영업/판매"),
+    weight: 1.25,
+  },
+  {
     id: "domain_finance",
-    text: "숫자·돈·자산을 다루는 금융·회계 분야가 끌리시나요?",
+    text: "숫자·돈·자산을 다루는 금융·회계 분야에 관심이 있으신가요?",
     predicate: (j) => yes(j.domain === "금융/보험" || j.domain === "행정/사무"),
     weight: 1.2,
   },
@@ -349,7 +426,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "domain_outdoor_work",
-    text: "건설 현장·자연·농림수산처럼 야외에서 직접 움직이는 일이 좋으신가요?",
+    text: "건설 현장·자연·농림수산처럼 야외에서 활동하는 업무를 선호하시나요?",
     predicate: (j) =>
       yes(
         j.domain === "건설/건축" ||
@@ -359,42 +436,474 @@ export const QUESTIONS: Question[] = [
     weight: 1.2,
   },
   {
+    id: "domain_environment_chem",
+    text: "환경·화학·에너지 분야의 분석·처리 업무에 관심이 있으신가요?",
+    predicate: (j) => yes(j.domain === "화학/환경"),
+    weight: 1.25,
+  },
+  {
     id: "domain_safety",
-    text: "사람과 사회의 안전을 지키는 일에 사명감을 느끼시나요?",
+    text: "사람과 사회의 안전을 지키는 분야에 관심이 있으신가요?",
     predicate: (j) => yes(j.domain === "경비/안전" || j.domain === "사회복지"),
     weight: 1.2,
   },
   {
     id: "domain_sports",
-    text: "운동·신체 활동을 직업으로 삼고 싶으신가요?",
+    text: "운동·신체 활동 중심의 직업에 관심이 있으신가요?",
     predicate: (j) => yes(j.domain === "스포츠"),
     weight: 1.3,
   },
   {
     id: "domain_lead",
-    text: "조직을 이끌고 의사결정을 내리는 리더 역할을 원하시나요?",
+    text: "조직을 이끌고 의사결정을 내리는 역할에 관심이 있으신가요?",
     predicate: (j) => yes(j.domain === "관리/리더십"),
     weight: 1.2,
   },
+  // 도메인 안에서 서로 비슷하게 묶이는 직업군을 다시 나누는 세부 질문
+  {
+    id: "it_product_building",
+    text: "웹·앱·게임처럼 사용자가 직접 쓰는 소프트웨어를 만드는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "IT/소프트웨어" &&
+          jobTitleMatches(
+            j,
+            /웹|앱|모바일|게임|응용소프트웨어|프로그래머|개발자/
+          )
+      ),
+    weight: 1.25,
+  },
+  {
+    id: "it_infrastructure_system",
+    text: "네트워크·서버·시스템처럼 보이지 않는 기술 기반 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "IT/소프트웨어" &&
+          jobTitleMatches(j, /네트워크|통신|시스템|서버|하드웨어|정보보안|보안/)
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "data_analysis_focus",
+    text: "숫자와 데이터를 깊게 분석해 의사결정에 활용하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(jobMatches(j, /데이터|빅데이터|통계|수학|분석가|시장조사|리서치/)),
+    weight: 1.2,
+  },
+  {
+    id: "health_surgery_treatment",
+    text: "진단뿐 아니라 수술·시술·검사처럼 직접 처치하는 의료 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "의료/보건" &&
+          jobTitleMatches(
+            j,
+            /외과|성형|산부인과|안과|치과|수술|시술|검사|임상병리|방사선|치과기공/
+          )
+      ),
+    weight: 1.25,
+  },
+  {
+    id: "health_counseling_rehab",
+    text: "상담·재활·심리·언어처럼 사람의 회복을 꾸준히 돕는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "의료/보건" &&
+          jobTitleMatches(j, /상담|심리|재활|치료|언어|청능|작업치료|물리치료/)
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "agriculture_plant",
+    text: "식물·작물·조경처럼 자라는 대상을 돌보고 관리하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        (j.domain === "농림수산" || j.domain === "화학/환경") &&
+          jobTitleMatches(
+            j,
+            /곡식|채소|과수|원예|조경|작물|식물|산림|임학|농학/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "animal_care",
+    text: "동물의 건강이나 사육 환경을 돌보는 분야에 관심이 있으신가요?",
+    predicate: (j) => yes(jobTitleMatches(j, /동물|수의|가축|축산|낙농|사육/)),
+    weight: 1.2,
+  },
+  {
+    id: "marine_fishery",
+    text: "바다·수산·양식처럼 물과 해양 생물을 다루는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(jobTitleMatches(j, /수산|양식|어부|해녀|해양|어업|어패류/)),
+    weight: 1.2,
+  },
+  {
+    id: "manufacturing_food",
+    text: "식품·음료를 가공하거나 생산하는 제조 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "제조/생산" &&
+          jobTitleMatches(
+            j,
+            /식품|음료|육류|어패류|낙농품|제분|도정|곡물|과실|채소|정육|도축/
+          )
+      ),
+    weight: 1.25,
+  },
+  {
+    id: "manufacturing_textile_fashion",
+    text: "섬유·의류·신발처럼 소재를 재단하고 만드는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "제조/생산" &&
+          jobTitleMatches(
+            j,
+            /섬유|직조|편직|염색|의류|재봉|제화|신발|가죽|패턴/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "manufacturing_metal_machine",
+    text: "금속·기계 부품을 가공하거나 조립하는 제조 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        (j.domain === "제조/생산" || j.domain === "기계/정비") &&
+          jobTitleMatches(
+            j,
+            /금속|금형|판금|제관|단조|주조|용접|도금|조립|공작/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "manufacturing_chemical_material",
+    text: "고무·플라스틱·화학 소재를 설비로 생산하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        (j.domain === "제조/생산" || j.domain === "화학/환경") &&
+          jobTitleMatches(
+            j,
+            /고무|플라스틱|타이어|화학|석유|가스|도료|농약|소각|재활용/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "construction_structure",
+    text: "건물의 뼈대와 구조물을 직접 세우는 현장 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "건설/건축" &&
+          jobTitleMatches(
+            j,
+            /철근|콘크리트|강구조|조적|목공|석공|전통건축|건립/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "construction_finish_install",
+    text: "마감·설치·보수처럼 공간을 완성하는 건축 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "건설/건축" &&
+          jobTitleMatches(
+            j,
+            /미장|방수|도장|단열|유리|배관|섀시|타일|인테리어|보수|설치/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "transport_driving_equipment",
+    text: "차량·열차·선박·장비를 직접 운전하거나 조작하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        (j.domain === "운송/물류" || j.domain === "건설/건축") &&
+          jobTitleMatches(
+            j,
+            /운전|기관사|조종|선장|항해|크레인|호이스트|지게차|굴착|기계운전/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "sales_face_to_face",
+    text: "매장이나 현장에서 고객을 직접 만나 판매하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "영업/판매" &&
+          jobTitleMatches(
+            j,
+            /판매원|방문판매|주유원|노점|이동판매|상점|매장|자동차영업/
+          )
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "sales_b2b_consulting",
+    text: "전문 지식을 바탕으로 기업 고객이나 큰 거래를 설득하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "영업/판매" &&
+          jobTitleMatches(
+            j,
+            /기술영업|해외영업|상품중개|경매|부동산|광고영업|영업관리/
+          )
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "environment_field_cleanup",
+    text: "현장에서 환경을 정비하거나 오염·폐기물을 처리하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "화학/환경" &&
+          jobTitleMatches(
+            j,
+            /환경미화|재활용|방역|상·하수도|소각|폐기물|처리장치/
+          )
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "environment_research_engineering",
+    text: "환경·화학 문제를 연구하고 공학적으로 해결하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "화학/환경" &&
+          jobTitleMatches(
+            j,
+            /연구원|기술자|공학|시험원|분석|대기환경|수질|토양|에너지/
+          )
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "it_web_mobile_game",
+    text: "웹사이트·모바일앱·게임처럼 화면이 있는 서비스를 만드는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "IT/소프트웨어" && jobTitleMatches(j, /웹|모바일|앱|게임/)
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "it_system_analysis",
+    text: "업무 시스템을 분석하고 설계하는 역할에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "IT/소프트웨어" &&
+          jobTitleMatches(j, /시스템.*분석|시스템설계|시스템소프트웨어/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "doctor_general_care",
+    text: "특정 수술보다 일상적인 진료와 장기적인 건강 관리 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "의료/보건" &&
+          jobTitleMatches(
+            j,
+            /내과|소아과|가정의학|일반의사|이비인후과|비뇨기과/
+          )
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "doctor_mental_health",
+    text: "마음 건강과 정신적 어려움을 다루는 진료 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "의료/보건" && jobTitleMatches(j, /정신과|심리|정신건강/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "crop_farming",
+    text: "곡식·채소·과수처럼 먹거리 작물을 재배하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "농림수산" && jobTitleMatches(j, /곡식|채소|과수|작물/)),
+    weight: 1.15,
+  },
+  {
+    id: "landscape_gardening",
+    text: "정원·조경·산림처럼 공간과 녹지를 가꾸는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "농림수산" && jobTitleMatches(j, /원예|조경|산림|임학/)),
+    weight: 1.15,
+  },
+  {
+    id: "manufacturing_ceramic_mineral",
+    text: "유리·점토·시멘트·석재 같은 광물성 소재를 다루는 제조 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "제조/생산" &&
+          jobTitleMatches(j, /유리|점토|시멘트|광물|석제품/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "manufacturing_paper_printing",
+    text: "종이·인쇄·목재처럼 생활 소재를 가공하는 제조 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "제조/생산" &&
+          jobTitleMatches(j, /인쇄|펄프|종이|목재|가구/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "manufacturing_vehicle_assembly",
+    text: "자동차나 대형 제품을 조립하는 생산 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "제조/생산" && jobTitleMatches(j, /자동차|조립원|가구조립/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "facility_equipment_maintenance",
+    text: "냉난방·보일러·승강기 같은 설비를 설치하고 정비하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        (j.domain === "기계/정비" || j.domain === "전기/전자") &&
+          jobTitleMatches(j, /냉동|냉장|공조|보일러|승강기|설비/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "vehicle_maintenance",
+    text: "자동차·선박·철도 같은 이동수단을 정비하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        (j.domain === "기계/정비" || j.domain === "운송/물류") &&
+          jobTitleMatches(j, /자동차|선박|철도|항공기|전동차|기관차|정비/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "electrical_field_work",
+    text: "전기 설비나 배선을 현장에서 설치·보수하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        (j.domain === "전기/전자" || j.domain === "건설/건축") &&
+          jobTitleMatches(j, /전기공|내선|외선|전기설비|배전|발전/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "transport_logistics_office",
+    text: "운송 현장보다 배차·물류·운송 사무를 관리하는 분야에 더 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "운송/물류" && jobTitleMatches(j, /운송사무|물류사무|배차/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "transport_public_route",
+    text: "철도·항공·수상처럼 정해진 노선과 승객 이동을 다루는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "운송/물류" &&
+          jobTitleMatches(j, /철도|지하철|항공|수상|버스|택시/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "construction_civil_infra",
+    text: "도로·철도·토목처럼 사회 기반시설을 만드는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "건설/건축" &&
+          jobTitleMatches(j, /토목|철로|도로|측량|교량|터널/)
+      ),
+    weight: 1.15,
+  },
   {
     id: "entry_easy",
-    text: "진입 장벽이 낮고 빨리 일을 시작할 수 있는 직업이 좋으신가요?",
+    text: "진입 장벽이 낮고 빨리 시작할 수 있는 직업을 선호하시나요?",
     predicate: (j) => yes(j.tags.entry_difficulty === "낮음"),
+    score: (j) =>
+      oneOfScore(j.tags.entry_difficulty, ["낮음"], ["높음", "매우높음"]),
     weight: 1.3,
   },
   {
     id: "competition_low",
-    text: "지원자가 많이 몰리는 경쟁 치열한 직업은 피하고 싶으세요?",
-    predicate: (j) => yes(j.tags.competition_level === "낮음" || j.tags.competition_level === "보통"),
+    text: "지원자가 많이 몰리는 경쟁 치열한 직업은 피하고 싶으신가요?",
+    predicate: (j) =>
+      yes(
+        j.tags.competition_level === "낮음" ||
+          j.tags.competition_level === "보통"
+      ),
+    score: (j) =>
+      j.tags.competition_level === "낮음"
+        ? 1
+        : j.tags.competition_level === "보통"
+          ? 0.5
+          : -1,
     weight: 1.2,
   },
   {
     id: "experience_newbie",
-    text: "경력 없이 신입으로도 도전할 수 있는 직업이 좋으세요?",
+    text: "경력 없이 신입으로도 도전할 수 있는 직업을 선호하시나요?",
     predicate: (j) => yes(j.tags.experience_required === "신입가능"),
+    score: (j) =>
+      oneOfScore(j.tags.experience_required, ["신입가능"], ["경력필수"]),
     weight: 1.2,
   },
 ];
+
+function questionAppliesTo(q: Question, job: Job): boolean {
+  if (q.id.startsWith("it_")) return job.domain === "IT/소프트웨어";
+  if (q.id.startsWith("health_") || q.id.startsWith("doctor_")) {
+    return job.domain === "의료/보건";
+  }
+  if (
+    q.id.startsWith("agriculture_") ||
+    q.id === "crop_farming" ||
+    q.id === "landscape_gardening" ||
+    q.id === "marine_fishery"
+  ) {
+    return job.domain === "농림수산" || job.domain === "화학/환경";
+  }
+  if (q.id === "animal_care") {
+    return job.domain === "농림수산" || job.domain === "의료/보건";
+  }
+  if (q.id === "manufacturing_chemical_material") {
+    return job.domain === "제조/생산" || job.domain === "화학/환경";
+  }
+  if (q.id.startsWith("manufacturing_")) {
+    return job.domain === "제조/생산" || job.domain === "기계/정비";
+  }
+  if (q.id.startsWith("construction_")) return job.domain === "건설/건축";
+  if (q.id.startsWith("transport_")) {
+    return job.domain === "운송/물류" || job.domain === "건설/건축";
+  }
+  if (q.id.startsWith("sales_")) return job.domain === "영업/판매";
+  if (q.id.startsWith("environment_")) return job.domain === "화학/환경";
+  if (q.id === "facility_equipment_maintenance") {
+    return job.domain === "기계/정비" || job.domain === "전기/전자";
+  }
+  if (q.id === "vehicle_maintenance") {
+    return job.domain === "기계/정비" || job.domain === "운송/물류";
+  }
+  if (q.id === "electrical_field_work") {
+    return job.domain === "전기/전자" || job.domain === "건설/건축";
+  }
+  return true;
+}
+
+function questionJobScore(q: Question, job: Job): number {
+  if (!questionAppliesTo(q, job)) return 0;
+  if (q.score) return q.score(job);
+  return q.predicate(job) ? 1 : -(q.mismatchPenalty ?? 1);
+}
 
 export interface Answer {
   questionId: string;
@@ -403,14 +912,14 @@ export interface Answer {
 
 /** 성별 제한에 어김나는 직업은 사전 제외 */
 export function filterByGender(jobs: Job[], userGender: UserGender): Job[] {
-  return jobs.filter((j) => meetsGender(j, userGender));
+  return jobs.filter(j => meetsGender(j, userGender));
 }
 
 /** 사용자가 보유한 자격증/언어에 따른 가산점 */
 function profileBonus(job: Job, profile?: UserProfile): number {
   if (!profile) return 0;
   let bonus = 0;
-  
+
   // 1. 자격증 일치: 질문 점수(최대 20~30점)를 압도할 수 있도록 대폭 가산
   if (profile.certifications?.length && job.certifications?.length) {
     const userCerts = new Set(profile.certifications);
@@ -421,13 +930,17 @@ function profileBonus(job: Job, profile?: UserProfile): number {
       }
     }
   }
-  
+
   // 2. 언어 가산점: 외국어 관련 직업이면 언어당 +30점
   if (profile.languages?.length) {
     const isLanguageJob =
-      /통역|번역|외국어|관광|가이드|외교|무역|항공|승무원|호텔|해외영업|국제/.test(job.name) ||
-      /외교관|비행기객실승무원|여행안내원|관광통역안내원|무역사무원|해외영업원/.test(job.name);
-      
+      /통역|번역|외국어|관광|가이드|외교|무역|항공|승무원|호텔|해외영업|국제/.test(
+        job.name
+      ) ||
+      /외교관|비행기객실승무원|여행안내원|관광통역안내원|무역사무원|해외영업원/.test(
+        job.name
+      );
+
     if (isLanguageJob) {
       bonus += profile.languages.length * 30.0;
     } else if (profile.languages.length >= 2) {
@@ -435,7 +948,7 @@ function profileBonus(job: Job, profile?: UserProfile): number {
       bonus += 2.0;
     }
   }
-  
+
   return bonus;
 }
 
@@ -445,15 +958,14 @@ export function scoreJobs(
   answers: Answer[],
   profile?: UserProfile
 ): Array<{ job: Job; score: number }> {
-  const qMap = new Map(QUESTIONS.map((q) => [q.id, q]));
-  return jobs.map((job) => {
+  const qMap = new Map(QUESTIONS.map(q => [q.id, q]));
+  return jobs.map(job => {
     let score = 0;
     for (const ans of answers) {
       const q = qMap.get(ans.questionId);
       if (!q || ans.level === 0) continue;
-      const matches = q.predicate(job);
       const w = q.weight ?? 1;
-      score += (matches ? 1 : -1) * ans.level * w;
+      score += questionJobScore(q, job) * ans.level * w;
     }
     score += profileBonus(job, profile);
     return { job, score };
@@ -465,7 +977,7 @@ export function pickNextQuestion(
   candidates: Job[],
   asked: Set<string>
 ): Question | null {
-  const remaining = QUESTIONS.filter((q) => !asked.has(q.id));
+  const remaining = QUESTIONS.filter(q => !asked.has(q.id));
   if (remaining.length === 0) return null;
   if (candidates.length === 0) {
     // 아직 후보가 없으면 난수 질문만쿠다
@@ -475,14 +987,19 @@ export function pickNextQuestion(
   // 각 질문의 변별력 점수(gain) 계산
   const scored: Array<{ q: Question; gain: number }> = [];
   for (const q of remaining) {
-    let yesCount = 0;
+    let positiveCount = 0;
+    let negativeCount = 0;
     for (const j of candidates) {
-      if (q.predicate(j)) yesCount++;
+      const score = questionJobScore(q, j);
+      if (score > 0) positiveCount++;
+      if (score < 0) negativeCount++;
     }
-    const noCount = candidates.length - yesCount;
-    if (yesCount === 0 || noCount === 0) continue; // 변별력 없는 질문은 제외
-    const balance = -Math.abs(yesCount - noCount);
-    const gain = balance + (q.weight ?? 1) * 0.5;
+    const activeCount = positiveCount + negativeCount;
+    if (positiveCount === 0 || negativeCount === 0) continue; // 변별력 없는 질문은 제외
+    if (activeCount < Math.min(8, candidates.length)) continue;
+    const balance = activeCount - Math.abs(positiveCount - negativeCount);
+    const coverage = activeCount / candidates.length;
+    const gain = balance * coverage + (q.weight ?? 1) * 0.5;
     scored.push({ q, gain });
   }
 
@@ -493,7 +1010,7 @@ export function pickNextQuestion(
   const bestGain = scored[0].gain;
   // 최고 점수 - 30%의 candidates 수 범위 이내 질문들을 후보로
   const tolerance = Math.max(2, Math.ceil(candidates.length * 0.15));
-  const topPool = scored.filter((s) => s.gain >= bestGain - tolerance);
+  const topPool = scored.filter(s => s.gain >= bestGain - tolerance);
   // 동적 파일에서 랜덤 선택
   const picked = topPool[Math.floor(Math.random() * topPool.length)];
   return picked.q;
@@ -567,12 +1084,12 @@ export function getRecommendations(
   }
 
   // 학력 지정: 학력 충족 직업만으로 메인 구성
-  const eligible = scored.filter((s) => meetsEducation(s.job, profile.education));
+  const eligible = scored.filter(s => meetsEducation(s.job, profile.education));
   const main = eligible.slice(0, topN);
 
   // 서브 풌: 메인에 알린 id 제외하고, 나머지 (학력 충족 + 미달 포함) 중 상위 30개
-  const mainIds = new Set(main.map((m) => m.job.id));
-  const subPool = scored.filter((s) => !mainIds.has(s.job.id)).slice(0, 30);
+  const mainIds = new Set(main.map(m => m.job.id));
+  const subPool = scored.filter(s => !mainIds.has(s.job.id)).slice(0, 30);
   const sub = shuffle(subPool, rng).slice(0, topN);
 
   return {
@@ -606,19 +1123,19 @@ export function currentCandidates(
 
   // 답변이 없으면 전체 풀 반환
   if (n === 0 || topScore <= 0) {
-    return scored.map((s) => s.job);
+    return scored.map(s => s.job);
   }
 
   // 답변 수에 따라 컷오프 비율 상승: 답변 1개=40%, 5개=60%, 10개=75%, 15개+=85%
   const ratio = Math.min(0.4 + n * 0.03, 0.85);
   const cutoff = topScore * ratio;
 
-  const filtered = scored.filter((s) => s.score >= cutoff);
+  const filtered = scored.filter(s => s.score >= cutoff);
 
   // 최소 5개, 최대 300개 보장
-  if (filtered.length < 5) return scored.slice(0, 5).map((s) => s.job);
-  if (filtered.length > 300) return scored.slice(0, 300).map((s) => s.job);
-  return filtered.map((s) => s.job);
+  if (filtered.length < 5) return scored.slice(0, 5).map(s => s.job);
+  if (filtered.length > 300) return scored.slice(0, 300).map(s => s.job);
+  return filtered.map(s => s.job);
 }
 
 export const ANSWER_OPTIONS: Array<{ label: string; level: AnswerLevel }> = [
@@ -633,6 +1150,8 @@ export const ANSWER_OPTIONS: Array<{ label: string; level: AnswerLevel }> = [
 export const CANDIDATE_THRESHOLD = 5;
 /** 최소 질문 수 — 이 수 이상 답해야 조기 종료 조건이 발동한다 */
 export const MIN_QUESTIONS = 5;
+/** 최대 질문 수 — 후보가 충분히 좁혀지지 않아도 이 수에 도달하면 결과를 보여준다 */
+export const MAX_QUESTIONS = 12;
 
 export const GENDER_OPTIONS: Array<{ value: UserGender; label: string }> = [
   { value: "male", label: "남성" },
