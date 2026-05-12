@@ -6,7 +6,8 @@
  * - e: education (중졸이하/고졸/전문대졸/대졸/석사/박사/u)
  * - c: certifications (콤마 구분, URL 인코딩)
  * - l: languages (콤마 구분, URL 인코딩)
- * - a: answers (questionId:level 쌍을 ; 로 연결)
+ * - qa: question answers (questionId:level 쌍을 ; 로 연결)
+ * - a: legacy answers parameter (decode only)
  * - s: seed (정수)
  */
 
@@ -57,7 +58,7 @@ export function encodeShareParams(state: ShareState): URLSearchParams {
     sp.set("l", state.profile.languages.join(","));
   }
   if (state.answers.length) {
-    sp.set("a", state.answers.map((a) => `${a.questionId}:${a.level}`).join(";"));
+    sp.set("qa", state.answers.map((a) => `${a.questionId}:${a.level}`).join(";"));
   }
   sp.set("s", String(state.seed));
   return sp;
@@ -77,7 +78,7 @@ export function decodeShareParams(sp: URLSearchParams): ShareState | null {
 
   const certs = sp.get("c");
   const langs = sp.get("l");
-  const answersRaw = sp.get("a");
+  const answersRaw = sp.get("qa") ?? sp.get("a");
 
   const answers: Answer[] = [];
   if (answersRaw) {

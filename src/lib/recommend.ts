@@ -141,6 +141,10 @@ export function meetsGender(job: Job, userGender: UserGender): boolean {
 export interface Question {
   id: string;
   text: string;
+  kind?: "core" | "domain" | "detail" | "condition";
+  group?: string;
+  targetDomains?: string[];
+  minAnswers?: number;
   predicate: (job: Job) => boolean;
   weight?: number;
   score?: (job: Job) => number;
@@ -859,6 +863,178 @@ export const QUESTIONS: Question[] = [
   },
 ];
 
+function questionKind(q: Question): NonNullable<Question["kind"]> {
+  if (q.kind) return q.kind;
+  if (q.id.startsWith("domain_")) return "domain";
+  if (
+    q.id.startsWith("it_") ||
+    q.id.startsWith("health_") ||
+    q.id.startsWith("doctor_") ||
+    q.id.startsWith("agriculture_") ||
+    q.id.startsWith("manufacturing_") ||
+    q.id.startsWith("construction_") ||
+    q.id.startsWith("transport_") ||
+    q.id.startsWith("sales_") ||
+    q.id.startsWith("environment_") ||
+    q.id === "animal_care" ||
+    q.id === "marine_fishery" ||
+    q.id === "crop_farming" ||
+    q.id === "landscape_gardening" ||
+    q.id === "data_analysis_focus" ||
+    q.id === "facility_equipment_maintenance" ||
+    q.id === "vehicle_maintenance" ||
+    q.id === "electrical_field_work"
+  ) {
+    return "detail";
+  }
+  if (
+    [
+      "license",
+      "income_high",
+      "risk_low",
+      "remote_work",
+      "work_schedule_regular",
+      "employment_stable",
+      "growth_potential",
+      "job_stability",
+      "automation_risk_low",
+      "social_impact",
+      "public_sector",
+      "entry_easy",
+      "competition_low",
+      "experience_newbie",
+    ].includes(q.id)
+  ) {
+    return "condition";
+  }
+  return "core";
+}
+
+function questionGroup(q: Question): string {
+  if (q.group) return q.group;
+  if (q.id.startsWith("domain_")) return "domain";
+  if (q.id.startsWith("it_") || q.id === "data_analysis_focus") return "it";
+  if (q.id.startsWith("health_") || q.id.startsWith("doctor_")) return "health";
+  if (
+    q.id.startsWith("agriculture_") ||
+    q.id === "animal_care" ||
+    q.id === "marine_fishery" ||
+    q.id === "crop_farming" ||
+    q.id === "landscape_gardening"
+  ) {
+    return "agriculture";
+  }
+  if (q.id.startsWith("manufacturing_")) return "manufacturing";
+  if (q.id.startsWith("construction_")) return "construction";
+  if (q.id.startsWith("transport_")) return "transport";
+  if (q.id.startsWith("sales_")) return "sales";
+  if (q.id.startsWith("environment_")) return "environment";
+  if (
+    q.id === "facility_equipment_maintenance" ||
+    q.id === "vehicle_maintenance" ||
+    q.id === "electrical_field_work"
+  ) {
+    return "maintenance";
+  }
+  if (
+    [
+      "remote_work",
+      "work_schedule_regular",
+      "employment_stable",
+      "entry_easy",
+      "competition_low",
+      "experience_newbie",
+    ].includes(q.id)
+  ) {
+    return "work_condition";
+  }
+  return q.id;
+}
+
+function questionTargetDomains(q: Question): string[] {
+  if (q.targetDomains) return q.targetDomains;
+  switch (q.id) {
+    case "domain_it":
+      return ["IT/소프트웨어"];
+    case "domain_health":
+      return ["의료/보건"];
+    case "domain_art":
+      return ["예술/문화", "디자인", "방송/미디어"];
+    case "domain_edu":
+      return ["교육/연구"];
+    case "domain_make":
+      return ["제조/생산", "기계/정비", "전기/전자"];
+    case "domain_service":
+      return ["서비스/접객", "음식/조리", "미용/뷰티"];
+    case "domain_sales":
+      return ["영업/판매"];
+    case "domain_finance":
+      return ["금융/보험", "행정/사무"];
+    case "domain_law":
+      return ["법률/공공"];
+    case "domain_outdoor_work":
+      return ["건설/건축", "농림수산", "운송/물류"];
+    case "domain_environment_chem":
+      return ["화학/환경"];
+    case "domain_safety":
+      return ["경비/안전", "사회복지"];
+    case "domain_sports":
+      return ["스포츠"];
+    case "domain_lead":
+      return ["관리/리더십"];
+  }
+  if (q.id.startsWith("it_") || q.id === "data_analysis_focus") {
+    return ["IT/소프트웨어", "교육/연구", "금융/보험", "행정/사무"];
+  }
+  if (q.id.startsWith("health_") || q.id.startsWith("doctor_")) {
+    return ["의료/보건"];
+  }
+  if (q.id.startsWith("agriculture_") || q.id === "crop_farming" || q.id === "landscape_gardening") {
+    return ["농림수산", "화학/환경"];
+  }
+  if (q.id === "animal_care") return ["농림수산", "의료/보건"];
+  if (q.id === "marine_fishery") return ["농림수산"];
+  if (q.id === "manufacturing_chemical_material") {
+    return ["제조/생산", "화학/환경"];
+  }
+  if (q.id.startsWith("manufacturing_")) return ["제조/생산", "기계/정비"];
+  if (q.id.startsWith("construction_")) return ["건설/건축"];
+  if (q.id.startsWith("transport_")) return ["운송/물류", "건설/건축"];
+  if (q.id.startsWith("sales_")) return ["영업/판매"];
+  if (q.id.startsWith("environment_")) return ["화학/환경"];
+  if (q.id === "facility_equipment_maintenance") return ["기계/정비", "전기/전자"];
+  if (q.id === "vehicle_maintenance") return ["기계/정비", "운송/물류"];
+  if (q.id === "electrical_field_work") return ["전기/전자", "건설/건축"];
+  return [];
+}
+
+function countTargetDomainJobs(q: Question, candidates: Job[]): number {
+  const domains = questionTargetDomains(q);
+  if (domains.length === 0) return candidates.length;
+  return candidates.filter(j => domains.includes(j.domain)).length;
+}
+
+function isQuestionActive(
+  q: Question,
+  candidates: Job[],
+  answeredCount: number,
+  strict = true
+): boolean {
+  const kind = questionKind(q);
+  const minAnswers = q.minAnswers ?? (kind === "detail" ? 3 : 0);
+  if (strict && answeredCount < minAnswers) return false;
+
+  const targetCount = countTargetDomainJobs(q, candidates);
+  if (targetCount === 0) return false;
+
+  if (kind !== "detail") return true;
+  if (!strict) return targetCount >= 2;
+
+  const minTargetCount =
+    candidates.length <= 20 ? 2 : Math.max(5, Math.ceil(candidates.length * 0.18));
+  return targetCount >= minTargetCount;
+}
+
 function questionAppliesTo(q: Question, job: Job): boolean {
   if (q.id.startsWith("it_")) return job.domain === "IT/소프트웨어";
   if (q.id.startsWith("health_") || q.id.startsWith("doctor_")) {
@@ -975,7 +1151,8 @@ export function scoreJobs(
 /** 다음 질문 선택 — 후보군을 50:50으로 가르는 질문 중 랜덤으로 선택 */
 export function pickNextQuestion(
   candidates: Job[],
-  asked: Set<string>
+  asked: Set<string>,
+  askedOrder: string[] = []
 ): Question | null {
   const remaining = QUESTIONS.filter(q => !asked.has(q.id));
   if (remaining.length === 0) return null;
@@ -984,34 +1161,62 @@ export function pickNextQuestion(
     return remaining[Math.floor(Math.random() * remaining.length)];
   }
 
+  const activeQuestions = remaining.filter(q =>
+    isQuestionActive(q, candidates, asked.size)
+  );
+  const questionsToScore = activeQuestions.length
+    ? activeQuestions
+    : remaining.filter(q => isQuestionActive(q, candidates, asked.size, false));
+  const lastAsked = askedOrder.length
+    ? QUESTIONS.find(q => q.id === askedOrder[askedOrder.length - 1])
+    : null;
+  const lastGroup = lastAsked ? questionGroup(lastAsked) : null;
+
   // 각 질문의 변별력 점수(gain) 계산
   const scored: Array<{ q: Question; gain: number }> = [];
-  for (const q of remaining) {
+  for (const q of questionsToScore) {
     let positiveCount = 0;
     let negativeCount = 0;
+    let neutralCount = 0;
     for (const j of candidates) {
       const score = questionJobScore(q, j);
       if (score > 0) positiveCount++;
       if (score < 0) negativeCount++;
+      if (score === 0) neutralCount++;
     }
     const activeCount = positiveCount + negativeCount;
     if (positiveCount === 0 || negativeCount === 0) continue; // 변별력 없는 질문은 제외
-    if (activeCount < Math.min(8, candidates.length)) continue;
-    const balance = activeCount - Math.abs(positiveCount - negativeCount);
+    if (activeCount < Math.min(questionKind(q) === "detail" ? 3 : 8, candidates.length)) {
+      continue;
+    }
+    const balance = 1 - Math.abs(positiveCount - negativeCount) / activeCount;
     const coverage = activeCount / candidates.length;
-    const gain = balance * coverage + (q.weight ?? 1) * 0.5;
+    const neutralPenalty = 1 - (neutralCount / candidates.length) * 0.25;
+    const kindBoost =
+      questionKind(q) === "core"
+        ? 1.12
+        : questionKind(q) === "domain"
+          ? 1.05
+          : questionKind(q) === "detail"
+            ? 0.95
+            : 1;
+    const groupPenalty = lastGroup && questionGroup(q) === lastGroup ? 0.65 : 1;
+    const gain =
+      (balance * 100 + coverage * 20 + (q.weight ?? 1) * 2) *
+      neutralPenalty *
+      kindBoost *
+      groupPenalty;
     scored.push({ q, gain });
   }
 
   if (scored.length === 0) return null; // 변별력 있는 질문이 없으면 종료
 
-  // 최고 점수 근처(상위 30% 또는 점수 차 이내)의 질문들 중 랜덤 선택
+  // 최고 점수 근처의 질문들 중 랜덤 선택
   scored.sort((a, b) => b.gain - a.gain);
   const bestGain = scored[0].gain;
-  // 최고 점수 - 30%의 candidates 수 범위 이내 질문들을 후보로
-  const tolerance = Math.max(2, Math.ceil(candidates.length * 0.15));
-  const topPool = scored.filter(s => s.gain >= bestGain - tolerance);
-  // 동적 파일에서 랜덤 선택
+  const topPool = scored
+    .filter(s => s.gain >= bestGain * 0.85)
+    .slice(0, 5);
   const picked = topPool[Math.floor(Math.random() * topPool.length)];
   return picked.q;
 }
@@ -1163,7 +1368,6 @@ export const EDUCATION_OPTIONS: Array<{
   value: UserEducation;
   label: string;
 }> = [
-  { value: "중졸이하", label: "중졸 이하" },
   { value: "고졸", label: "고졸" },
   { value: "전문대졸", label: "전문대졸" },
   { value: "대졸", label: "대졸" },

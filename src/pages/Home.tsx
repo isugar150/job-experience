@@ -148,13 +148,13 @@ export default function Home() {
       return;
     }
     // 더 이상 유효한 질문이 없으면 종료
-    const next = pickNextQuestion(candidates, askedIds);
+    const next = pickNextQuestion(candidates, askedIds, askedOrder);
     if (!next) {
       navigate(PHASE_TO_PATH["result"]);
       return;
     }
     setCurrentQuestion(next);
-  }, [phase, askedIds, candidates, currentQuestion]);
+  }, [phase, askedIds, askedOrder, candidates, currentQuestion]);
 
   // 브라우저 뒤로가기 대응: intro로 돌아오면 퀴즈 상태는 초기화하되, 프로필은 유지한다
   useEffect(() => {
@@ -784,7 +784,7 @@ function Profile({
               요건 충족 여부에 따라 메인/보완 추천으로 나뉘니다.
             </span>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-6 gap-2.5">
             {EDUCATION_OPTIONS.map((o) => (
               <OptionButton
                 key={o.value}
@@ -961,6 +961,32 @@ function Asking({
 const namuwikiUrl = (name: string) =>
   `https://namu.wiki/w/${encodeURIComponent(name)}`;
 
+const answerLabel = (level: Answer["level"]) =>
+  ANSWER_OPTIONS.find((opt) => opt.level === level)?.label ?? "응답 없음";
+
+const answerToneClass = (level: Answer["level"]) => {
+  if (level === 2) {
+    return "border-emerald-300 bg-emerald-100 text-emerald-900";
+  }
+  if (level === 1) {
+    return "border-emerald-200 bg-emerald-50 text-emerald-800";
+  }
+  if (level === -1) {
+    return "border-rose-200 bg-rose-50 text-rose-800";
+  }
+  if (level === -2) {
+    return "border-rose-300 bg-rose-100 text-rose-900";
+  }
+  return "border-slate-200 bg-slate-50 text-slate-700";
+};
+
+const genderLabel = (gender: UserGender) =>
+  GENDER_OPTIONS.find((opt) => opt.value === gender)?.label ?? "응답 안함";
+
+const educationLabel = (education: UserEducation) =>
+  EDUCATION_OPTIONS.find((opt) => opt.value === education)?.label ??
+  (education === "unspecified" ? "응답 안함" : education);
+
 function Result({
   profile,
   main,
@@ -1009,12 +1035,34 @@ function Result({
 
   const winnerInMain = main[0]?.job?.id === winner.id;
   const isBookmarked = bookmarks?.isBookmarked(winner.id) ?? false;
+  const answeredQuestions = answers
+    .map((answer) => ({
+      answer,
+      question: QUESTIONS.find((q) => q.id === answer.questionId),
+    }))
+    .filter((item): item is { answer: Answer; question: Question } =>
+      Boolean(item.question)
+    );
 
   return (
     <section>
-      <div className="text-xs text-muted-foreground mb-2">
+      {/* Runners (메인 추천 나머지) */}
+      {runners.length > 0 && (
+        <div className="mb-8">
+          <h3 className="text-sm font-semibold mb-3">함께 추천된 직업</h3>
+          <RecommendedJobGrid
+            items={runners}
+            userEdu={profile.education}
+            bookmarks={bookmarks}
+            recentJobs={recentJobs}
+          />
+        </div>
+      )}
+
+      <div className="text-lg font-bold tracking-tight mb-3">
         {winnerInMain ? "추천 직업" : "보완이 필요한 추천 직업"}
       </div>
+
       {winner.image && (
         <div className="mb-5 flex justify-center">
           <JobThumb
@@ -1140,16 +1188,11 @@ function Result({
           </Button>
         </a>
       </div>
-      {/* Runners (메인 추천 나머지) */}
-      {runners.length > 0 && (
-        <div className="border-t border-border pt-8">
-          <h3 className="text-sm font-semibold mb-2">함께 추천된 직업</h3>
-          <p className="text-xs text-muted-foreground mb-4 max-w-lg">
-            답변과 프로필에 잘 맞는 직업들입니다.
-          </p>
-          <JobList items={runners} userEdu={profile.education} bookmarks={bookmarks} recentJobs={recentJobs} />
-        </div>
-      )}
+
+      <ResultInputSummary
+        profile={profile}
+        answeredQuestions={answeredQuestions}
+      />
 
       {/* 서브 추천: 도전해볼 만한 직업 (랜덤 5개) */}
       {sub.length > 0 && (
@@ -1212,7 +1255,7 @@ function JobList({
                   <div className="text-sm text-muted-foreground mt-1.5 line-clamp-2">
                     {r.job.description || r.job.short_desc}
                   </div>
-                  {highlightRequirement || !ok ? (
+                  {highlightRequirement ? (
                     <div className="mt-2.5 inline-flex items-center gap-1.5 text-xs text-foreground/80 px-2 py-1 rounded bg-muted">
                       <GraduationCap className="h-3.5 w-3.5" />
                       필요 학력: {r.job.education_required ?? "고졸이상"}
@@ -1232,6 +1275,205 @@ function JobList({
         onView={recentJobs?.addRecent}
       />
     </>
+  );
+}
+
+function RecommendedJobGrid({
+  items,
+  userEdu,
+  bookmarks,
+  recentJobs,
+}: {
+  items: Array<{ job: Job; score: number }>;
+  userEdu: UserEducation;
+  bookmarks?: BookmarksHook;
+  recentJobs?: RecentJobsHook;
+}) {
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {items.map((r) => {
+          const ok = meetsEducation(r.job, userEdu);
+          return (
+            <button
+              key={r.job.id}
+              type="button"
+              onClick={() => {
+                setSelectedJob(r.job);
+                setDialogOpen(true);
+              }}
+              className="group overflow-hidden rounded-md border border-border bg-card text-left transition-colors hover:border-foreground"
+            >
+              <div className="flex gap-3 p-3">
+                <JobThumb job={r.job} size={88} rounded="md" />
+                <div className="min-w-0 flex-1 py-0.5">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <div className="truncate text-sm font-semibold">
+                        {r.job.name}
+                      </div>
+                      <div className="mt-1 text-xs text-muted-foreground">
+                        {r.job.domain}
+                      </div>
+                    </div>
+                    {bookmarks?.isBookmarked(r.job.id) ? (
+                      <BookmarkCheck className="h-4 w-4 shrink-0 fill-foreground text-foreground" />
+                    ) : null}
+                  </div>
+                  <div className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                    {r.job.short_desc || r.job.description}
+                  </div>
+                  {!ok && (
+                    <div className="mt-2 inline-flex items-center gap-1 rounded bg-muted px-2 py-0.5 text-[11px] text-foreground/80">
+                      <GraduationCap className="h-3 w-3" />
+                      {r.job.education_required ?? "고졸이상"}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      <JobDetailDialog
+        job={selectedJob}
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        bookmarks={bookmarks}
+        onView={recentJobs?.addRecent}
+      />
+    </>
+  );
+}
+
+function ResultInputSummary({
+  profile,
+  answeredQuestions,
+}: {
+  profile: UserProfile;
+  answeredQuestions: Array<{ answer: Answer; question: Question }>;
+}) {
+  const certifications = profile.certifications?.filter(Boolean) ?? [];
+  const languages = profile.languages?.filter(Boolean) ?? [];
+  const [expanded, setExpanded] = useState(false);
+  const visibleQuestions = expanded
+    ? answeredQuestions
+    : answeredQuestions.slice(0, 3);
+  const hiddenCount = Math.max(answeredQuestions.length - visibleQuestions.length, 0);
+
+  return (
+    <div className="border-t border-border pt-8 mb-10">
+      <h3 className="text-sm font-semibold mb-4">입력한 정보</h3>
+
+      <div className="grid gap-3 sm:grid-cols-2 mb-6">
+        <div className="rounded-md border border-border bg-card p-4">
+          <div className="text-xs text-muted-foreground mb-1">성별</div>
+          <div className="text-sm font-medium">{genderLabel(profile.gender)}</div>
+        </div>
+        <div className="rounded-md border border-border bg-card p-4">
+          <div className="text-xs text-muted-foreground mb-1">학력</div>
+          <div className="text-sm font-medium">
+            {educationLabel(profile.education)}
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 mb-6">
+        <ProfileTagGroup title="보유 자격증" items={certifications} />
+        <ProfileTagGroup title="구사 언어" items={languages} />
+      </div>
+
+      {answeredQuestions.length > 0 && (
+        <div>
+          <h4 className="text-xs font-semibold text-muted-foreground mb-3">
+            질문과 답변
+          </h4>
+          <ol className="grid gap-2.5">
+            {visibleQuestions.map(({ answer, question }, index) => (
+              <li
+                key={`${answer.questionId}-${index}`}
+                className="rounded-md border border-border bg-card px-4 py-3"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="text-xs text-muted-foreground mb-1">
+                      질문 {index + 1}
+                    </div>
+                    <div className="text-sm leading-relaxed">
+                      {question.text}
+                    </div>
+                  </div>
+                  <div
+                    className={
+                      "shrink-0 rounded-full border px-3 py-1 text-xs font-semibold shadow-sm " +
+                      answerToneClass(answer.level)
+                    }
+                  >
+                    {answerLabel(answer.level)}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+          {answeredQuestions.length > 3 && (
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={() => setExpanded((v) => !v)}
+              className="mt-3 px-2 text-muted-foreground hover:text-foreground"
+            >
+              {expanded ? (
+                <>
+                  접기
+                  <ChevronUp className="ml-1.5 h-3.5 w-3.5" />
+                </>
+              ) : (
+                <>
+                  {hiddenCount}개 더보기
+                  <ChevronDown className="ml-1.5 h-3.5 w-3.5" />
+                </>
+              )}
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ProfileTagGroup({
+  title,
+  items,
+}: {
+  title: string;
+  items: string[];
+}) {
+  return (
+    <div>
+      <div className="text-xs text-muted-foreground mb-2">{title}</div>
+      <div className="flex flex-wrap gap-2">
+        {items.length > 0 ? (
+          items.map((item) => (
+            <span
+              key={item}
+              className="rounded-md border border-border bg-card px-2.5 py-1 text-xs"
+            >
+              {item}
+            </span>
+          ))
+        ) : (
+          <span
+            className="rounded-md border border-border bg-muted px-2.5 py-1 text-xs text-muted-foreground"
+          >
+            해당 없음
+          </span>
+        )}
+      </div>
+    </div>
   );
 }
 
