@@ -407,7 +407,36 @@ function BookmarkModal({
 }) {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollPositionRef = useRef(0);
   useModalBackHandler(open && !detailOpen, () => onOpenChange(false));
+
+  // Save scroll position when detail dialog opens
+  useEffect(() => {
+    if (detailOpen && scrollAreaRef.current) {
+      const viewport = scrollAreaRef.current.querySelector('[data-slot="scroll-area-viewport"]');
+      if (viewport) {
+        scrollPositionRef.current = (viewport as HTMLElement).scrollTop;
+      }
+    }
+  }, [detailOpen]);
+
+  // Restore scroll position when detail dialog closes
+  useEffect(() => {
+    if (!detailOpen && scrollAreaRef.current && scrollPositionRef.current > 0) {
+      // Use requestAnimationFrame to ensure the DOM is updated before restoring scroll position
+      const restoreScroll = () => {
+        const viewport = scrollAreaRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
+        if (viewport) {
+          (viewport as HTMLElement).scrollTop = scrollPositionRef.current;
+        }
+      };
+      
+      // Try to restore scroll position after the next paint
+      const rafId = requestAnimationFrame(restoreScroll);
+      return () => cancelAnimationFrame(rafId);
+    }
+  }, [detailOpen]);
 
   // 다이얼로그가 닫혀 있는 동안에는 ALL_JOBS(536개) 필터링을 수행하지 않는다.
   // open이 true일 때만 계산해 다이얼로그 열림 직전의 부모 렌더를 가볍게 유지한다.
@@ -431,7 +460,7 @@ function BookmarkModal({
                 : "아직 저장한 직업이 없습니다. 직업 카드의 책갈피 아이콘을 눈러 저장하세요."}
             </DialogDescription>
           </DialogHeader>
-          <ScrollArea className="max-h-[60vh] pr-2">
+          <ScrollArea ref={scrollAreaRef} className="max-h-[60vh] pr-2">
             {bookmarkedJobs.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
                 <Bookmark className="h-10 w-10 mb-3 opacity-30" />
@@ -502,7 +531,36 @@ function RecentModal({
 }) {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollPositionRef = useRef(0);
   useModalBackHandler(open && !detailOpen, () => onOpenChange(false));
+
+  // Save scroll position when detail dialog opens
+  useEffect(() => {
+    if (detailOpen && scrollAreaRef.current) {
+      const viewport = scrollAreaRef.current.querySelector('[data-slot="scroll-area-viewport"]');
+      if (viewport) {
+        scrollPositionRef.current = (viewport as HTMLElement).scrollTop;
+      }
+    }
+  }, [detailOpen]);
+
+  // Restore scroll position when detail dialog closes
+  useEffect(() => {
+    if (!detailOpen && scrollAreaRef.current && scrollPositionRef.current > 0) {
+      // Use requestAnimationFrame to ensure the DOM is updated before restoring scroll position
+      const restoreScroll = () => {
+        const viewport = scrollAreaRef.current?.querySelector('[data-slot="scroll-area-viewport"]');
+        if (viewport) {
+          (viewport as HTMLElement).scrollTop = scrollPositionRef.current;
+        }
+      };
+      
+      // Try to restore scroll position after the next paint
+      const rafId = requestAnimationFrame(restoreScroll);
+      return () => cancelAnimationFrame(rafId);
+    }
+  }, [detailOpen]);
 
   // open=false일 때는 recentIds 순회를 수행하지 않아 닫힌 상태의 부모 렌더를 가볍게 유지한다.
   const jobs = useMemo(
@@ -530,7 +588,7 @@ function RecentModal({
                 : "아직 본 직업이 없습니다. 직업 카드를 눌러보세요."}
             </DialogDescription>
           </DialogHeader>
-          <ScrollArea className="max-h-[60vh] pr-2">
+          <ScrollArea ref={scrollAreaRef} className="max-h-[60vh] pr-2">
             {jobs.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
                 <Clock className="h-10 w-10 mb-3 opacity-30" />
@@ -583,7 +641,6 @@ function RecentModal({
         open={detailOpen}
         onOpenChange={setDetailOpen}
         bookmarks={bookmarks}
-        onView={recentJobs.addRecent}
       />
     </>
   );
@@ -1528,8 +1585,33 @@ function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollPositionRef = useRef(0);
   // 점진적 렌더링을 위한 표시 개수 (검색어/카테고리 변경 시 리셋)
   const [visibleCount, setVisibleCount] = useState(JOB_LIST_PAGE_SIZE);
+
+  // Save scroll position when detail dialog opens
+  useEffect(() => {
+    if (dialogOpen && scrollAreaRef.current) {
+      scrollPositionRef.current = scrollAreaRef.current.scrollTop;
+    }
+  }, [dialogOpen]);
+
+  // Restore scroll position when detail dialog closes
+  useEffect(() => {
+    if (!dialogOpen && scrollAreaRef.current && scrollPositionRef.current > 0) {
+      // Use requestAnimationFrame to ensure the DOM is updated before restoring scroll position
+      const restoreScroll = () => {
+        if (scrollAreaRef.current) {
+          scrollAreaRef.current.scrollTop = scrollPositionRef.current;
+        }
+      };
+      
+      // Try to restore scroll position after the next paint
+      const rafId = requestAnimationFrame(restoreScroll);
+      return () => cancelAnimationFrame(rafId);
+    }
+  }, [dialogOpen]);
 
   // 마운트 시 한 번만 셔플된 이덱스 순서 (페이지 진입마다 순서 달라짐).
   // 대용량 배열을 다시 쉍으로 셔플하는 대신, 인덱스 배열만 셔플해 초기 작업을 줄인다.
@@ -1615,7 +1697,7 @@ function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: BookmarksHook; 
         <p className="text-xs text-muted-foreground mb-3">
           {filtered.length}개 직업 중 {Math.min(visibleCount, filtered.length)}개 표시
         </p>
-        <div className="grid gap-2 max-h-[600px] overflow-y-auto border border-border rounded-md p-3 bg-card/50">
+        <div ref={scrollAreaRef} className="grid gap-2 max-h-[600px] overflow-y-auto border border-border rounded-md p-3 bg-card/50">
           {visibleJobs.map((job) => (
             <button
               key={job.id}
