@@ -72,9 +72,10 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## 디렉토리 규칙
 
-- `public/jobs/{id}.png` — 각 직업의 정사각형 썸네일 일러스트. 파일명은 `Job.id`와 일치시킨다.
-- 웹에서 접근하는 경로는 항상 Vite의 `BASE_URL`을 prefix로 붙인다 (예: `/job-experience/jobs/4.png`). 새 컴포넌트에서 직업 이미지를 표시할 때는 `import.meta.env.BASE_URL`을 사용해 안전하게 prefix를 결합한다.
-- `Job.image` 필드에는 base 경로를 제외한 상대 경로(`/jobs/{id}.png`)만 저장한다. UI에서 prefix를 결합한다.
+- `public/jobs/{id}.webp` — 각 직업의 최적화된 정사각형 썸네일 일러스트. 파일명은 `Job.id`와 일치시킨다.
+- 새 원본 이미지는 PNG/JPG/WebP로 `public/jobs/{id}.{ext}`에 추가한 뒤 `npm run job-img-optimize`를 실행해 640px WebP로 일관되게 변환한다.
+- 웹에서 접근하는 경로는 항상 Vite의 `BASE_URL`을 prefix로 붙인다 (예: `/job-experience/jobs/4.webp`). 새 컴포넌트에서 직업 이미지를 표시할 때는 `import.meta.env.BASE_URL`을 사용해 안전하게 prefix를 결합한다.
+- `Job.image` 필드에는 base 경로를 제외한 상대 경로(`/jobs/{id}.webp`)만 저장한다. UI에서 prefix를 결합한다.
 - 이미지가 아직 없는 직업(`image` 필드 부재)은 UI에서 자동으로 생략하거나 플레이스홀더(인물 실루엣 + 도메인 이니셜)로 대체한다.
 
 ## 직업 썸네일 일러스트 스타일 가이드
@@ -127,9 +128,10 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ### 생성 후 작업
 
-1. 결과물을 `public/jobs/{id}.png`로 저장한다 (PNG, 1248×1248).
-2. `src/data/jobs.json`의 해당 항목 `image` 필드를 `/jobs/{id}.png`로 설정한다. `image` 필드는 `short_desc` 바로 뒤에 위치시켜 다른 항목과 키 순서를 통일한다.
-3. 새 이미지를 추가했다면 `git status`로 변경 파일을 확인하고 커밋한다.
+1. 원본 결과물을 `public/jobs/{id}.png` 또는 `public/jobs/{id}.jpg`로 저장한다.
+2. `npm run job-img-optimize`를 실행해 `public/jobs/{id}.webp`로 리사이즈/압축하고 원본을 삭제한다.
+3. 스크립트가 `src/data/jobs.json`의 해당 항목 `image` 필드를 `/jobs/{id}.webp`로 갱신했는지 확인한다. `image` 필드는 `short_desc` 바로 뒤에 위치시켜 다른 항목과 키 순서를 통일한다.
+4. 새 이미지를 추가했다면 `git status`로 변경 파일을 확인하고 커밋한다.
 
 ## 직업 썸네일을 사용하는 UI 위치
 

@@ -74,7 +74,7 @@ export interface Job {
   };
   traits: string[];
   short_desc: string;
-  /** 직업 썸네일 일러스트의 상대 경로 (예: "/jobs/1.png"). UI에서 import.meta.env.BASE_URL을 prefix로 결합한다. */
+  /** 직업 썸네일 일러스트의 상대 경로 (예: "/jobs/1.webp"). UI에서 import.meta.env.BASE_URL을 prefix로 결합한다. */
   image?: string;
   description?: string;
   pros?: string[];
