@@ -1164,6 +1164,12 @@ function questionTargetDomains(q: Question): string[] {
   if (q.id.startsWith("beauty_")) return ["미용/뷰티"];
   if (q.id.startsWith("design_")) return ["디자인"];
   if (q.id.startsWith("research_")) return ["교육/연구"];
+  if (q.id === "management_business_support_marketing") {
+    return ["관리/리더십", "행정/사무"];
+  }
+  if (q.id === "management_food_service") {
+    return ["음식/조리", "서비스/접객", "관리/리더십"];
+  }
   if (q.id.startsWith("management_")) {
     return ["관리/리더십", "음식/조리", "서비스/접객", "제조/생산", "전기/전자", "건설/건축", "운송/물류"];
   }
@@ -1239,9 +1245,29 @@ function questionAppliesTo(q: Question, job: Job): boolean {
   if (q.id.startsWith("beauty_")) return job.domain === "미용/뷰티";
   if (q.id.startsWith("design_")) return job.domain === "디자인";
   if (q.id.startsWith("research_")) return job.domain === "교육/연구";
+  if (q.id === "management_business_support_marketing") {
+    return (
+      job.domain === "관리/리더십" ||
+      job.domain === "행정/사무" ||
+      job.category === "관리직"
+    );
+  }
+  if (q.id === "management_food_service") {
+    return (
+      job.domain === "음식/조리" ||
+      job.domain === "서비스/접객" ||
+      job.category === "관리직"
+    );
+  }
   if (q.id.startsWith("management_")) {
     return (
       job.domain === "관리/리더십" ||
+      job.domain === "음식/조리" ||
+      job.domain === "서비스/접객" ||
+      job.domain === "제조/생산" ||
+      job.domain === "전기/전자" ||
+      job.domain === "건설/건축" ||
+      job.domain === "운송/물류" ||
       job.category === "관리직"
     );
   }
@@ -1538,9 +1564,9 @@ export const ANSWER_OPTIONS: Array<{ label: string; level: AnswerLevel }> = [
 /** 후보가 이 수 이하로 좁혀지면 질문을 조기 종료한다 */
 export const CANDIDATE_THRESHOLD = 5;
 /** 최소 질문 수 — 이 수 이상 답해야 조기 종료 조건이 발동한다 */
-export const MIN_QUESTIONS = 5;
+export const MIN_QUESTIONS = 7;
 /** 최대 질문 수 — 후보가 충분히 좁혀지지 않아도 이 수에 도달하면 결과를 보여준다 */
-export const MAX_QUESTIONS = 12;
+export const MAX_QUESTIONS = 16;
 
 export const GENDER_OPTIONS: Array<{ value: UserGender; label: string }> = [
   { value: "male", label: "남성" },

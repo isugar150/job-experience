@@ -68,9 +68,10 @@ export default function Home() {
     () => currentCandidates(profile, answers),
     [profile, answers]
   );
+  const recommendationSize = Math.min(12, Math.max(CANDIDATE_THRESHOLD, candidates.length));
   const recommendation = useMemo(
-    () => getRecommendations(profile, answers, 12, seed),
-    [profile, answers, seed]
+    () => getRecommendations(profile, answers, recommendationSize, seed),
+    [profile, answers, recommendationSize, seed]
   );
 
   // 최초 마운트 시 URL 쿼리 파라미터를 검사해 추천 상태를 복원·결과 화면으로 이동
@@ -108,8 +109,8 @@ export default function Home() {
       navigate(PHASE_TO_PATH["result"]);
       return;
     }
-    // 최소 질문 수 이상 답한 상태에서 후보가 CANDIDATE_THRESHOLD 이하로 좌혀지면 조기 종료
-    if (askedIds.size >= MIN_QUESTIONS && candidates.length <= CANDIDATE_THRESHOLD + 3) {
+    // 최소 질문 수 이상 답한 상태에서 후보가 충분히 좁혀지면 조기 종료
+    if (askedIds.size >= MIN_QUESTIONS && candidates.length <= CANDIDATE_THRESHOLD) {
       navigate(PHASE_TO_PATH["result"]);
       return;
     }
