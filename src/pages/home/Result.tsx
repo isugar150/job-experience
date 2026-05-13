@@ -379,7 +379,7 @@ function RecommendedJobGrid({
           {items.map((r) => (
             <CarouselItem
               key={r.job.id}
-              className="basis-[72%] pl-3 sm:basis-[42%] lg:basis-[28.571%]"
+              className="basis-[40%] pl-3 sm:basis-[42%] lg:basis-[28.571%]"
             >
               <button
                 type="button"
