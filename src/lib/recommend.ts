@@ -547,13 +547,20 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "electrical_power_safety_supervision",
-    text: "전력 설비·배전·전기안전·감리처럼 전기 인프라를 관리하는 분야에 관심이 있으신가요?",
+    text: "전기안전·감리처럼 설비가 기준대로 시공되고 안전한지 점검하는 분야에 관심이 있으신가요?",
     predicate: (j) =>
       yes(
         j.domain === "전기/전자" &&
-          jobMatches(j, /전기감리|전기안전|발전|배전|전기공|내선|외선|전기 설비|전기설비/)
+          jobMatches(j, /전기감리|전기안전|감리|안전/)
       ),
     weight: 1.2,
+  },
+  {
+    id: "electrical_power_grid_operation",
+    text: "발전·배전처럼 전기를 생산하고 공급하는 설비 운영 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "전기/전자" && jobMatches(j, /발전|배전|전력|전기설비/)),
+    weight: 1.15,
   },
   {
     id: "health_surgery_treatment",
@@ -644,6 +651,41 @@ export const QUESTIONS: Question[] = [
     weight: 1.2,
   },
   {
+    id: "manufacturing_metal_plate_welding",
+    text: "금속판을 자르고 붙여 용기·관·구조물을 만드는 작업에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "제조/생산" && jobTitleMatches(j, /제관|판금|용접/)),
+    weight: 1.15,
+  },
+  {
+    id: "manufacturing_metal_cast_forge",
+    text: "금속을 녹이거나 두드려 주조·단조품을 만드는 공정에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "제조/생산" && jobTitleMatches(j, /주조|단조/)),
+    weight: 1.15,
+  },
+  {
+    id: "manufacturing_metal_forging",
+    text: "금속을 두드리거나 압력을 가해 단조품을 만드는 공정에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "제조/생산" && jobTitleMatches(j, /단조/)),
+    weight: 1.1,
+  },
+  {
+    id: "manufacturing_metal_casting",
+    text: "금속을 녹여 틀에 부어 주조품을 만드는 공정에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "제조/생산" && jobTitleMatches(j, /주조/)),
+    weight: 1.1,
+  },
+  {
+    id: "manufacturing_metal_surface_finish",
+    text: "도금·분무처럼 금속 표면을 처리하고 마감하는 공정에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "제조/생산" && jobTitleMatches(j, /도금|금속분무/)),
+    weight: 1.15,
+  },
+  {
     id: "manufacturing_chemical_material",
     text: "고무·플라스틱·화학 소재를 설비로 생산하는 분야에 관심이 있으신가요?",
     predicate: (j) =>
@@ -681,6 +723,48 @@ export const QUESTIONS: Question[] = [
           )
       ),
     weight: 1.2,
+  },
+  {
+    id: "construction_wall_surface_finish",
+    text: "미장·방수처럼 벽과 바닥의 표면을 바르고 보강하는 작업에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "건설/건축" && jobTitleMatches(j, /미장|방수/)),
+    weight: 1.15,
+  },
+  {
+    id: "construction_plastering",
+    text: "벽이나 바닥에 모르타르를 발라 표면을 고르게 마감하는 작업에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "건설/건축" && jobTitleMatches(j, /미장/)),
+    weight: 1.1,
+  },
+  {
+    id: "construction_waterproofing",
+    text: "물이 새지 않도록 건물 표면을 방수 처리하는 작업에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "건설/건축" && jobTitleMatches(j, /방수/)),
+    weight: 1.1,
+  },
+  {
+    id: "construction_glass_window_install",
+    text: "유리·창호처럼 건물 개구부를 설치하고 마감하는 작업에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "건설/건축" && jobTitleMatches(j, /유리|창호|섀시/)),
+    weight: 1.15,
+  },
+  {
+    id: "construction_insulation",
+    text: "건물의 열 손실을 줄이기 위해 단열재를 시공하는 작업에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "건설/건축" && jobTitleMatches(j, /단열/)),
+    weight: 1.1,
+  },
+  {
+    id: "construction_painting",
+    text: "건물 표면에 색과 보호 기능을 입히는 도장 작업에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "건설/건축" && jobTitleMatches(j, /도장/)),
+    weight: 1.1,
   },
   {
     id: "transport_driving_equipment",
@@ -739,6 +823,27 @@ export const QUESTIONS: Question[] = [
     weight: 1.15,
   },
   {
+    id: "research_education_system",
+    text: "교육 제도와 학습 방법을 연구하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "교육/연구" && jobTitleMatches(j, /교육학/)),
+    weight: 1.15,
+  },
+  {
+    id: "research_politics_policy",
+    text: "정치 제도와 공공 정책을 분석하는 연구 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "교육/연구" && jobTitleMatches(j, /정치학/)),
+    weight: 1.15,
+  },
+  {
+    id: "research_social_structure",
+    text: "사회 구조와 집단 행동을 분석하는 연구 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "교육/연구" && jobTitleMatches(j, /사회학/)),
+    weight: 1.15,
+  },
+  {
     id: "research_natural_life",
     text: "물리·생명·농림수산처럼 자연 현상을 연구하는 분야에 관심이 있으신가요?",
     predicate: (j) =>
@@ -760,11 +865,21 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "management_field_operation",
-    text: "음식점·호텔·시설처럼 현장 사업장을 운영하고 직원을 관리하는 역할에 관심이 있으신가요?",
+    text: "호텔·여행처럼 고객 경험이 중요한 현장 사업장을 운영하는 역할에 관심이 있으신가요?",
     predicate: (j) =>
       yes(
         j.category === "관리직" &&
-          jobMatches(j, /음식서비스|음식점|식당|호텔|여행|시설|전기|가스|수도|건설|채굴|운송|생산|품질|제조/)
+          jobMatches(j, /호텔|여행/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "management_industrial_facility",
+    text: "전기·가스·수도·생산시설처럼 산업 인프라를 운영하는 관리 역할에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.category === "관리직" &&
+          jobMatches(j, /전기|가스|수도|건설|채굴|운송|생산|품질|제조|시설/)
       ),
     weight: 1.15,
   },
@@ -851,15 +966,67 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "doctor_general_care",
-    text: "특정 수술보다 일상적인 진료와 장기적인 건강 관리 분야에 관심이 있으신가요?",
+    text: "내과처럼 성인 질환을 진단하고 장기적으로 관리하는 진료에 관심이 있으신가요?",
     predicate: (j) =>
       yes(
         j.domain === "의료/보건" &&
-          jobTitleMatches(
-            j,
-            /내과|소아과|가정의학|일반의사|이비인후과|비뇨기과/
-          )
+          jobTitleMatches(j, /내과/)
       ),
+    weight: 1.15,
+  },
+  {
+    id: "doctor_child_family_care",
+    text: "소아·청소년이나 가족 단위의 건강을 지속적으로 돌보는 진료에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "의료/보건" &&
+          jobTitleMatches(j, /소아과|가정의학/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "doctor_pediatric_care",
+    text: "소아·청소년 환자를 중심으로 진료하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "의료/보건" && jobTitleMatches(j, /소아과/)),
+    weight: 1.1,
+  },
+  {
+    id: "doctor_family_medicine",
+    text: "환자와 가족의 전반적인 건강을 폭넓게 관리하는 진료에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "의료/보건" && jobTitleMatches(j, /가정의학/)),
+    weight: 1.1,
+  },
+  {
+    id: "doctor_body_system_care",
+    text: "귀·코·목이나 비뇨기처럼 특정 신체 기관을 전문적으로 진료하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "의료/보건" &&
+          jobTitleMatches(j, /이비인후과|비뇨기과/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "doctor_ent_care",
+    text: "귀·코·목 질환을 전문적으로 진료하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "의료/보건" && jobTitleMatches(j, /이비인후과/)),
+    weight: 1.1,
+  },
+  {
+    id: "doctor_urology_care",
+    text: "비뇨기계 질환을 전문적으로 진료하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "의료/보건" && jobTitleMatches(j, /비뇨기과/)),
+    weight: 1.1,
+  },
+  {
+    id: "doctor_general_practice",
+    text: "특정 전문과보다 다양한 질환을 폭넓게 진료하는 역할에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "의료/보건" && jobTitleMatches(j, /일반의사/)),
     weight: 1.15,
   },
   {
@@ -923,6 +1090,44 @@ export const QUESTIONS: Question[] = [
           jobTitleMatches(j, /냉동|냉장|공조|보일러|승강기|설비/)
       ),
     weight: 1.15,
+  },
+  {
+    id: "machine_construction_mining_maintenance",
+    text: "건설·광업 현장에서 쓰는 중장비를 설치하고 정비하는 일에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "기계/정비" &&
+          jobTitleMatches(j, /건설·광업기계|건설.*기계|광업.*기계/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "machine_agriculture_maintenance",
+    text: "농업용 기계와 기타 작업 장비를 정비하는 일에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "기계/정비" && jobTitleMatches(j, /농업용|기타 기계장비/)),
+    weight: 1.15,
+  },
+  {
+    id: "machine_ship_maintenance",
+    text: "선박처럼 큰 이동 장비를 정비하는 일에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "기계/정비" && jobTitleMatches(j, /선박정비|선박/)),
+    weight: 1.15,
+  },
+  {
+    id: "machine_material_handling_maintenance",
+    text: "물품을 옮기는 기계 장비를 설치하고 정비하는 일에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "기계/정비" && jobTitleMatches(j, /물품이동장비/)),
+    weight: 1.1,
+  },
+  {
+    id: "machine_railway_maintenance",
+    text: "철도기관차나 전동차를 정비하는 일에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "기계/정비" && jobTitleMatches(j, /철도기관차|전동차/)),
+    weight: 1.1,
   },
   {
     id: "vehicle_maintenance",
@@ -1019,6 +1224,7 @@ function questionKind(q: Question): NonNullable<Question["kind"]> {
     q.id.startsWith("manufacturing_") ||
     q.id.startsWith("construction_") ||
     q.id.startsWith("transport_") ||
+    q.id.startsWith("machine_") ||
     q.id.startsWith("beauty_") ||
     q.id.startsWith("design_") ||
     q.id.startsWith("research_") ||
@@ -1078,6 +1284,7 @@ function questionGroup(q: Question): string {
   if (q.id.startsWith("manufacturing_")) return "manufacturing";
   if (q.id.startsWith("construction_")) return "construction";
   if (q.id.startsWith("transport_")) return "transport";
+  if (q.id.startsWith("machine_")) return "maintenance";
   if (q.id.startsWith("beauty_")) return "beauty";
   if (q.id.startsWith("design_")) return "design";
   if (q.id.startsWith("research_")) return "research";
@@ -1161,6 +1368,7 @@ function questionTargetDomains(q: Question): string[] {
   if (q.id.startsWith("manufacturing_")) return ["제조/생산", "기계/정비"];
   if (q.id.startsWith("construction_")) return ["건설/건축"];
   if (q.id.startsWith("transport_")) return ["운송/물류", "건설/건축"];
+  if (q.id.startsWith("machine_")) return ["기계/정비"];
   if (q.id.startsWith("beauty_")) return ["미용/뷰티"];
   if (q.id.startsWith("design_")) return ["디자인"];
   if (q.id.startsWith("research_")) return ["교육/연구"];
@@ -1242,6 +1450,7 @@ function questionAppliesTo(q: Question, job: Job): boolean {
   if (q.id.startsWith("transport_")) {
     return job.domain === "운송/물류" || job.domain === "건설/건축";
   }
+  if (q.id.startsWith("machine_")) return job.domain === "기계/정비";
   if (q.id.startsWith("beauty_")) return job.domain === "미용/뷰티";
   if (q.id.startsWith("design_")) return job.domain === "디자인";
   if (q.id.startsWith("research_")) return job.domain === "교육/연구";
