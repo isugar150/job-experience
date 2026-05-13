@@ -513,6 +513,49 @@ export const QUESTIONS: Question[] = [
     weight: 1.2,
   },
   {
+    id: "hr_people_ops",
+    text: "채용·평가·보상·교육처럼 사람과 조직을 관리하는 업무에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(jobTitleMatches(j, /인적자원|인사|교육|훈련|노무/)),
+    weight: 1.25,
+  },
+  {
+    id: "electrical_component_production",
+    text: "전기·전자 부품이나 반도체처럼 작은 부품을 생산·조립하는 일에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "전기/전자" &&
+          jobMatches(
+            j,
+            /전기부품|전자부품|전기·전자부품|반도체|전자제품.*부품|전기기기.*제품|전자제품 및 부품/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "electrical_install_repair_device",
+    text: "가전·사무기기·통신장비를 설치하고 고치는 현장 업무에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "전기/전자" &&
+          jobMatches(
+            j,
+            /사무용 전자기기|가전제품|통신장비설치|케이블 설치|설치·수리/
+          )
+      ),
+    weight: 1.2,
+  },
+  {
+    id: "electrical_power_safety_supervision",
+    text: "전력 설비·배전·전기안전·감리처럼 전기 인프라를 관리하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "전기/전자" &&
+          jobMatches(j, /전기감리|전기안전|발전|배전|전기공|내선|외선|전기 설비|전기설비/)
+      ),
+    weight: 1.2,
+  },
+  {
     id: "health_surgery_treatment",
     text: "진단뿐 아니라 수술·시술·검사처럼 직접 처치하는 의료 분야에 관심이 있으신가요?",
     predicate: (j) =>
@@ -651,6 +694,89 @@ export const QUESTIONS: Question[] = [
           )
       ),
     weight: 1.2,
+  },
+  {
+    id: "beauty_hair_nail",
+    text: "헤어·네일처럼 손기술로 외형을 다듬는 미용 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "미용/뷰티" &&
+          jobMatches(j, /미용사|네일|손톱|발톱|모발|헤어/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "beauty_makeup_stage",
+    text: "메이크업·분장처럼 얼굴 이미지나 캐릭터를 연출하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "미용/뷰티" && jobMatches(j, /메이크업|분장|화장/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "design_digital_ui",
+    text: "웹사이트·앱 화면처럼 디지털 UI를 디자인하는 일에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "디자인" && jobMatches(j, /웹디자이너|웹사이트|UI|UX|앱/)),
+    weight: 1.15,
+  },
+  {
+    id: "design_game_graphic",
+    text: "게임 캐릭터·배경처럼 콘텐츠 그래픽을 만드는 일에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(j.domain === "디자인" && jobMatches(j, /게임그래픽|게임 캐릭터|게임|캐릭터|배경/)),
+    weight: 1.15,
+  },
+  {
+    id: "research_human_society",
+    text: "교육·심리·사회처럼 사람과 사회 현상을 연구하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "교육/연구" &&
+          jobMatches(j, /교육학|심리학|사회학|언어학|정치학|경제학|인문|사회/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "research_natural_life",
+    text: "물리·생명·농림수산처럼 자연 현상을 연구하는 분야에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.domain === "교육/연구" &&
+          jobMatches(j, /물리|화학|생명|농학|수산학|임학|산림|자연과학|생물/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "management_business_support_marketing",
+    text: "본사 경영지원·마케팅처럼 조직 내부 운영을 관리하는 역할에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.category === "관리직" &&
+          jobMatches(j, /경영지원|마케팅|광고|홍보/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "management_field_operation",
+    text: "음식점·호텔·시설처럼 현장 사업장을 운영하고 직원을 관리하는 역할에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.category === "관리직" &&
+          jobMatches(j, /음식서비스|음식점|식당|호텔|여행|시설|전기|가스|수도|건설|채굴|운송|생산|품질|제조/)
+      ),
+    weight: 1.15,
+  },
+  {
+    id: "management_food_service",
+    text: "음식점 운영과 직원 관리를 함께 맡는 역할에 관심이 있으신가요?",
+    predicate: (j) =>
+      yes(
+        j.category === "관리직" &&
+          jobMatches(j, /음식서비스|음식점|식당/)
+      ),
+    weight: 1.15,
   },
   {
     id: "sales_face_to_face",
@@ -886,12 +1012,17 @@ function questionKind(q: Question): NonNullable<Question["kind"]> {
   if (q.id.startsWith("domain_")) return "domain";
   if (
     q.id.startsWith("it_") ||
+    q.id.startsWith("electrical_") ||
     q.id.startsWith("health_") ||
     q.id.startsWith("doctor_") ||
     q.id.startsWith("agriculture_") ||
     q.id.startsWith("manufacturing_") ||
     q.id.startsWith("construction_") ||
     q.id.startsWith("transport_") ||
+    q.id.startsWith("beauty_") ||
+    q.id.startsWith("design_") ||
+    q.id.startsWith("research_") ||
+    q.id.startsWith("management_") ||
     q.id.startsWith("sales_") ||
     q.id.startsWith("environment_") ||
     q.id === "animal_care" ||
@@ -899,6 +1030,7 @@ function questionKind(q: Question): NonNullable<Question["kind"]> {
     q.id === "crop_farming" ||
     q.id === "landscape_gardening" ||
     q.id === "data_analysis_focus" ||
+    q.id === "hr_people_ops" ||
     q.id === "facility_equipment_maintenance" ||
     q.id === "vehicle_maintenance" ||
     q.id === "electrical_field_work"
@@ -932,6 +1064,7 @@ function questionGroup(q: Question): string {
   if (q.group) return q.group;
   if (q.id.startsWith("domain_")) return "domain";
   if (q.id.startsWith("it_") || q.id === "data_analysis_focus") return "it";
+  if (q.id.startsWith("electrical_")) return "electrical";
   if (q.id.startsWith("health_") || q.id.startsWith("doctor_")) return "health";
   if (
     q.id.startsWith("agriculture_") ||
@@ -945,6 +1078,10 @@ function questionGroup(q: Question): string {
   if (q.id.startsWith("manufacturing_")) return "manufacturing";
   if (q.id.startsWith("construction_")) return "construction";
   if (q.id.startsWith("transport_")) return "transport";
+  if (q.id.startsWith("beauty_")) return "beauty";
+  if (q.id.startsWith("design_")) return "design";
+  if (q.id.startsWith("research_")) return "research";
+  if (q.id.startsWith("management_")) return "management";
   if (q.id.startsWith("sales_")) return "sales";
   if (q.id.startsWith("environment_")) return "environment";
   if (
@@ -1004,6 +1141,12 @@ function questionTargetDomains(q: Question): string[] {
   if (q.id.startsWith("it_") || q.id === "data_analysis_focus") {
     return ["IT/소프트웨어", "교육/연구", "금융/보험", "행정/사무"];
   }
+  if (q.id === "hr_people_ops") {
+    return ["행정/사무", "관리/리더십", "법률/공공"];
+  }
+  if (q.id.startsWith("electrical_")) {
+    return ["전기/전자"];
+  }
   if (q.id.startsWith("health_") || q.id.startsWith("doctor_")) {
     return ["의료/보건"];
   }
@@ -1018,6 +1161,12 @@ function questionTargetDomains(q: Question): string[] {
   if (q.id.startsWith("manufacturing_")) return ["제조/생산", "기계/정비"];
   if (q.id.startsWith("construction_")) return ["건설/건축"];
   if (q.id.startsWith("transport_")) return ["운송/물류", "건설/건축"];
+  if (q.id.startsWith("beauty_")) return ["미용/뷰티"];
+  if (q.id.startsWith("design_")) return ["디자인"];
+  if (q.id.startsWith("research_")) return ["교육/연구"];
+  if (q.id.startsWith("management_")) {
+    return ["관리/리더십", "음식/조리", "서비스/접객", "제조/생산", "전기/전자", "건설/건축", "운송/물류"];
+  }
   if (q.id.startsWith("sales_")) return ["영업/판매"];
   if (q.id.startsWith("environment_")) return ["화학/환경"];
   if (q.id === "facility_equipment_maintenance") return ["기계/정비", "전기/전자"];
@@ -1055,6 +1204,14 @@ function isQuestionActive(
 
 function questionAppliesTo(q: Question, job: Job): boolean {
   if (q.id.startsWith("it_")) return job.domain === "IT/소프트웨어";
+  if (q.id.startsWith("electrical_")) return job.domain === "전기/전자";
+  if (q.id === "hr_people_ops") {
+    return (
+      job.domain === "행정/사무" ||
+      job.domain === "관리/리더십" ||
+      job.domain === "법률/공공"
+    );
+  }
   if (q.id.startsWith("health_") || q.id.startsWith("doctor_")) {
     return job.domain === "의료/보건";
   }
@@ -1078,6 +1235,15 @@ function questionAppliesTo(q: Question, job: Job): boolean {
   if (q.id.startsWith("construction_")) return job.domain === "건설/건축";
   if (q.id.startsWith("transport_")) {
     return job.domain === "운송/물류" || job.domain === "건설/건축";
+  }
+  if (q.id.startsWith("beauty_")) return job.domain === "미용/뷰티";
+  if (q.id.startsWith("design_")) return job.domain === "디자인";
+  if (q.id.startsWith("research_")) return job.domain === "교육/연구";
+  if (q.id.startsWith("management_")) {
+    return (
+      job.domain === "관리/리더십" ||
+      job.category === "관리직"
+    );
   }
   if (q.id.startsWith("sales_")) return job.domain === "영업/판매";
   if (q.id.startsWith("environment_")) return job.domain === "화학/환경";
