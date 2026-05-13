@@ -69,7 +69,7 @@ export default function Home() {
     [profile, answers]
   );
   const recommendation = useMemo(
-    () => getRecommendations(profile, answers, 5, seed),
+    () => getRecommendations(profile, answers, 12, seed),
     [profile, answers, seed]
   );
 

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import {
   ANSWER_OPTIONS,
   EDUCATION_OPTIONS,
   GENDER_OPTIONS,
@@ -21,7 +26,6 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
-  ExternalLink,
   GraduationCap,
   Info,
   Link2,
@@ -31,8 +35,6 @@ import {
 } from "lucide-react";
 import type { BookmarksHook, RecentJobsHook } from "./types";
 import { JobDetailDialog } from "./JobDetailDialog";
-const namuwikiUrl = (name: string) =>
-  `https://namu.wiki/w/${encodeURIComponent(name)}`;
 
 const answerLabel = (level: Answer["level"]) =>
   ANSWER_OPTIONS.find((opt) => opt.level === level)?.label ?? "응답 없음";
@@ -80,7 +82,7 @@ export function Result({
   recentJobs?: RecentJobsHook;
 }) {
   const winner = main[0]?.job ?? sub[0]?.job;
-  const runners = main.slice(1, 5);
+  const runners = main.filter((item) => item.job.id !== winner?.id);
   const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "shared">("idle");
 
   // 결과 페이지 진입 시 winner를 최근 본 직업에 자동 추가
@@ -119,13 +121,56 @@ export function Result({
 
   return (
     <section>
+      <div className="mb-8 flex flex-wrap gap-3">
+        <Button onClick={onReset} className="rounded-md">
+          <RotateCcw className="h-4 w-4 mr-2" />
+          다시찾아보기
+        </Button>
+        {bookmarks && (
+          <Button
+            variant="outline"
+            className="rounded-md"
+            onClick={() => bookmarks.toggle(winner.id)}
+          >
+            {isBookmarked ? (
+              <>
+                <BookmarkCheck className="h-4 w-4 mr-2 fill-foreground" />
+                저장됨
+              </>
+            ) : (
+              <>
+                <Bookmark className="h-4 w-4 mr-2" />
+                저장하기
+              </>
+            )}
+          </Button>
+        )}
+        <Button variant="outline" className="rounded-md" onClick={handleShare}>
+          {shareStatus === "copied" ? (
+            <>
+              <Link2 className="h-4 w-4 mr-2" />
+              링크 복사됨
+            </>
+          ) : shareStatus === "shared" ? (
+            <>
+              <Check className="h-4 w-4 mr-2" />
+              공유됨
+            </>
+          ) : (
+            <>
+              <Share2 className="h-4 w-4 mr-2" />
+              공유하기
+            </>
+          )}
+        </Button>
+      </div>
+
       {/* Runners (메인 추천 나머지) */}
       {runners.length > 0 && (
         <div className="mb-8">
           <h3 className="text-sm font-semibold mb-3">함께 추천된 직업</h3>
           <RecommendedJobGrid
             items={runners}
-            userEdu={profile.education}
             bookmarks={bookmarks}
             recentJobs={recentJobs}
           />
@@ -218,50 +263,6 @@ export function Result({
       {/* Meta grid */}
       <WinnerMetaGrid winner={winner} />
 
-      {/* Actions */}
-      <div className="flex flex-wrap gap-3 mb-12">
-        <Button onClick={onReset} className="rounded-md">
-          <RotateCcw className="h-4 w-4 mr-2" />
-          다시 찾아보기
-        </Button>
-        {bookmarks && (
-          <Button
-            variant="outline"
-            className="rounded-md"
-            onClick={() => bookmarks.toggle(winner.id)}
-          >
-            {isBookmarked ? (
-              <><BookmarkCheck className="h-4 w-4 mr-2 fill-foreground" />저장됨</>
-            ) : (
-              <><Bookmark className="h-4 w-4 mr-2" />저장하기</>
-            )}
-          </Button>
-        )}
-        <Button
-          variant="outline"
-          className="rounded-md"
-          onClick={handleShare}
-        >
-          {shareStatus === "copied" ? (
-            <><Link2 className="h-4 w-4 mr-2" />링크 복사됨</>
-          ) : shareStatus === "shared" ? (
-            <><Check className="h-4 w-4 mr-2" />공유됨</>
-          ) : (
-            <><Share2 className="h-4 w-4 mr-2" />공유하기</>
-          )}
-        </Button>
-        <a
-          href={namuwikiUrl(winner.name)}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Button variant="outline" className="rounded-md">
-            더 알아보기
-            <ExternalLink className="h-4 w-4 ml-2" />
-          </Button>
-        </a>
-      </div>
-
       <ResultInputSummary
         profile={profile}
         answeredQuestions={answeredQuestions}
@@ -353,12 +354,10 @@ function JobList({
 
 function RecommendedJobGrid({
   items,
-  userEdu,
   bookmarks,
   recentJobs,
 }: {
   items: Array<{ job: Job; score: number }>;
-  userEdu: UserEducation;
   bookmarks?: BookmarksHook;
   recentJobs?: RecentJobsHook;
 }) {
@@ -367,50 +366,55 @@ function RecommendedJobGrid({
 
   return (
     <>
-      <div className="grid gap-3 sm:grid-cols-2">
-        {items.map((r) => {
-          const ok = meetsEducation(r.job, userEdu);
-          return (
-            <button
+      <Carousel
+        opts={{
+          align: "start",
+          containScroll: "trimSnaps",
+          dragFree: true,
+          slidesToScroll: 1,
+        }}
+        className="relative"
+      >
+        <CarouselContent className="-ml-3 cursor-grab select-none active:cursor-grabbing">
+          {items.map((r) => (
+            <CarouselItem
               key={r.job.id}
-              type="button"
-              onClick={() => {
-                setSelectedJob(r.job);
-                setDialogOpen(true);
-              }}
-              className="group overflow-hidden rounded-md border border-border bg-card text-left transition-colors hover:border-foreground"
+              className="basis-[72%] pl-3 sm:basis-[42%] lg:basis-[28.571%]"
             >
-              <div className="flex gap-3 p-3">
-                <JobThumb job={r.job} size={88} rounded="md" />
-                <div className="min-w-0 flex-1 py-0.5">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <div className="truncate text-sm font-semibold">
-                        {r.job.name}
-                      </div>
-                      <div className="mt-1 text-xs text-muted-foreground">
-                        {r.job.domain}
-                      </div>
-                    </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedJob(r.job);
+                  setDialogOpen(true);
+                }}
+                className="group h-full w-full select-none overflow-hidden rounded-md border border-border bg-card text-left transition-colors hover:border-foreground"
+              >
+                <div className="p-3">
+                  <JobThumb
+                    job={r.job}
+                    rounded="md"
+                    className="pointer-events-none mb-3 aspect-square w-full select-none"
+                  />
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
+                      {r.job.category}
+                    </span>
                     {bookmarks?.isBookmarked(r.job.id) ? (
-                      <BookmarkCheck className="h-4 w-4 shrink-0 fill-foreground text-foreground" />
+                      <BookmarkCheck
+                        className="h-4 w-4 shrink-0 fill-foreground text-foreground"
+                        aria-label="저장됨"
+                      />
                     ) : null}
                   </div>
-                  <div className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-                    {r.job.short_desc || r.job.description}
+                  <div className="mt-1 truncate text-sm font-semibold">
+                    {r.job.name}
                   </div>
-                  {!ok && (
-                    <div className="mt-2 inline-flex items-center gap-1 rounded bg-muted px-2 py-0.5 text-[11px] text-foreground/80">
-                      <GraduationCap className="h-3 w-3" />
-                      {r.job.education_required ?? "고졸이상"}
-                    </div>
-                  )}
                 </div>
-              </div>
-            </button>
-          );
-        })}
-      </div>
+              </button>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
       <JobDetailDialog
         job={selectedJob}
         open={dialogOpen}

@@ -191,6 +191,9 @@ const oneOfScore = (
   return neutralScore;
 };
 
+const softenGenericItAffinity = (job: Job, score: number) =>
+  job.domain === "IT/소프트웨어" && score > 0 ? score * 0.55 : score;
+
 export const QUESTIONS: Question[] = [
   // ── 양방향 축 질문 (긍정 → 실내/높음, 부정 → 실외/낮음) ──
   {
@@ -209,10 +212,10 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "tech_usage",
-    text: "컴퓨터·IT·디지털 도구를 적극 활용하는 업무를 선호하시나요?",
+    text: "컴퓨터·디지털 도구를 적극 활용하는 업무를 선호하시나요?",
     predicate: (j) => yes(j.tags.tech_intensity === "높음"),
     score: (j) => levelScore(j.tags.tech_intensity, "높음", "낮음"),
-    weight: 1.4,
+    weight: 1.0,
   },
   {
     id: "physical_demand",
@@ -265,11 +268,14 @@ export const QUESTIONS: Question[] = [
     predicate: (j) =>
       yes(j.tags.remote_work === "가능" || j.tags.remote_work === "부분가능"),
     score: (j) =>
-      j.tags.remote_work === "가능"
-        ? 1
-        : j.tags.remote_work === "부분가능"
-          ? 0.5
-          : -1,
+      softenGenericItAffinity(
+        j,
+        j.tags.remote_work === "가능"
+          ? 1
+          : j.tags.remote_work === "부분가능"
+            ? 0.5
+            : -1
+      ),
     weight: 1.2,
   },
   {
@@ -297,14 +303,22 @@ export const QUESTIONS: Question[] = [
     id: "growth_potential",
     text: "앞으로 성장 가능성이 높은 직업을 선호하시나요?",
     predicate: (j) => yes(j.tags.growth_potential === "높음"),
-    score: (j) => levelScore(j.tags.growth_potential, "높음", "낮음"),
+    score: (j) =>
+      softenGenericItAffinity(
+        j,
+        levelScore(j.tags.growth_potential, "높음", "낮음")
+      ),
     weight: 1.2,
   },
   {
     id: "job_stability",
     text: "직업 안정성을 가장 중요하게 생각하시나요?",
     predicate: (j) => yes(j.tags.job_stability === "높음"),
-    score: (j) => levelScore(j.tags.job_stability, "높음", "낮음"),
+    score: (j) =>
+      softenGenericItAffinity(
+        j,
+        levelScore(j.tags.job_stability, "높음", "낮음")
+      ),
     weight: 1.2,
   },
   {
@@ -319,7 +333,11 @@ export const QUESTIONS: Question[] = [
     id: "work_autonomy",
     text: "스스로 계획하고 자율적으로 일하는 방식을 선호하시나요?",
     predicate: (j) => yes(j.tags.work_autonomy === "높음"),
-    score: (j) => levelScore(j.tags.work_autonomy, "높음", "낮음"),
+    score: (j) =>
+      softenGenericItAffinity(
+        j,
+        levelScore(j.tags.work_autonomy, "높음", "낮음")
+      ),
     weight: 1.2,
   },
   {
