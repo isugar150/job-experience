@@ -1,8 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { EDUCATION_OPTIONS, GENDER_OPTIONS, type UserEducation, type UserGender, type UserProfile } from "@/lib/recommend";
+import { ALL_DOMAINS, EDUCATION_OPTIONS, GENDER_OPTIONS, type UserEducation, type UserGender, type UserProfile } from "@/lib/recommend";
 import { ArrowRight } from "lucide-react";
 import { TagInput } from "@/components/TagInput";
 import { ALL_CERTIFICATIONS, ALL_LANGUAGES } from "@/data/profileData";
+
+const PRIORITY_OPTIONS: Array<{ value: NonNullable<UserProfile["priorities"]>[number]; label: string }> = [
+  { value: "income", label: "소득" },
+  { value: "stability", label: "안정성" },
+  { value: "growth", label: "성장성" },
+  { value: "safety", label: "안전" },
+  { value: "socialImpact", label: "사회적 의미" },
+  { value: "autonomy", label: "자율성" },
+];
+
+function toggleListValue<T extends string>(values: T[] | undefined, value: T, max = 5) {
+  const current = values ?? [];
+  if (current.includes(value)) return current.filter((item) => item !== value);
+  return [...current, value].slice(0, max);
+}
 export function Profile({
   profile,
   onChange,
@@ -18,7 +33,10 @@ export function Profile({
     profile.gender !== "unspecified" ||
     profile.education !== "unspecified" ||
     (profile.certifications?.length ?? 0) > 0 ||
-    (profile.languages?.length ?? 0) > 0;
+    (profile.languages?.length ?? 0) > 0 ||
+    (profile.interestDomains?.length ?? 0) > 0 ||
+    (profile.avoidedDomains?.length ?? 0) > 0 ||
+    (profile.priorities?.length ?? 0) > 0;
   return (
     <section>
       <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
@@ -103,6 +121,77 @@ export function Profile({
             placeholder="예: 영어, 일본어 ..."
           />
         </div>
+
+        {/* 관심/기피 분야 (선택) */}
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-semibold">관심 분야</h3>
+            <span className="text-xs text-muted-foreground">최대 5개까지 추천 가중치에 반영됩니다.</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {ALL_DOMAINS.map((domain) => (
+              <ChipButton
+                key={domain}
+                selected={(profile.interestDomains ?? []).includes(domain)}
+                disabled={(profile.avoidedDomains ?? []).includes(domain)}
+                onClick={() =>
+                  onChange({
+                    ...profile,
+                    interestDomains: toggleListValue(profile.interestDomains, domain),
+                    avoidedDomains: (profile.avoidedDomains ?? []).filter((item) => item !== domain),
+                  })
+                }
+                label={domain}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-semibold">피하고 싶은 분야</h3>
+            <span className="text-xs text-muted-foreground">선택한 분야는 추천 점수를 낮춥니다.</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {ALL_DOMAINS.map((domain) => (
+              <ChipButton
+                key={domain}
+                selected={(profile.avoidedDomains ?? []).includes(domain)}
+                disabled={(profile.interestDomains ?? []).includes(domain)}
+                onClick={() =>
+                  onChange({
+                    ...profile,
+                    avoidedDomains: toggleListValue(profile.avoidedDomains, domain),
+                    interestDomains: (profile.interestDomains ?? []).filter((item) => item !== domain),
+                  })
+                }
+                label={domain}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-semibold">중요하게 보는 가치</h3>
+            <span className="text-xs text-muted-foreground">여러 개 선택할 수 있습니다.</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {PRIORITY_OPTIONS.map((option) => (
+              <ChipButton
+                key={option.value}
+                selected={(profile.priorities ?? []).includes(option.value)}
+                onClick={() =>
+                  onChange({
+                    ...profile,
+                    priorities: toggleListValue(profile.priorities, option.value, PRIORITY_OPTIONS.length),
+                  })
+                }
+                label={option.label}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="mt-12 flex flex-wrap gap-3">
@@ -142,6 +231,37 @@ function OptionButton({
         (selected
           ? "border-foreground bg-foreground text-background"
           : "border-border bg-card hover:border-foreground")
+      }
+    >
+      {label}
+    </button>
+  );
+}
+
+function ChipButton({
+  selected,
+  disabled = false,
+  onClick,
+  label,
+}: {
+  selected: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      aria-pressed={selected}
+      disabled={disabled}
+      onClick={onClick}
+      className={
+        "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors " +
+        (selected
+          ? "border-foreground bg-foreground text-background"
+          : disabled
+            ? "border-border bg-muted text-muted-foreground opacity-45 cursor-not-allowed"
+            : "border-border bg-card hover:border-foreground")
       }
     >
       {label}

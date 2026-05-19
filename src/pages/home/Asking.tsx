@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ANSWER_OPTIONS, ALL_JOBS, CANDIDATE_THRESHOLD, type Question } from "@/lib/recommend";
+import { ANSWER_OPTIONS, ALL_JOBS, CANDIDATE_THRESHOLD, MAX_QUESTIONS, type Question } from "@/lib/recommend";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 export function Asking({
   question,
@@ -30,8 +30,8 @@ export function Asking({
     <section>
       <div className="mb-10">
         <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
-          <span>질문 {answeredCount + 1}번째</span>
-          <span>후보 직업 {candidateCount}개</span>
+          <span>질문 {answeredCount + 1} / 최대 {MAX_QUESTIONS}</span>
+          <span>{totalJobs}개 중 후보 직업 {candidateCount}개</span>
         </div>
         <div className="h-1 bg-muted rounded-full overflow-hidden">
           <div
@@ -41,9 +41,12 @@ export function Asking({
         </div>
       </div>
 
-      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight leading-snug mb-8">
+      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight leading-snug mb-3">
         {question.text}
       </h2>
+      <p className="text-sm text-muted-foreground mb-8">
+        현재 후보군을 가장 잘 나눌 수 있는 질문이에요. 판단하기 어렵다면 건너뛰기를 선택해도 됩니다.
+      </p>
 
       <div className="grid gap-2.5">
         {ANSWER_OPTIONS.map((opt) => (
@@ -56,7 +59,7 @@ export function Asking({
             }}
             className="group flex items-center justify-between text-left rounded-md border border-border bg-card px-4 py-3.5 [@media(hover:hover)]:hover:border-foreground [@media(hover:hover)]:hover:bg-accent/50 transition-colors"
           >
-            <span className="text-base font-medium">{opt.label}</span>
+            <span className="text-base font-medium">{opt.level === 0 ? "건너뛰기 / 잘 모르겠다" : opt.label}</span>
             <ArrowRight className="h-4 w-4 text-muted-foreground [@media(hover:hover)]:group-hover:text-foreground transition-colors" />
           </button>
         ))}

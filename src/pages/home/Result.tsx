@@ -19,6 +19,7 @@ import {
   type UserProfile,
 } from "@/lib/recommend";
 import { buildShareUrl, shareUrl } from "@/lib/share";
+import { explainRecommendation } from "@/lib/recommendation-insights";
 import { JobThumb } from "@/components/JobThumb";
 import {
   Bookmark,
@@ -84,6 +85,11 @@ export function Result({
   const winner = main[0]?.job ?? sub[0]?.job;
   const runners = main.filter((item) => item.job.id !== winner?.id);
   const [shareStatus, setShareStatus] = useState<"idle" | "copied" | "shared">("idle");
+  const compareOptions = [...main, ...sub].filter((item, index, arr) =>
+    item.job.id !== winner?.id && arr.findIndex((other) => other.job.id === item.job.id) === index
+  );
+  const [compareJobId, setCompareJobId] = useState<number | null>(null);
+  const compareTarget = compareOptions.find((item) => item.job.id === compareJobId) ?? null;
 
   // 결과 페이지 진입 시 winner를 최근 본 직업에 자동 추가
   useEffect(() => {
@@ -96,6 +102,7 @@ export function Result({
     setShareStatus(result);
     window.setTimeout(() => setShareStatus("idle"), 2200);
   }
+
 
   if (!winner) {
     return (
@@ -110,6 +117,7 @@ export function Result({
 
   const winnerInMain = main[0]?.job?.id === winner.id;
   const isBookmarked = bookmarks?.isBookmarked(winner.id) ?? false;
+  const insights = explainRecommendation(winner, answers, profile);
   const answeredQuestions = answers
     .map((answer) => ({
       answer,
@@ -163,6 +171,7 @@ export function Result({
             </>
           )}
         </Button>
+
       </div>
 
       {/* Runners (메인 추천 나머지) */}
@@ -214,6 +223,24 @@ export function Result({
         </p>
       )}
 
+      <section className="rounded-xl border border-border bg-card p-4 mb-10">
+        <h3 className="text-sm font-semibold mb-2">왜 이 직업이 추천됐나요?</h3>
+        <p className="text-sm text-muted-foreground mb-4">{insights.summary}</p>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <ReasonList title="잘 맞는 답변" items={insights.matched.slice(0, 5).map((item) => item.label)} empty="뚜렷하게 맞는 답변은 아직 적어요." />
+          <ReasonList title="선호와 다른 부분" items={insights.mismatched.slice(0, 4).map((item) => item.label)} empty="큰 불일치 항목이 없습니다." />
+        </div>
+        {insights.profileReasons.length > 0 && (
+          <div className="mt-4 border-t border-border pt-3">
+            <div className="text-xs font-semibold mb-2">프로필 반영</div>
+            <ul className="grid gap-1.5 text-sm text-muted-foreground">
+              {insights.profileReasons.map((reason) => <li key={reason}>• {reason}</li>)}
+            </ul>
+          </div>
+        )}
+      </section>
+
+
       {/* Pros / Cons */}
       {(winner.pros?.length || winner.cons?.length) && (
         <div className="grid sm:grid-cols-2 gap-4 mb-10">
@@ -263,6 +290,15 @@ export function Result({
       {/* Meta grid */}
       <WinnerMetaGrid winner={winner} />
 
+      {compareOptions.length > 0 && (
+        <RecommendationCompare
+          winner={{ job: winner, score: main.find((item) => item.job.id === winner.id)?.score ?? sub.find((item) => item.job.id === winner.id)?.score ?? 0 }}
+          options={compareOptions}
+          selected={compareTarget}
+          onSelect={(id) => setCompareJobId(id)}
+        />
+      )}
+
       <ResultInputSummary
         profile={profile}
         answeredQuestions={answeredQuestions}
@@ -286,6 +322,82 @@ export function Result({
         </div>
       )}
     </section>
+  );
+}
+
+function RecommendationCompare({
+  winner,
+  options,
+  selected,
+  onSelect,
+}: {
+  winner: { job: Job; score: number };
+  options: Array<{ job: Job; score: number }>;
+  selected: { job: Job; score: number } | null;
+  onSelect: (id: number | null) => void;
+}) {
+  const target = selected ?? options[0];
+
+  return (
+    <section className="border-t border-border pt-8 mb-10">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h3 className="text-sm font-semibold mb-1">추천 직업 비교</h3>
+          <p className="text-xs text-muted-foreground">
+            1순위 추천과 다른 후보를 나란히 비교해보세요.
+          </p>
+        </div>
+        <label className="grid gap-1 text-xs text-muted-foreground sm:min-w-52">
+          <span>비교할 직업 선택</span>
+          <select
+            aria-label="비교할 직업 선택"
+            value={target?.job.id ?? ""}
+            onChange={(e) => onSelect(e.target.value ? Number(e.target.value) : null)}
+            className="rounded-md border border-border bg-background px-2 py-2 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+          >
+            {options.map((item) => (
+              <option key={item.job.id} value={item.job.id}>
+                {item.job.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      {target && (
+        <div className="overflow-x-auto rounded-md border border-border bg-card">
+          <table className="w-full min-w-[560px] text-sm">
+            <thead>
+              <tr className="border-b border-border bg-muted/40">
+                <th className="w-28 px-4 py-3 text-left text-xs font-medium text-muted-foreground">항목</th>
+                <th className="px-4 py-3 text-left font-semibold">{winner.job.name}</th>
+                <th className="px-4 py-3 text-left font-semibold">{target.job.name}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <CompareMetricRow label="추천 점수" left={winner.score.toFixed(1)} right={target.score.toFixed(1)} />
+              <CompareMetricRow label="분야" left={`${winner.job.domain} · ${winner.job.category}`} right={`${target.job.domain} · ${target.job.category}`} />
+              <CompareMetricRow label="학력" left={winner.job.education_required ?? "고졸이상"} right={target.job.education_required ?? "고졸이상"} />
+              <CompareMetricRow label="소득" left={winner.job.tags.income_level} right={target.job.tags.income_level} />
+              <CompareMetricRow label="성장성" left={winner.job.tags.growth_potential ?? "보통"} right={target.job.tags.growth_potential ?? "보통"} />
+              <CompareMetricRow label="자동화 위험" left={winner.job.tags.automation_risk ?? "보통"} right={target.job.tags.automation_risk ?? "보통"} />
+              <CompareMetricRow label="근무 환경" left={winner.job.tags.work_environment} right={target.job.tags.work_environment} />
+              <CompareMetricRow label="자격증" left={winner.job.tags.license_required ? "필요" : "불필요"} right={target.job.tags.license_required ? "필요" : "불필요"} />
+            </tbody>
+          </table>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function CompareMetricRow({ label, left, right }: { label: string; left: string; right: string }) {
+  return (
+    <tr className="border-b border-border/70 align-top last:border-0">
+      <td className="px-4 py-3 text-xs font-medium text-muted-foreground">{label}</td>
+      <td className="px-4 py-3 leading-relaxed">{left}</td>
+      <td className="px-4 py-3 leading-relaxed">{right}</td>
+    </tr>
   );
 }
 
@@ -569,6 +681,21 @@ function EducationGapNotice({
         현재 입력하신 학력(<span className="font-semibold">{userEdu}</span>)으로는
         진입 요건이 부족할 수 있어, 추가 학업·자격 취득을 고려해야 합니다.
       </div>
+    </div>
+  );
+}
+
+function ReasonList({ title, items, empty }: { title: string; items: string[]; empty: string }) {
+  return (
+    <div>
+      <div className="text-xs font-semibold mb-2">{title}</div>
+      {items.length > 0 ? (
+        <ul className="grid gap-1.5 text-sm text-muted-foreground">
+          {items.map((item) => <li key={item}>• {item}</li>)}
+        </ul>
+      ) : (
+        <p className="text-sm text-muted-foreground">{empty}</p>
+      )}
     </div>
   );
 }

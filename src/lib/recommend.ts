@@ -37,6 +37,12 @@ export interface UserProfile {
   certifications?: string[];
   /** 사용자가 구사하는 언어 목록 (선택) */
   languages?: string[];
+  /** 관심 있는 직업 분야 (선택) */
+  interestDomains?: string[];
+  /** 피하고 싶은 직업 분야 (선택) */
+  avoidedDomains?: string[];
+  /** 사용자가 특히 중요하게 보는 가치 (선택) */
+  priorities?: Array<"income" | "stability" | "growth" | "safety" | "socialImpact" | "autonomy">;
 }
 
 export interface Job {
@@ -1494,7 +1500,7 @@ function questionAppliesTo(q: Question, job: Job): boolean {
   return true;
 }
 
-function questionJobScore(q: Question, job: Job): number {
+export function questionJobScore(q: Question, job: Job): number {
   if (!questionAppliesTo(q, job)) return 0;
   if (q.score) return q.score(job);
   return q.predicate(job) ? 1 : -(q.mismatchPenalty ?? 1);
@@ -1542,6 +1548,22 @@ function profileBonus(job: Job, profile?: UserProfile): number {
       // 다국어 구사자는 일반 직업에도 약간의 보너스
       bonus += 2.0;
     }
+  }
+
+  if (profile.interestDomains?.includes(job.domain)) {
+    bonus += 8.0;
+  }
+  if (profile.avoidedDomains?.includes(job.domain)) {
+    bonus -= 12.0;
+  }
+
+  for (const priority of profile.priorities ?? []) {
+    if (priority === "income" && ["높음", "매우높음"].includes(job.tags.income_level)) bonus += 3.0;
+    if (priority === "growth" && job.tags.growth_potential === "높음") bonus += 3.0;
+    if (priority === "safety" && job.tags.risk_level === "낮음") bonus += 2.5;
+    if (priority === "stability" && job.tags.job_stability === "높음") bonus += 2.5;
+    if (priority === "socialImpact" && job.tags.social_impact === "높음") bonus += 2.0;
+    if (priority === "autonomy" && job.tags.work_autonomy === "높음") bonus += 2.0;
   }
 
   return bonus;

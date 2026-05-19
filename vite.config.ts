@@ -1,7 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 
 export default defineConfig({
@@ -43,5 +43,8 @@ export default defineConfig({
     ],
     // 로컬 개발 시 /job-experience 경로 프록시
     middlewareMode: false,
+  },
+  test: {
+    exclude: ["e2e/**", "node_modules/**", "dist/**"],
   },
 });

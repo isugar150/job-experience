@@ -8,6 +8,9 @@ export const DEFAULT_PROFILE: UserProfile = {
   education: "unspecified",
   certifications: [],
   languages: [],
+  interestDomains: [],
+  avoidedDomains: [],
+  priorities: [],
 };
 
 function loadProfile(): UserProfile {
@@ -21,6 +24,9 @@ function loadProfile(): UserProfile {
       education: parsed.education ?? DEFAULT_PROFILE.education,
       certifications: Array.isArray(parsed.certifications) ? parsed.certifications : [],
       languages: Array.isArray(parsed.languages) ? parsed.languages : [],
+      interestDomains: Array.isArray(parsed.interestDomains) ? parsed.interestDomains : [],
+      avoidedDomains: Array.isArray(parsed.avoidedDomains) ? parsed.avoidedDomains : [],
+      priorities: Array.isArray(parsed.priorities) ? parsed.priorities : [],
     };
   } catch {
     return DEFAULT_PROFILE;
