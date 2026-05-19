@@ -106,6 +106,7 @@
   html, body {
     background-color: oklch(0.97 0.015 85);
     color: oklch(0.22 0.02 60);
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground;

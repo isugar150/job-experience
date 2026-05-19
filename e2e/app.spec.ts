@@ -31,3 +31,26 @@ test("browse filters and compare jobs", async ({ page }) => {
   await page.getByRole("button", { name: "비교 추가" }).first().click();
   await expect(page.getByText("직업 비교")).toBeVisible();
 });
+
+test("mobile nested dialogs close one layer at a time with browser back", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("./");
+
+  await page.getByText("속기사").first().click();
+  await expect(page.getByRole("dialog", { name: "속기사" })).toBeVisible();
+  await expect(page.locator("html")).toHaveJSProperty("scrollWidth", 390);
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog", { name: "속기사" })).toHaveCount(0);
+
+  await page.getByTitle("최근 본 직업").click();
+  await expect(page.getByRole("dialog", { name: "최근 본 직업" })).toBeVisible();
+  await page.getByRole("dialog", { name: "최근 본 직업" }).getByRole("button", { name: /속기사/ }).click();
+  await expect(page.getByRole("dialog", { name: "속기사" })).toBeVisible();
+
+  await page.goBack();
+  await expect(page.getByRole("dialog", { name: "속기사" })).toHaveCount(0);
+  await expect(page.getByRole("dialog", { name: "최근 본 직업" })).toBeVisible();
+
+  await page.goBack();
+  await expect(page.getByRole("dialog", { name: "최근 본 직업" })).toHaveCount(0);
+});
