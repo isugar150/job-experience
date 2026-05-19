@@ -32,6 +32,18 @@ test("browse filters and compare jobs", async ({ page }) => {
   await expect(page.getByText("직업 비교")).toBeVisible();
 });
 
+test("mobile browse category filter stays inside the page", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("./");
+
+  const categorySelect = page.getByLabel("분류");
+  await expect(categorySelect).toBeVisible();
+  const width = await categorySelect.evaluate((el) => el.clientWidth);
+  expect(width).toBeLessThanOrEqual(180);
+  const rightEdge = await categorySelect.evaluate((el) => el.getBoundingClientRect().right);
+  expect(rightEdge).toBeLessThanOrEqual(373);
+});
+
 test("mobile nested dialogs close one layer at a time with browser back", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("./");

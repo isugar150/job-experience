@@ -182,12 +182,12 @@ export function JobListBrowser({ bookmarks, recentJobs }: { bookmarks?: Bookmark
 
 function Select({ label, value, onChange, options }: { label: string; value: string; onChange: (value: string) => void; options: Array<{ value: string; label: string }> }) {
   return (
-    <label className="grid gap-1 text-xs text-muted-foreground">
+    <label className="grid min-w-0 gap-1 text-xs text-muted-foreground">
       <span>{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-md border border-border bg-background px-2 py-2 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+        className="w-full min-w-0 rounded-md border border-border bg-background px-2 py-2 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
       >
         {options.map((item) => (
           <option key={item.value} value={item.value}>{item.label}</option>
