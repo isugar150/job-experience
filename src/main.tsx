@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { cssUrlWithBase } from "./lib/assets";
+import { registerServiceWorker } from "./registerServiceWorker";
 
 document.documentElement.style.setProperty(
   "--paper-texture-url",
@@ -9,3 +10,4 @@ document.documentElement.style.setProperty(
 );
 
 createRoot(document.getElementById("root")!).render(<App />);
+registerServiceWorker();

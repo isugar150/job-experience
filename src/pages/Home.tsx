@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { useRecentJobs } from "@/hooks/useRecentJobs";
+import PwaInstallBanner from "@/components/PwaInstallBanner";
 import {
   CANDIDATE_THRESHOLD,
   MAX_QUESTIONS,
@@ -214,6 +215,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <PwaInstallBanner />
       <Header showReset={phase !== "intro"} onReset={reset} bookmarks={bookmarks} recentJobs={recentJobs} />
 
       <main className="max-w-3xl mx-auto px-5 sm:px-6 pt-10 sm:pt-16 pb-24">

@@ -1,0 +1,28 @@
+{
+  "name": "나에게 맞는 직업 찾기",
+  "short_name": "직업찾기",
+  "description": "몇 가지 질문에 답하면 나에게 맞는 직업을 추천해주는 서비스입니다.",
+  "id": "https://isugar150.github.io/job-experience/",
+  "start_url": "/job-experience/",
+  "scope": "/job-experience/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F5EFE2",
+  "theme_color": "#F5EFE2",
+  "categories": ["education", "productivity"],
+  "lang": "ko-KR",
+  "icons": [
+    {
+      "src": "./pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
