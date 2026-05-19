@@ -2,16 +2,7 @@ import { useEffect, useState } from "react";
 import { Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Job } from "@/lib/recommend";
-
-/**
- * Vite의 BASE_URL을 prefix로 하여 정적 자산 경로를 만든다.
- * BASE_URL은 항상 trailing slash를 포함하므로 image의 leading slash는 제거한다.
- */
-function withBase(path: string): string {
-  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
-  const rel = path.startsWith("/") ? path : `/${path}`;
-  return `${base}${rel}`;
-}
+import { withBase } from "@/lib/assets";
 
 export interface JobThumbProps {
   job: Pick<Job, "id" | "name" | "image" | "domain">;

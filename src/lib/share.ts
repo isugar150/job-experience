@@ -104,7 +104,7 @@ export function decodeShareParams(sp: URLSearchParams): ShareState | null {
 export function buildShareUrl(state: ShareState): string {
   const sp = encodeShareParams(state);
   const { origin } = window.location;
-  // Vite BASE_URL 보존 (예: /job-experience/) - 끝의 / 제거
+  // Vite BASE_URL 보존 - 끝의 / 제거
   const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
   return `${origin}${base}/result?${sp.toString()}`;
 }

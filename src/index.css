@@ -114,7 +114,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     /* 종이 질감 배경 */
-    background-image: url('/job-experience/paper_texture.png');
+    background-image: var(--paper-texture-url);
     background-repeat: repeat;
     background-size: 400px 400px;
   }
@@ -176,7 +176,7 @@
 
   /* 종이 카드 스타일 */
   .paper-card {
-    background-image: url('/job-experience/paper_texture.png');
+    background-image: var(--paper-texture-url);
     background-repeat: repeat;
     background-size: 300px 300px;
     box-shadow: 2px 3px 8px oklch(0.5 0.03 70 / 0.15), 0 1px 2px oklch(0.5 0.03 70 / 0.1);

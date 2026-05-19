@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ALL_JOBS } from "@/lib/recommend";
 import { ArrowRight, Bookmark, Clock } from "lucide-react";
+import { withBase } from "@/lib/assets";
 import type { BookmarksHook, RecentJobsHook } from "./types";
 import { JobListBrowser } from "./JobListBrowser";
 export function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void; bookmarks?: BookmarksHook; recentJobs?: RecentJobsHook }) {
@@ -37,13 +38,13 @@ export function Intro({ onStart, bookmarks, recentJobs }: { onStart: () => void;
         {/* 오른쪽: 문구류 일러스트 */}
         <div className="hidden sm:flex flex-col items-center gap-4 shrink-0 w-[260px]">
           <img
-            src="/job-experience/stationery_objects.png"
+            src={withBase("/stationery_objects.png")}
             alt=""
             className="w-full drop-shadow-md"
             style={{ opacity: 0.95 }}
           />
           <img
-            src="/job-experience/pencil.png"
+            src={withBase("/pencil.png")}
             alt=""
             className="w-[140px] drop-shadow-md"
             style={{ opacity: 0.9, transform: 'rotate(-15deg) translateX(20px)' }}

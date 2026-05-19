@@ -12,8 +12,10 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { JobThumb } from "@/components/JobThumb";
+import { cssUrlWithBase, withBase } from "@/lib/assets";
 import type { BookmarksHook, RecentJobsHook } from "./types";
 import { JobDetailDialog } from "./JobDetailDialog";
+
 export function Header({
   showReset,
   onReset,
@@ -32,11 +34,30 @@ export function Header({
 
   return (
     <>
-      <header className="border-b border-border sticky top-0 z-10" style={{backgroundColor: '#f7f3eb', backgroundImage: "url('/job-experience/paper_texture.png')", backgroundRepeat: 'repeat', backgroundSize: '400px 400px', boxShadow: '0 2px 6px rgba(100,80,50,0.15)'}}>
+      <header
+        className="border-b border-border sticky top-0 z-10"
+        style={{
+          backgroundColor: "#f7f3eb",
+          backgroundImage: cssUrlWithBase("/paper_texture.png"),
+          backgroundRepeat: "repeat",
+          backgroundSize: "400px 400px",
+          boxShadow: "0 2px 6px rgba(100,80,50,0.15)",
+        }}
+      >
         <div className="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/job-experience/logo_icon.png" alt="로고" className="h-8 w-8 object-contain" />
-            <span className="text-sm font-bold tracking-tight" style={{fontFamily: '"Pretendard Variable", sans-serif', letterSpacing: '-0.01em'}}>
+            <img
+              src={withBase("/logo_icon.png")}
+              alt="로고"
+              className="h-8 w-8 object-contain"
+            />
+            <span
+              className="text-sm font-bold tracking-tight"
+              style={{
+                fontFamily: '"Pretendard Variable", sans-serif',
+                letterSpacing: "-0.01em",
+              }}
+            >
               나에게 맞는 직업 찾기
             </span>
           </div>

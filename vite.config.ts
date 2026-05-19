@@ -19,6 +19,14 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("src/data/jobs.json")) return "jobs-data";
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1200,
   },
   server: {
     port: 3000,

@@ -1,12 +1,12 @@
 # 나에게 맞는 직업 찾기
 
-> 한국 직업 537개 중에서 당신에게 잘 맞는 직업을 질문 답변을 통해 추천해주는 웹앱.
+> 한국 직업 536개 중에서 당신에게 잘 맞는 직업을 질문 답변을 통해 추천해주는 웹앱.
 
 React 19 + TypeScript + Vite + Tailwind CSS 4로 만들어졌으며, 별도의 백엔드 없이 정적 파일만으로 동작합니다. GitHub Pages에 그대로 배포할 수 있습니다.
 
 ## ✨ 기능
 
-- 한국고용정보원 직업 분류 기반 **537개 직업 코퍼스** (`client/src/data/jobs.json`)
+- 한국고용정보원 직업 분류 기반 **536개 직업 코퍼스** (`src/data/jobs.json`)
 - 각 직업에 LLM이 자동 생성한 13개 태그 (근무환경, 창의성, 분석력, 산업 도메인, 성향 키워드 등)
 - 사용자의 답변에 따라 후보를 점진적으로 좁히는 **5단계 척도 질문 UI**
 - 후보군의 분포에 따라 가장 분별력이 높은 질문을 우선 노출하는 **엔트로피 기반 질문 선택기**
@@ -17,27 +17,31 @@ React 19 + TypeScript + Vite + Tailwind CSS 4로 만들어졌으며, 별도의 �
 ## 🏗 프로젝트 구조
 
 ```
-client/
-  src/
-    components/
-      (메인 컴포넌트는 pages/Home.tsx 내에 정의)
-    data/
-      jobs.json                ← 537개 직업 + 태그 데이터셋
-    lib/
-      recommend.ts             ← 추천 엔진 + 질문 정의
-    pages/
-      Home.tsx                 ← 메인 인터랙션 화면
+src/
+  components/
+    JobThumb.tsx               ← 직업 썸네일 공통 컴포넌트
+    ui/                        ← Radix/shadcn 기반 공통 UI
+  data/
+    jobs.json                  ← 536개 직업 + 태그 데이터셋
+    profileData.ts             ← 자격증/언어 추천 입력 데이터
+  hooks/                       ← 프로필/북마크/최근 본 직업 저장 훅
+  lib/
+    recommend.ts               ← 추천 엔진 + 질문 정의
+    share.ts                   ← 공유 URL 인코딩/디코딩
+  pages/
+    Home.tsx                   ← 단계 흐름 상태 관리
+    home/                      ← Intro/Profile/Asking/Result 등 화면 컴포넌트
 .github/workflows/
   deploy.yml                   ← GitHub Pages 자동 배포
 scripts/
-  postbuild-pages.mjs          ← 404.html / .nojekyll 생성
+  job-img-optimize.mjs         ← 직업 썸네일 WebP 최적화
 ```
 
 ## 🚀 로컬 실행
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
 ## 📦 GitHub Pages 배포
@@ -51,14 +55,14 @@ pnpm dev
 수동으로 빌드하려면:
 
 ```bash
-VITE_BASE=/job-experience/ pnpm build:pages
+VITE_BASE=/job-experience/ npm run build:pages
 ```
 
-산출물은 `dist/public/`에 생성되며, 그대로 `gh-pages` 브랜치 등에 업로드해도 됩니다.
+산출물은 `dist/`에 생성되며, 그대로 `gh-pages` 브랜치 등에 업로드해도 됩니다.
 
 ## 🧠 추천 알고리즘 요약
 
 - 각 질문은 직업 한 개에 대해 `predicate(job): boolean`을 가집니다.
 - 사용자 답변(±2 ~ ±1, 0 = 잘 모르겠다)은 가중치를 곱해 직업의 점수를 누적합니다.
 - 매 질문 후, 현재 후보군에서 yes/no 분포가 50:50에 가장 가까운 질문(가장 분별력 높은 질문)을 다음 질문으로 선택합니다.
-- 후보가 5개 이하로 좁혀지거나 12개 질문에 도달하면 종료하고 Top 추천을 보여줍니다.
+- 후보가 5개 이하로 좁혀지거나 최대 16개 질문에 도달하면 종료하고 Top 추천을 보여줍니다.
